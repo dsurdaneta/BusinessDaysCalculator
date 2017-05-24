@@ -4478,10 +4478,10 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "\\\\rtcmsdfs03\\u_urdanetd$\\My Documents\\Visual Studio 2017\\Projects\\BusinessDaysCalculator\\BusinessDays\\BusinessDays.csproj",
+      "projectUniqueName": "D:\\Git\\Projects\\BusinessDaysCalculator\\BusinessDays\\BusinessDays.csproj",
       "projectName": "BusinessDays",
-      "projectPath": "\\\\rtcmsdfs03\\u_urdanetd$\\My Documents\\Visual Studio 2017\\Projects\\BusinessDaysCalculator\\BusinessDays\\BusinessDays.csproj",
-      "outputPath": "\\\\rtcmsdfs03\\u_urdanetd$\\My Documents\\Visual Studio 2017\\Projects\\BusinessDaysCalculator\\BusinessDays\\obj\\",
+      "projectPath": "D:\\Git\\Projects\\BusinessDaysCalculator\\BusinessDays\\BusinessDays.csproj",
+      "outputPath": "D:\\Git\\Projects\\BusinessDaysCalculator\\BusinessDays\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netstandard1.4"
