@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace BusinessDays
 {
@@ -15,7 +18,7 @@ namespace BusinessDays
         #endregion
 
         #region static Methods
-        public static double GetBusinessDaysCount(DateTime startDate, DateTime endDate, bool readHolidays = false, string folder = ResourceFolder, string fileName = FileName, string fileExt = FileExtension.JSON)
+        public static double GetBusinessDaysCount(DateTime startDate, DateTime endDate, bool readHolidaysFile = false, string folder = ResourceFolder, string fileName = FileName, string fileExt = FileExtension.JSON)
         {
             //initial date difference calculation
             double result = (endDate - startDate).TotalDays;
@@ -23,24 +26,51 @@ namespace BusinessDays
             //minus weekends
             int weekendCount = GetWeekendsCount(startDate, result);
             //minus holidays
-            int holidaysCount = (readHolidays) ? GetHolidaysCount(folder, fileName) : 0;
+            int holidaysCount = (readHolidaysFile) ? GetHolidaysCount(startDate, endDate, folder, fileName) : 0;
 
             result = result - weekendCount - holidaysCount;
 
             return result;
         }
        
-        public static DateTime AddBusinessDays(DateTime startDate, double daysCount, bool readHolidays = false,
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="daysCount"></param>
+        /// <param name="readHolidaysFile">if you have a file with the holidays</param>
+        /// <param name="folder"></param>
+        /// <param name="fileName"></param>
+        /// <param name="fileExt"></param>
+        /// <returns></returns>
+        public static DateTime AddBusinessDays(DateTime startDate, double daysCount, bool readHolidaysFile = false,
             string folder = ResourceFolder, string fileName = FileName, string fileExt = FileExtension.JSON)
         {
             //plus weekends
             int weekendCount = GetWeekendsCount(startDate, daysCount);
-            //plus holidays
-            int holidaysCount = (readHolidays) ? GetHolidaysCount(folder, fileName, fileExt) : 0;
             //add everything to the initial date
-            DateTime endDate = startDate.AddDays(daysCount + weekendCount + holidaysCount);
+            DateTime endDate = startDate.AddDays(daysCount + weekendCount);
+            //plus holidays
+            int holidaysCount = (readHolidaysFile) ? GetHolidaysCount(startDate, endDate, folder, fileName, fileExt) : 0;
+            //also add the holidays
+            endDate = endDate.AddDays(holidaysCount);
 
             return endDate;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="daysCount"></param>
+        /// <param name="notWeekendHolidaysCount">if you already have the holidays count</param>
+        /// <returns></returns>
+        public static DateTime AddBusinessDays(DateTime startDate, double daysCount, double notWeekendHolidaysCount)
+        {
+            //plus weekends
+            int weekendCount = GetWeekendsCount(startDate, daysCount);
+            //add everything to the initial date
+            return startDate.AddDays(daysCount + weekendCount + notWeekendHolidaysCount);
         }
 
         internal static int GetWeekendsCount(DateTime startDate, double daysCount)
@@ -61,9 +91,27 @@ namespace BusinessDays
         internal static List<Holiday> ReadHolidaysFile(string folder = ResourceFolder, string fileName = FileName, string fileExt = FileExtension.JSON)
         {
             List<Holiday> holidays = new List<Holiday>();
+            //if it does not exist, create directory
+            //check for the full path
+            var currentDirectory = System.IO.Directory.GetCurrentDirectory();
+            
+            if (!Directory.Exists($"{currentDirectory} /{folder}"))
+            {
+                Directory.CreateDirectory($"{currentDirectory}/{folder}");
+            }
+            
+            //format to list according to fileExt
             switch (fileExt)
             {
                 case FileExtension.JSON:
+                    using (StreamReader file = File.OpenText($"{currentDirectory}/{folder}/{fileName}.{fileExt}"))
+                    {
+                        string json = file.ReadToEnd();
+                        var deserializedInfo = JsonConvert.DeserializeObject<HolidaysInfoList>(json);
+
+                        if (deserializedInfo != null)
+                            holidays = deserializedInfo.Holidays;
+                    }
                     break;
                 case FileExtension.XML:
                     break;
@@ -74,16 +122,16 @@ namespace BusinessDays
                     return holidays;
             }
 
-            //TODO
-            throw new NotImplementedException();
+            return holidays;
         }
-
-        internal static int GetHolidaysCount(string folder = ResourceFolder, string fileName = FileName, string fileExt = FileExtension.JSON)
+       
+        internal static int GetHolidaysCount(DateTime startDate, DateTime endDate, string folder = ResourceFolder, string fileName = FileName, string fileExt = FileExtension.JSON)
         {
+            //TODO: The holidays count must consider holidays between evaluation dates
             int holidayCount = 0;
             List<Holiday> holidays = ReadHolidaysFile(folder, fileName, fileExt);
 
-            foreach (Holiday holiday in holidays)
+            foreach (Holiday holiday in holidays.Where(h => h.HolidayDate >= startDate && h.HolidayDate <= endDate))
             {
                 //holiday only counts if is on a business day
                 if ((holiday.HolidayDate.DayOfWeek > DayOfWeek.Sunday) && (holiday.HolidayDate.DayOfWeek < DayOfWeek.Saturday))

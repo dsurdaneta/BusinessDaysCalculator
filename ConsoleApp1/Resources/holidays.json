@@ -1,0 +1,15 @@
+﻿{
+  "Holidays":
+  [
+    {
+      "HolidayDate": "2017-05-01",
+      "Name": "Workers Day",
+      "Description": ""
+    },
+    {
+      "HolidayDate": "2017-12-25",
+      "Name": "Christmas",
+      "Description": ""
+    }
+  ]
+}
