@@ -79,7 +79,7 @@ namespace BusinessDays
 
             for (int i = 0; i < daysCount; i++)
             {
-                DateTime calcDateTime = startDate.AddDays(1);
+                DateTime calcDateTime = startDate.AddDays(i);
                 if ((calcDateTime.DayOfWeek == DayOfWeek.Saturday) || (calcDateTime.DayOfWeek == DayOfWeek.Sunday))
                 {
                     weekendCount++;
