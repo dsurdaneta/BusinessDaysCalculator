@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessDays", "BusinessDay
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{4F9FED92-DD39-42B6-964E-0C37032443CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessDaysTest", "BusinessDaysTest\BusinessDaysTest.csproj", "{B8503C93-3212-4778-A129-65CB756B6C7D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessDays.Test", "BusinessDaysTest\BusinessDays.Test.csproj", "{B8503C93-3212-4778-A129-65CB756B6C7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using DsuDev.BusinessDays;
 
-
-namespace BusinessDaysTest
+namespace BusinessDays.Test
 {
     [TestClass]
     public class Calculator
@@ -12,7 +12,7 @@ namespace BusinessDaysTest
         {
             DateTime starDate = new DateTime(2001,5,26);
             DateTime enDateTime = new DateTime(2001,6,11);
-            var result = BusinessDays.BusinessDaysCalculator.GetBusinessDaysCount(starDate, enDateTime);
+            var result = BusinessDaysCalculator.GetBusinessDaysCount(starDate, enDateTime);
             Assert.AreEqual(10, result);
         }
     }

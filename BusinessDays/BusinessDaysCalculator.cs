@@ -5,7 +5,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace BusinessDays
+namespace DsuDev.BusinessDays
 {
     /// <summary>
     /// Class to handle every calculation related with business days or holidays

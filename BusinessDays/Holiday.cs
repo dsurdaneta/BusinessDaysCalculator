@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BusinessDays
+namespace DsuDev.BusinessDays
 {
     /// <summary>
     /// DTO class to handle Holidays info

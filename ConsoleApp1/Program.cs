@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using BusinessDays;
+using DsuDev.BusinessDays;
 
 namespace ConsoleApp1
 {
