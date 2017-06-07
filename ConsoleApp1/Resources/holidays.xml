@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<holidays>
+  <Holiday>
+    <HolidayDate>2017-05-01</HolidayDate>
+    <Name>Workers Day</Name>
+    <Description></Description>
+  </Holiday>
+  <Holiday>
+    <HolidayDate>2017-12-25</HolidayDate>
+    <Name>Christmas</Name>
+    <Description>Xmas</Description>
+  </Holiday>
+</holidays>
