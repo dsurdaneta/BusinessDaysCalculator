@@ -8,5 +8,6 @@
         internal const string JSON = "json";
         internal const string XML = "xml";
         internal const string TXT = "txt";
+        internal const string CSV = "csv";
     }
 }

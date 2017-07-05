@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace DsuDev.BusinessDays
 {
     /// <summary>
-    /// Class to handle every calculation related with business days or holidays
+    /// Class to handle every calculation related with business days and/or holidays
     /// </summary>
     public class BusinessDaysCalculator
     {
@@ -18,6 +19,16 @@ namespace DsuDev.BusinessDays
         #endregion
 
         #region static Methods
+        /// <summary>
+        /// Calculates the number of business days between two given dates
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <param name="readHolidaysFile"></param>
+        /// <param name="folder"></param>
+        /// <param name="fileName"></param>
+        /// <param name="fileExt"></param>
+        /// <returns></returns>
         public static double GetBusinessDaysCount(DateTime startDate, DateTime endDate, bool readHolidaysFile = false, string folder = ResourceFolder, string fileName = FileName, string fileExt = FileExtension.JSON)
         {
             //initial date difference calculation
@@ -34,10 +45,10 @@ namespace DsuDev.BusinessDays
         }
        
         /// <summary>
-        /// 
+        /// Adds a specific number of business days
         /// </summary>
         /// <param name="startDate"></param>
-        /// <param name="daysCount"></param>
+        /// <param name="daysCount">business days to add</param>
         /// <param name="readHolidaysFile">if you have a file with the holidays</param>
         /// <param name="folder"></param>
         /// <param name="fileName"></param>
@@ -59,7 +70,7 @@ namespace DsuDev.BusinessDays
         }
 
         /// <summary>
-        /// 
+        /// Adds a specific number of business days, considering also a number of holidays
         /// </summary>
         /// <param name="startDate"></param>
         /// <param name="daysCount"></param>
@@ -73,6 +84,12 @@ namespace DsuDev.BusinessDays
             return startDate.AddDays(daysCount + weekendCount + notWeekendHolidaysCount);
         }
 
+        /// <summary>
+        /// Gets the number of Saturdays and Sundays for a given number of business days
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="daysCount"></param>
+        /// <returns></returns>
         internal static int GetWeekendsCount(DateTime startDate, double daysCount)
         {
             int weekendCount = 0;
@@ -88,23 +105,32 @@ namespace DsuDev.BusinessDays
             return weekendCount;
         }
 
+        /// <summary>
+        /// Process a file with the holidays and saves it in a List
+        /// </summary>
+        /// <param name="folder"></param>
+        /// <param name="fileName"></param>
+        /// <param name="fileExt"></param>
+        /// <returns></returns>
         internal static List<Holiday> ReadHolidaysFile(string folder = ResourceFolder, string fileName = FileName, string fileExt = FileExtension.JSON)
         {
             List<Holiday> holidays = new List<Holiday>();
-            //if it does not exist, create directory
-            //check for the full path
+            //if it does not exist, create directory            
             var currentDirectory = System.IO.Directory.GetCurrentDirectory();
-            
-            if (!Directory.Exists($"{currentDirectory} /{folder}"))
+            string folderPath = $"{currentDirectory}/{folder}";
+
+            if (!Directory.Exists(folderPath))
             {
-                Directory.CreateDirectory($"{currentDirectory}/{folder}");
+                Directory.CreateDirectory(folderPath);
             }
-            
+
+            string fullFilePath = $"{currentDirectory}/{folder}/{fileName}.{fileExt}";
+
             //format to list according to fileExt
             switch (fileExt)
             {
                 case FileExtension.JSON:
-                    using (StreamReader file = File.OpenText($"{currentDirectory}/{folder}/{fileName}.{fileExt}"))
+                    using (StreamReader file = File.OpenText(fullFilePath))
                     {
                         string json = file.ReadToEnd();
                         var deserializedInfo = JsonConvert.DeserializeObject<HolidaysInfoList>(json);
@@ -114,8 +140,18 @@ namespace DsuDev.BusinessDays
                     }
                     break;
                 case FileExtension.XML:
+                    XmlDocument xDoc = new XmlDocument();
+                    xDoc.LoadXml(fullFilePath);
+                    //Deserializing the Xml
+                    using (StreamReader file = File.OpenText(fullFilePath))
+                    {
+                        //XmlSerializer ser = new XmlSerializer(typeof(HolidaysInfoList));
+                    }
+
                     break;
                 case FileExtension.TXT:
+                    break;
+                case FileExtension.CSV:
                     break;
                 default:
                     //file extension is not supported;
@@ -125,9 +161,18 @@ namespace DsuDev.BusinessDays
             return holidays;
         }
        
+        /// <summary>
+        /// Gets the number of holidays between two dates.
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <param name="folder"></param>
+        /// <param name="fileName"></param>
+        /// <param name="fileExt"></param>
+        /// <returns></returns>
         internal static int GetHolidaysCount(DateTime startDate, DateTime endDate, string folder = ResourceFolder, string fileName = FileName, string fileExt = FileExtension.JSON)
         {
-            //TODO: The holidays count must consider holidays between evaluation dates
+            //The holidays count must consider holidays between evaluation dates
             int holidayCount = 0;
             List<Holiday> holidays = ReadHolidaysFile(folder, fileName, fileExt);
 
