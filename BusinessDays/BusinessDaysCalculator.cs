@@ -37,7 +37,7 @@ namespace DsuDev.BusinessDays
             //minus weekends
             int weekendCount = GetWeekendsCount(startDate, result);
             //minus holidays
-            int holidaysCount = (readHolidaysFile) ? GetHolidaysCount(startDate, endDate, folder, fileName) : 0;
+            int holidaysCount = (readHolidaysFile) ? GetHolidaysCount(startDate, endDate, folder, fileName, fileExt) : 0;
 
             result = result - weekendCount - holidaysCount;
 
@@ -117,14 +117,14 @@ namespace DsuDev.BusinessDays
             List<Holiday> holidays = new List<Holiday>();
             //if it does not exist, create directory            
             var currentDirectory = System.IO.Directory.GetCurrentDirectory();
-            string folderPath = $"{currentDirectory}/{folder}";
+            string folderPath = $"{currentDirectory}\\{folder}";
 
             if (!Directory.Exists(folderPath))
             {
                 Directory.CreateDirectory(folderPath);
             }
 
-            string fullFilePath = $"{currentDirectory}/{folder}/{fileName}.{fileExt}";
+            string fullFilePath = $"{currentDirectory}\\{folder}\\{fileName}.{fileExt}";
 
             //format to list according to fileExt
             switch (fileExt)
@@ -141,13 +141,27 @@ namespace DsuDev.BusinessDays
                     break;
                 case FileExtension.XML:
                     XmlDocument xDoc = new XmlDocument();
-                    xDoc.LoadXml(fullFilePath);
-                    //Deserializing the Xml
-                    using (StreamReader file = File.OpenText(fullFilePath))
+                    
+                    using (XmlReader file = XmlReader.Create(fullFilePath))
                     {
-                        //XmlSerializer ser = new XmlSerializer(typeof(HolidaysInfoList));
-                    }
+                        xDoc.Load(file);
 
+                        foreach(XmlNode node in xDoc.ChildNodes[1])
+                        {
+                            if (node.ChildNodes.Count < 3)
+                            {
+                                continue;
+                            }
+                            Holiday holidayInfo = new Holiday
+                            {
+                                HolidayDate = Convert.ToDateTime(node.ChildNodes[0].InnerText),
+                                Name = node.ChildNodes[1].InnerText,
+                                Description = node.ChildNodes[2].InnerText
+                            };
+                            holidays.Add(holidayInfo);
+                        }
+                    }
+                    
                     break;
                 case FileExtension.TXT:
                     break;

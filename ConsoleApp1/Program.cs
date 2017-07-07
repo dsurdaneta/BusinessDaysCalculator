@@ -8,7 +8,8 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            var aux = BusinessDaysCalculator.GetBusinessDaysCount(DateTime.Today, DateTime.Today.AddDays(20),true);
+            var aux = BusinessDaysCalculator.GetBusinessDaysCount(DateTime.Today, DateTime.Today.AddDays(20),true, fileExt: "xml");
+            Console.WriteLine(aux);
             Console.ReadLine();
         }
     }
