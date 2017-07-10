@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.1",
-    "signature": "59c846140d3b30c139b2eb579aabf362f37b8d55"
+    "signature": "ddb2943898d860870692f571dd72be48aa9dd8ea"
   },
   "compilationOptions": {},
   "targets": {
@@ -12,6 +12,11 @@
         },
         "runtime": {
           "ConsoleApp1.dll": {}
+        }
+      },
+      "csvhelper/2.16.3": {
+        "runtime": {
+          "lib/netstandard1.3/CsvHelper.dll": {}
         }
       },
       "newtonsoft.json/10.0.2": {
@@ -73,6 +78,7 @@
       },
       "businessdays/1.0.0": {
         "dependencies": {
+          "CsvHelper": "2.16.3",
           "Newtonsoft.Json": "10.0.2"
         },
         "runtime": {
@@ -86,6 +92,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "csvhelper/2.16.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-RTxNM9Q6MDg3WpGorrK7E9eXsjGhtDLYx5dBuHol5kHDpu7kND2NveHDVCFQgGxowuDB57ettaOEn3EJqiJ1oQ==",
+      "path": "csvhelper/2.16.3",
+      "hashPath": "csvhelper.2.16.3.nupkg.sha512"
     },
     "newtonsoft.json/10.0.2": {
       "type": "package",

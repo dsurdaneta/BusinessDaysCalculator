@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v1.4/",
-    "signature": "15487df56c6943fa05d1c93df9fd29831ed8ff97"
+    "signature": "89acfc4c1ba2ecc0185334e50b5fe34431aee6a8"
   },
   "compilationOptions": {},
   "targets": {
@@ -9,11 +9,22 @@
     ".NETStandard,Version=v1.4/": {
       "businessdays/1.0.0": {
         "dependencies": {
+          "CsvHelper": "2.16.3",
           "NETStandard.Library": "1.6.1",
           "Newtonsoft.Json": "10.0.2"
         },
         "runtime": {
           "BusinessDays.dll": {}
+        }
+      },
+      "csvhelper/2.16.3": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.3.0",
+          "NETStandard.Library": "1.6.1",
+          "System.Reflection.TypeExtensions": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.3/CsvHelper.dll": {}
         }
       },
       "microsoft.csharp/4.3.0": {
@@ -729,6 +740,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "csvhelper/2.16.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-RTxNM9Q6MDg3WpGorrK7E9eXsjGhtDLYx5dBuHol5kHDpu7kND2NveHDVCFQgGxowuDB57ettaOEn3EJqiJ1oQ==",
+      "path": "csvhelper/2.16.3",
+      "hashPath": "csvhelper.2.16.3.nupkg.sha512"
     },
     "microsoft.csharp/4.3.0": {
       "type": "package",

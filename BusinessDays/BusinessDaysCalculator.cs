@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using System.Xml;
-using System.Xml.Serialization;
+using CsvHelper;
 
 namespace DsuDev.BusinessDays
 {
@@ -140,8 +140,7 @@ namespace DsuDev.BusinessDays
                     }
                     break;
                 case FileExtension.XML:
-                    XmlDocument xDoc = new XmlDocument();
-                    
+                    XmlDocument xDoc = new XmlDocument();                    
                     using (XmlReader file = XmlReader.Create(fullFilePath))
                     {
                         xDoc.Load(file);
@@ -160,12 +159,28 @@ namespace DsuDev.BusinessDays
                             };
                             holidays.Add(holidayInfo);
                         }
+                    }                    
+                    break;               
+                case FileExtension.CSV:
+                    using (StreamReader file = File.OpenText(fullFilePath))
+                    {
+                        var csv = new CsvReader(file);
+                        csv.Configuration.HasHeaderRecord = true;
+                        csv.Configuration.Delimiter = ";";
+                        //holidays = csv.GetRecords<Holiday>().ToList();
+                        while (csv.Read())
+                        {
+                            Holiday holidayInfo = new Holiday
+                            {
+                                HolidayDate = csv.GetField<DateTime>(0),
+                                Name = csv.GetField<string>(1),
+                                Description = csv.GetField(2)
+                            };
+                            holidays.Add(holidayInfo);
+                        }
                     }
-                    
                     break;
                 case FileExtension.TXT:
-                    break;
-                case FileExtension.CSV:
                     break;
                 default:
                     //file extension is not supported;
