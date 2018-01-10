@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/BusinessDaysCalculator/v15/Server/sqlite3
+/ConsoleApp1/obj
+/BusinessDaysTest/obj/Debug
+/BusinessDays/obj

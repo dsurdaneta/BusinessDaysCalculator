@@ -148,7 +148,7 @@ namespace DsuDev.BusinessDays
                             Holiday holidayInfo = new Holiday
                             {
                                 HolidayDate = Convert.ToDateTime(node.ChildNodes[0].InnerText),
-                                //HolidayStringDate = ode.ChildNodes[0].InnerText, //in case its needed
+                                HolidayStringDate = node.ChildNodes[0].InnerText, //in case its needed
                                 Name = node.ChildNodes[1].InnerText,
                                 Description = node.ChildNodes[2].InnerText
                             };
@@ -168,7 +168,7 @@ namespace DsuDev.BusinessDays
                             Holiday holidayInfo = new Holiday
                             {
                                 HolidayDate = csv.GetField<DateTime>(0),
-                                //HolidayStringDate = csv.GetField(0), //in case its needed
+                                HolidayStringDate = csv.GetField(0), //in case its needed
                                 Name = csv.GetField<string>(1),
                                 Description = csv.GetField(2)
                             };

@@ -10,7 +10,7 @@ namespace DsuDev.BusinessDays
     {
         public DateTime HolidayDate { get; set; }
         //in case you need to handle the date as a string:
-        //public string HolidayStringDate { get; set; }
+        public string HolidayStringDate { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
     }
