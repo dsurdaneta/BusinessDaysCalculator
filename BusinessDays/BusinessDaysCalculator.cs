@@ -124,59 +124,16 @@ namespace DsuDev.BusinessDays
             //format to list according to fileExt
             switch (fileExt)
             {
-                case FileExtension.JSON:
-                    using (StreamReader file = File.OpenText(fullFilePath))
-                    {
-                        string json = file.ReadToEnd();
-                        var deserializedInfo = JsonConvert.DeserializeObject<HolidaysInfoList>(json);
-
-                        if (deserializedInfo != null)
-                            holidays = deserializedInfo.Holidays;
-                    }
-                    break;
-                case FileExtension.XML:
-                    using (XmlReader file = XmlReader.Create(fullFilePath))
-                    {
-                        XmlDocument xDoc = new XmlDocument();
-                        xDoc.Load(file);
-
-                        foreach(XmlNode node in xDoc.ChildNodes[1])
-                        {
-                            if (node.ChildNodes.Count < 3)                           
-                                continue;
-
-                            Holiday holidayInfo = new Holiday
-                            {
-                                HolidayDate = Convert.ToDateTime(node.ChildNodes[0].InnerText),
-                                HolidayStringDate = node.ChildNodes[0].InnerText, //in case its needed
-                                Name = node.ChildNodes[1].InnerText,
-                                Description = node.ChildNodes[2].InnerText
-                            };
-                            holidays.Add(holidayInfo);
-                        }
-                    }                    
-                    break;               
-                case FileExtension.CSV:
-                    using (StreamReader file = File.OpenText(fullFilePath))
-                    {
-                        var csv = new CsvReader(file);                        
-                        csv.Configuration.HasHeaderRecord = true;
-                        csv.Configuration.Delimiter = ";";
-
-                        while (csv.Read())
-                        {
-                            Holiday holidayInfo = new Holiday
-                            {
-                                HolidayDate = csv.GetField<DateTime>(0),
-                                HolidayStringDate = csv.GetField(0), //in case its needed
-                                Name = csv.GetField<string>(1),
-                                Description = csv.GetField(2)
-                            };
-                            holidays.Add(holidayInfo);
-                        }
-                    }
-                    break;
-                case FileExtension.TXT:
+				case FileExtension.JSON:
+					holidays = HolidaysFromJSON(fullFilePath);
+					break;
+				case FileExtension.XML:
+					holidays = HolidaysFromXML(fullFilePath);
+					break;
+				case FileExtension.CSV:
+					holidays = HolidaysFromCSV(fullFilePath);
+					break;
+				case FileExtension.TXT:
                     break;
                 default:
                     //file extension is not supported
@@ -185,17 +142,81 @@ namespace DsuDev.BusinessDays
 
             return holidays;
         }
-       
-        /// <summary>
-        /// Gets the number of holidays between two dates.
-        /// </summary>
-        /// <param name="startDate"></param>
-        /// <param name="endDate"></param>
-        /// <param name="folder"></param>
-        /// <param name="fileName"></param>
-        /// <param name="fileExt"></param>
-        /// <returns></returns>
-        internal static int GetHolidaysCount(DateTime startDate, DateTime endDate, string folder = ResourceFolder, string fileName = FileName, string fileExt = FileExtension.JSON)
+
+		private static List<Holiday> HolidaysFromCSV(string fullFilePath)
+		{
+			List<Holiday> holidays = new List<Holiday>();
+			using (StreamReader file = File.OpenText(fullFilePath))
+			{
+				var csv = new CsvReader(file);
+				csv.Configuration.HasHeaderRecord = true;
+				csv.Configuration.Delimiter = ";";
+
+				while (csv.Read())
+				{
+					Holiday holidayInfo = new Holiday
+					{
+						HolidayDate = csv.GetField<DateTime>(0),
+						HolidayStringDate = csv.GetField(0), //in case its needed
+						Name = csv.GetField<string>(1),
+						Description = csv.GetField(2)
+					};
+					holidays.Add(holidayInfo);
+				}
+			}
+			return holidays;
+		}
+
+		private static List<Holiday> HolidaysFromXML(string fullFilePath)
+		{
+			List<Holiday> holidays = new List<Holiday>();
+			using (XmlReader file = XmlReader.Create(fullFilePath))
+			{
+				XmlDocument xDoc = new XmlDocument();
+				xDoc.Load(file);
+
+				foreach (XmlNode node in xDoc.ChildNodes[1])
+				{
+					if (node.ChildNodes.Count < 3)
+						continue;
+
+					Holiday holidayInfo = new Holiday
+					{
+						HolidayDate = Convert.ToDateTime(node.ChildNodes[0].InnerText),
+						HolidayStringDate = node.ChildNodes[0].InnerText, //in case its needed
+						Name = node.ChildNodes[1].InnerText,
+						Description = node.ChildNodes[2].InnerText
+					};
+					holidays.Add(holidayInfo);
+				}
+			}
+			return holidays;
+		}
+
+		private static List<Holiday> HolidaysFromJSON(string fullFilePath)
+		{
+			List<Holiday> holidays = new List<Holiday>();
+			using (StreamReader file = File.OpenText(fullFilePath))
+			{
+				string json = file.ReadToEnd();
+				var deserializedInfo = JsonConvert.DeserializeObject<HolidaysInfoList>(json);
+
+				if (deserializedInfo != null)
+					holidays = deserializedInfo.Holidays;
+			}
+			return holidays;
+		}
+
+		/// <summary>
+		/// Gets the number of holidays between two dates.
+		/// </summary>
+		/// <param name="startDate"></param>
+		/// <param name="endDate"></param>
+		/// <param name="folder"></param>
+		/// <param name="fileName"></param>
+		/// <param name="fileExt"></param>
+		/// <returns></returns>
+		internal static int GetHolidaysCount(DateTime startDate, DateTime endDate, string folder = ResourceFolder, string fileName = FileName, string fileExt = FileExtension.JSON)
         {
             //The holidays count must consider holidays between evaluation dates
             int holidayCount = 0;

@@ -7,7 +7,10 @@
     {
         internal const string JSON = "json";
         internal const string XML = "xml";
-        internal const string TXT = "txt";
+		/// <summary>
+		/// CSV with headers and separeted by ;
+		/// </summary>
         internal const string CSV = "csv";
+		internal const string TXT = "txt";
     }
 }
