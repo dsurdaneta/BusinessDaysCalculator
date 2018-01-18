@@ -61,11 +61,14 @@ namespace DsuDev.BusinessDays
             int weekendCount = GetWeekendsCount(startDate, daysCount);
             //add everything to the initial date
             DateTime endDate = startDate.AddDays(daysCount + weekendCount);
-            //plus holidays
-            int holidaysCount = (readHolidaysFile) ? GetHolidaysCount(startDate, endDate, folder, fileName, fileExt) : 0;
-            //also add the holidays
-            endDate = endDate.AddDays(holidaysCount);
-
+			
+			if (readHolidaysFile)
+			{
+				//holidays calculation
+				int holidaysCount = GetHolidaysCount(startDate, endDate, folder, fileName, fileExt);
+				//add the holidays to the date
+				endDate = endDate.AddDays(holidaysCount);
+			}
             return endDate;
         }
 
@@ -223,18 +226,16 @@ namespace DsuDev.BusinessDays
 		/// <param name="fileExt"></param>
 		/// <returns></returns>
 		internal static int GetHolidaysCount(DateTime startDate, DateTime endDate, string folder = ResourceFolder, string fileName = FileName, string fileExt = FileExtension.JSON)
-        {
-            //The holidays count must consider holidays between evaluation dates
+        {            
             int holidayCount = 0;
             List<Holiday> holidays = ReadHolidaysFile(folder, fileName, fileExt);
-            Func<Holiday, bool> holidayIsBetweenDates = (h => h.HolidayDate >= startDate && h.HolidayDate <= endDate);
+			
+			//The holidays count must consider holidays between evaluation dates
+			Func<Holiday, bool> holidayIsBetweenDates = (h => h.HolidayDate >= startDate && h.HolidayDate <= endDate);
+			//Holiday only counts if is on a business day
+			Func<Holiday, bool> holidayIsAWeekDay = (h => h.HolidayDate.DayOfWeek > DayOfWeek.Sunday && h.HolidayDate.DayOfWeek < DayOfWeek.Saturday);
 
-            foreach (Holiday holiday in holidays.Where(holidayIsBetweenDates))
-            {
-                //holiday only counts if is on a business day
-                if ((holiday.HolidayDate.DayOfWeek > DayOfWeek.Sunday) && (holiday.HolidayDate.DayOfWeek < DayOfWeek.Saturday))               
-                    holidayCount++;
-            }
+			holidayCount = holidays.Where(holidayIsBetweenDates).Count(holidayIsAWeekDay);			
 
             return holidayCount;
         }
