@@ -5,7 +5,7 @@ using DsuDev.BusinessDays;
 namespace BusinessDays.Test
 {
     [TestClass]
-    public class Calculator
+    public class CalculatorTest
     {
         [TestMethod]
         public void BussinesDays_GetBusinessDaysCountNoHolidaysFile()
