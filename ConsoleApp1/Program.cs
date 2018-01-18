@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using DsuDev.BusinessDays;
 
-namespace ConsoleApp1
+namespace DsuDev.BusinessDays.ConsoleApp1
 {
-    class Program
+	class Program
     {
         static void Main(string[] args)
         {

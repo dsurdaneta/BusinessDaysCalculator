@@ -1,10 +1,9 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using DsuDev.BusinessDays;
 
-namespace BusinessDays.Test
+namespace DsuDev.BusinessDays.Test
 {
-    [TestClass]
+	[TestClass]
     public class CalculatorTest
     {
         [TestMethod]
