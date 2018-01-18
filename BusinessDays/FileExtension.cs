@@ -11,6 +11,9 @@
 		/// CSV with headers and separeted by ;
 		/// </summary>
         public const string CSV = "csv";
+		/// <summary>
+		/// txt file for Custom protocol
+		/// </summary>
 		public const string TXT = "txt";
     }
 }

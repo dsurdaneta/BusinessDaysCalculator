@@ -18,7 +18,7 @@ namespace DsuDev.BusinessDays
     /// <summary>
     /// DTO list class to handle a List of Holidays
     /// </summary>
-    public class HolidaysInfoList //: List<Holiday>
+    public class HolidaysInfoList 
     {
         public List<Holiday> Holidays { get; set; }
     }
