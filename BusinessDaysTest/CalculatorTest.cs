@@ -7,7 +7,35 @@ namespace DsuDev.BusinessDays.Test
 	[TestClass]
     public class CalculatorTest
     {
-        [TestMethod]
+		[TestMethod]
+		public void BussinesDays_CalculatorObjIsNotNull()
+		{
+			var result = new BusinessDaysCalculator();
+			Assert.IsNotNull(result);
+		}
+
+		[TestMethod]
+		public void BussinesDays_HolidayObjIsNotNull()
+		{
+			var result = new Holiday();
+			Assert.IsNotNull(result);
+		}
+
+		[TestMethod]
+		public void BussinesDays_HolidayInfoListObjIsNotNull()
+		{
+			var result = new HolidaysInfoList();
+			Assert.IsNotNull(result);
+		}
+
+		[TestMethod]
+		public void BussinesDays_FileExtensionObjIsNotNull()
+		{
+			var result = new FileExtension();
+			Assert.IsNotNull(result);
+		}
+
+		[TestMethod]
         public void BussinesDays_GetBusinessDaysCountNoHolidaysFile()
         {
 			//Arrange
@@ -80,6 +108,6 @@ namespace DsuDev.BusinessDays.Test
 			//Assert
 			Assert.AreEqual(9, result);
 		}
-
+		
 	}
 }

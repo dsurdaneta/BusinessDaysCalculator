@@ -10,5 +10,6 @@ D:\Git\Projects\BusinessDaysCalculator\BusinessDaysTest\bin\Debug\BusinessDays.p
 D:\Git\Projects\BusinessDaysCalculator\BusinessDaysTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
 D:\Git\Projects\BusinessDaysCalculator\BusinessDaysTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
 D:\Git\Projects\BusinessDaysCalculator\BusinessDaysTest\obj\Debug\BusinessDays.Test.csprojResolveAssemblyReference.cache
+D:\Git\Projects\BusinessDaysCalculator\BusinessDaysTest\obj\Debug\BusinessDays.Test.csproj.CoreCompileInputs.cache
 D:\Git\Projects\BusinessDaysCalculator\BusinessDaysTest\obj\Debug\BusinessDaysTest.dll
 D:\Git\Projects\BusinessDaysCalculator\BusinessDaysTest\obj\Debug\BusinessDaysTest.pdb

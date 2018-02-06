@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "targets": {
     ".NETCoreApp,Version=v1.1": {
       "CsvHelper/2.16.3": {
@@ -2409,6 +2409,12 @@
           "CsvHelper": "2.16.3",
           "NETStandard.Library": "1.6.1",
           "Newtonsoft.Json": "10.0.2"
+        },
+        "compile": {
+          "bin/placeholder/BusinessDays.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BusinessDays.dll": {}
         }
       }
     }
@@ -7495,19 +7501,40 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\urdanetd\\.nuget\\packages\\": {}
+    "C:\\Users\\urdanetd\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {}
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
       "projectUniqueName": "D:\\Git\\Projects\\BusinessDaysCalculator\\ConsoleApp1\\ConsoleApp1.csproj",
       "projectName": "ConsoleApp1",
       "projectPath": "D:\\Git\\Projects\\BusinessDaysCalculator\\ConsoleApp1\\ConsoleApp1.csproj",
+      "packagesPath": "C:\\Users\\urdanetd\\.nuget\\packages\\",
       "outputPath": "D:\\Git\\Projects\\BusinessDaysCalculator\\ConsoleApp1\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\urdanetd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
+      ],
       "originalTargetFrameworks": [
         "netcoreapp1.1"
       ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {},
+        "http://nugetprod.emea.roche.com/nuget/3rdParty": {},
+        "http://nugetprod.emea.roche.com/nuget/Stable": {},
+        "http://nugetprod.emea.roche.com/nuget/Unstable": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
       "frameworks": {
         "netcoreapp1.1": {
           "projectReferences": {
@@ -7516,6 +7543,11 @@
             }
           }
         }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
       }
     },
     "frameworks": {
@@ -7523,7 +7555,7 @@
         "dependencies": {
           "Microsoft.NETCore.App": {
             "target": "Package",
-            "version": "1.1.2",
+            "version": "[1.1.2, )",
             "autoReferenced": true
           }
         }

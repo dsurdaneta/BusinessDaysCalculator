@@ -8,10 +8,10 @@ using CsvHelper;
 
 namespace DsuDev.BusinessDays
 {
-    /// <summary>
-    /// Class to handle every calculation related with business days and/or holidays
-    /// </summary>
-    public class BusinessDaysCalculator
+	/// <summary>
+	/// Class to handle every calculation related with business days and/or holidays
+	/// </summary>
+	public class BusinessDaysCalculator
     {
         #region Constants
         internal const string ResourceFolderName = "Resources";

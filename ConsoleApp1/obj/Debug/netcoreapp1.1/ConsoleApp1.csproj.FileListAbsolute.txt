@@ -6,6 +6,8 @@ D:\Git\Projects\BusinessDaysCalculator\ConsoleApp1\bin\Debug\netcoreapp1.1\Conso
 D:\Git\Projects\BusinessDaysCalculator\ConsoleApp1\bin\Debug\netcoreapp1.1\BusinessDays.dll
 D:\Git\Projects\BusinessDaysCalculator\ConsoleApp1\bin\Debug\netcoreapp1.1\BusinessDays.pdb
 D:\Git\Projects\BusinessDaysCalculator\ConsoleApp1\obj\Debug\netcoreapp1.1\ConsoleApp1.csprojResolveAssemblyReference.cache
+D:\Git\Projects\BusinessDaysCalculator\ConsoleApp1\obj\Debug\netcoreapp1.1\ConsoleApp1.csproj.CoreCompileInputs.cache
+D:\Git\Projects\BusinessDaysCalculator\ConsoleApp1\obj\Debug\netcoreapp1.1\ConsoleApp1.AssemblyInfoInputs.cache
 D:\Git\Projects\BusinessDaysCalculator\ConsoleApp1\obj\Debug\netcoreapp1.1\ConsoleApp1.AssemblyInfo.cs
 D:\Git\Projects\BusinessDaysCalculator\ConsoleApp1\obj\Debug\netcoreapp1.1\ConsoleApp1.dll
 D:\Git\Projects\BusinessDaysCalculator\ConsoleApp1\obj\Debug\netcoreapp1.1\ConsoleApp1.pdb
