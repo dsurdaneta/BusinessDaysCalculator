@@ -8,35 +8,35 @@ namespace DsuDev.BusinessDays.Test
     public class CalculatorTest
     {
 		[TestMethod]
-		public void BussinesDays_CalculatorObjIsNotNull()
+		public void BusinessDays_CalculatorObjIsNotNull()
 		{
 			var result = new BusinessDaysCalculator();
 			Assert.IsNotNull(result);
 		}
 
 		[TestMethod]
-		public void BussinesDays_HolidayObjIsNotNull()
+		public void BusinessDays_HolidayObjIsNotNull()
 		{
 			var result = new Holiday();
 			Assert.IsNotNull(result);
 		}
 
 		[TestMethod]
-		public void BussinesDays_HolidayInfoListObjIsNotNull()
+		public void BusinessDays_HolidayInfoListObjIsNotNull()
 		{
 			var result = new HolidaysInfoList();
 			Assert.IsNotNull(result);
 		}
 
 		[TestMethod]
-		public void BussinesDays_FileExtensionObjIsNotNull()
+		public void BusinessDays_FileExtensionObjIsNotNull()
 		{
 			var result = new FileExtension();
 			Assert.IsNotNull(result);
 		}
 
 		[TestMethod]
-        public void BussinesDays_GetBusinessDaysCountNoHolidaysFile()
+        public void BusinessDays_GetBusinessDaysCountNoHolidaysFile()
         {
 			//Arrange
             DateTime startDate = new DateTime(2001,5,26);
@@ -48,7 +48,7 @@ namespace DsuDev.BusinessDays.Test
         }
 
         [TestMethod]
-        public void BussinesDays_AddBusinessDaysNoHolidaysFile()
+        public void BusinessDays_AddBusinessDaysNoHolidaysFile()
         {
 			//Arrange
             DateTime startDate = new DateTime(2001, 5, 26);
@@ -60,7 +60,7 @@ namespace DsuDev.BusinessDays.Test
         }
 
         [TestMethod]
-        public void BussinesDays_AddBusinessDaysWithHolidaysCounter()
+        public void BusinessDays_AddBusinessDaysWithHolidaysCounter()
 		{
 			//Arrange
 			DateTime starDate = new DateTime(2001, 5, 26);
@@ -72,7 +72,7 @@ namespace DsuDev.BusinessDays.Test
 		}
 
 		[TestMethod]
-		public void BussinesDays_AddBusinessDaysFromList()
+		public void BusinessDays_AddBusinessDaysFromList()
 		{
 			//Arrange
 			List<Holiday> holidays = new List<Holiday>();			
@@ -91,7 +91,7 @@ namespace DsuDev.BusinessDays.Test
 		}
 
 		[TestMethod]
-		public void BussinesDays_GetBusinessDaysCountFromList()
+		public void BusinessDays_GetBusinessDaysCountFromList()
 		{
 			//Arrange
 			List<Holiday> holidays = new List<Holiday>();
