@@ -34,12 +34,10 @@ namespace DsuDev.BusinessDays
         {
             //initial date difference calculation
             double result = (endDate - startDate).TotalDays;
-
             //minus weekends
             int weekendCount = GetWeekendsCount(startDate, result);
             //minus holidays
             int holidaysCount = (readHolidaysFile) ? GetHolidaysCount(startDate, endDate, folder, fileName, fileExt) : 0;
-
             result -= (weekendCount + holidaysCount);
 
             return result;
@@ -151,7 +149,6 @@ namespace DsuDev.BusinessDays
 		{
 			List<Holiday> holidays = new List<Holiday>();
 			string fullFilePath = GenerateFilePath(folder, fileName, fileExt);
-
 			//format to list according to fileExt
 			switch (fileExt)
 			{
@@ -280,7 +277,6 @@ namespace DsuDev.BusinessDays
 		internal static int GetHolidaysCount(DateTime startDate, DateTime endDate, List<Holiday> holidays)
 		{
 			int holidayCount = 0;
-
 			if (holidays != null && holidays.Count > 0)
 			{
 				//The holidays count must consider holidays between evaluation dates
@@ -290,7 +286,6 @@ namespace DsuDev.BusinessDays
 
 				holidayCount = holidays.Where(holidayIsBetweenDates).Count(holidayIsAWeekDay);
 			}
-
 			return holidayCount;
 		}
 
@@ -303,7 +298,6 @@ namespace DsuDev.BusinessDays
 		internal static int GetHolidaysCount(DateTime startDate, List<Holiday> holidays)
 		{
 			int holidayCount = 0;
-
 			if (holidays != null && holidays.Count > 0)
 			{
 				//The holidays count must consider holidays since evaluation date
@@ -313,7 +307,6 @@ namespace DsuDev.BusinessDays
 
 				holidayCount = holidays.Where(holidaySince).Count(holidayIsAWeekDay);
 			}
-
 			return holidayCount;
 		}
 		#endregion

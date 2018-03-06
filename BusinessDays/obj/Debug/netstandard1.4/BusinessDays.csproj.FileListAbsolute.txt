@@ -6,3 +6,4 @@ D:\Git\Projects\BusinessDaysCalculator\BusinessDays\obj\Debug\netstandard1.4\Bus
 D:\Git\Projects\BusinessDaysCalculator\BusinessDays\obj\Debug\netstandard1.4\BusinessDays.AssemblyInfo.cs
 D:\Git\Projects\BusinessDaysCalculator\BusinessDays\obj\Debug\netstandard1.4\BusinessDays.dll
 D:\Git\Projects\BusinessDaysCalculator\BusinessDays\obj\Debug\netstandard1.4\BusinessDays.pdb
+D:\Git\Projects\BusinessDaysCalculator\BusinessDays\obj\Debug\netstandard1.4\BusinessDays.csprojResolveAssemblyReference.cache
