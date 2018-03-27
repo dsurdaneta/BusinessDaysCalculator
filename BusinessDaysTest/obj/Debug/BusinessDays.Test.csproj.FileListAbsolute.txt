@@ -13,3 +13,4 @@ D:\Git\Projects\BusinessDaysCalculator\BusinessDaysTest\obj\Debug\BusinessDays.T
 D:\Git\Projects\BusinessDaysCalculator\BusinessDaysTest\obj\Debug\BusinessDays.Test.csproj.CoreCompileInputs.cache
 D:\Git\Projects\BusinessDaysCalculator\BusinessDaysTest\obj\Debug\BusinessDaysTest.dll
 D:\Git\Projects\BusinessDaysCalculator\BusinessDaysTest\obj\Debug\BusinessDaysTest.pdb
+D:\Git\Projects\BusinessDaysCalculator\BusinessDaysTest\obj\Debug\BusinessDays.Test.csproj.CopyComplete
