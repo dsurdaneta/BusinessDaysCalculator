@@ -13,6 +13,26 @@ namespace DsuDev.BusinessDays
         public string HolidayStringDate { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+
+        public Holiday()
+        {
+            HolidayDate = new DateTime();
+        }
+
+        public Holiday(int year, int month, int day)
+        {
+            HolidayDate = new DateTime(year, month, day);
+        }
+
+        public Holiday(DateTime dateTime)
+        {
+            HolidayDate = dateTime;
+        }
+
+        public Holiday(TimeSpan timeSpan)
+        {
+            HolidayDate = new DateTime(timeSpan.Ticks);
+        }
     }
 
     /// <summary>
@@ -22,5 +42,10 @@ namespace DsuDev.BusinessDays
     public class HolidaysInfoList 
     {
         public List<Holiday> Holidays { get; set; }
+
+        public HolidaysInfoList()
+        {
+            Holidays = new List<Holiday>();
+        }
     }
 }

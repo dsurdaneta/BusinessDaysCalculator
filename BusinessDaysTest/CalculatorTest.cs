@@ -10,53 +10,45 @@ namespace DsuDev.BusinessDays.Test
 		[TestMethod]
 		public void BusinessDays_CalculatorObjIsNotNull()
 		{
-			var result = new BusinessDaysCalculator();
-			Assert.IsNotNull(result);
-		}
-
-		[TestMethod]
-		public void BusinessDays_HolidayObjIsNotNull()
-		{
-			var result = new Holiday();
-			Assert.IsNotNull(result);
-		}
-
-		[TestMethod]
-		public void BusinessDays_HolidayInfoListObjIsNotNull()
-		{
-			var result = new HolidaysInfoList();
-			Assert.IsNotNull(result);
-		}
+            //Act
+			var sut = new BusinessDaysCalculator();
+            //Assert
+			Assert.IsNotNull(sut);
+		}		
 
 		[TestMethod]
 		public void BusinessDays_FileExtensionObjIsNotNull()
 		{
-			var result = new FileExtension();
-			Assert.IsNotNull(result);
+            //Act
+			var sut = new FileExtension();
+            //Assert
+			Assert.IsNotNull(sut);
 		}
 
 		[TestMethod]
         public void BusinessDays_GetBusinessDaysCountNoHolidaysFile()
         {
-			//Arrange
-            DateTime startDate = new DateTime(2001,5,26);
-            DateTime expectedDate = new DateTime(2001,6,11);
+            //Arrange
+            int year = 2001;
+            DateTime startDate = new DateTime(year,5,26);
+            DateTime expectedDate = new DateTime(year,6,11);
 			//Act
-            var result = BusinessDaysCalculator.GetBusinessDaysCount(startDate, expectedDate);
+            var sut = BusinessDaysCalculator.GetBusinessDaysCount(startDate, expectedDate);
 			//Assert
-            Assert.AreEqual(10, result);
+            Assert.AreEqual(10, sut);
         }
 
         [TestMethod]
         public void BusinessDays_AddBusinessDaysNoHolidaysFile()
         {
-			//Arrange
-            DateTime startDate = new DateTime(2001, 5, 26);
-			DateTime expectedDate = new DateTime(2001,6,15);
+            //Arrange
+            int year = 2001;
+            DateTime startDate = new DateTime(year, 5, 26);
+			DateTime expectedDate = new DateTime(year,6,15);
 			//Act
-            var result = BusinessDaysCalculator.AddBusinessDays(startDate, 15);
+            var sut = BusinessDaysCalculator.AddBusinessDays(startDate, 15);
             //Assert
-            Assert.AreEqual(expectedDate, result);
+            Assert.AreEqual(expectedDate, sut);
         }
 
         [TestMethod]
@@ -66,47 +58,39 @@ namespace DsuDev.BusinessDays.Test
 			DateTime starDate = new DateTime(2001, 5, 26);
 			DateTime expectedDate = new DateTime(2001, 6, 18);
 			//Act
-			var result = BusinessDaysCalculator.AddBusinessDays(starDate, 15, 3);
+			var sut = BusinessDaysCalculator.AddBusinessDays(starDate, 15, 3);
 			//Assert
-			Assert.AreEqual(expectedDate, result);
+			Assert.AreEqual(expectedDate, sut);
 		}
 
 		[TestMethod]
 		public void BusinessDays_AddBusinessDaysFromList()
 		{
-			//Arrange
-			List<Holiday> holidays = new List<Holiday>();			
-			DateTime starDate = new DateTime(2001, 4, 27);
-			DateTime expectedDate = new DateTime(2001, 5, 17);
+            //Arrange
+            int year = 2001;
+            List<Holiday> holidays = new List<Holiday>();			
+			DateTime starDate = new DateTime(year, 4, 27);
+			DateTime expectedDate = new DateTime(year, 5, 17);
 			//Act
-			holidays.Add(new Holiday
-			{
-				HolidayDate = new DateTime(2001, 5, 1),
-				Name = "Workers Day",
-				Description = " "
-			});
-			var result = BusinessDaysCalculator.AddBusinessDays(starDate, 15, holidays);
+			holidays.Add(HolidayTests.GetWorkersDay(year));
+			var sut = BusinessDaysCalculator.AddBusinessDays(starDate, 15, holidays);
 			//Assert
-			Assert.AreEqual(expectedDate, result);
+			Assert.AreEqual(expectedDate, sut);
 		}
 
 		[TestMethod]
 		public void BusinessDays_GetBusinessDaysCountFromList()
 		{
-			//Arrange
+            //Arrange
+            int year = 2001;
 			List<Holiday> holidays = new List<Holiday>();
-			DateTime startDate = new DateTime(2001, 4, 25);
-			DateTime expectedDate = new DateTime(2001, 5, 9);
+			DateTime startDate = new DateTime(year, 4, 25);
+			DateTime expectedDate = new DateTime(year, 5, 9);
 			//Act
-			holidays.Add(new Holiday
-			{
-				HolidayDate = new DateTime(2001, 5, 1),
-				Name = "Workers Day",
-				Description = " "
-			});
-			var result = BusinessDaysCalculator.GetBusinessDaysCount(startDate, expectedDate, holidays);
+			holidays.Add(HolidayTests.GetWorkersDay(year));
+			var sut = BusinessDaysCalculator.GetBusinessDaysCount(startDate, expectedDate, holidays);
 			//Assert
-			Assert.AreEqual(9, result);
+			Assert.AreEqual(9, sut);
 		}
 		
 	}
