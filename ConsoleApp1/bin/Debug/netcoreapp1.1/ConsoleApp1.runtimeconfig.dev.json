@@ -2,8 +2,7 @@
   "runtimeOptions": {
     "additionalProbingPaths": [
       "C:\\Users\\urdanetd\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\urdanetd\\.nuget\\packages",
-      "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback"
+      "C:\\Users\\urdanetd\\.nuget\\packages"
     ]
   }
 }

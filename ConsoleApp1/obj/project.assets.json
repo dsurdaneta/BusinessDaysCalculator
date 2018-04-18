@@ -2597,7 +2597,7 @@
       ]
     },
     "Microsoft.NETCore.App/1.1.2": {
-      "sha512": "TUPK1xhef7WcbsIkhfZOz6J7DrG5aebjVRBswPfHe90eDhfnlWHaLiI1OtMB2O78bf5d37WO6ge+9nel2keKkA==",
+      "sha512": "fcN0Ob6rjY7Zu0770cA5l9wRJvj7+ltJPPdryUidejkkhao+y2AYrtezBTlP9nCSFXLmYR9BtaknORT17x8reA==",
       "type": "package",
       "path": "microsoft.netcore.app/1.1.2",
       "files": [
@@ -2621,7 +2621,7 @@
       ]
     },
     "Microsoft.NETCore.DotNetHostPolicy/1.1.2": {
-      "sha512": "fD2UWfXXY+FgPWVqvpNo2/d7b/LHYl1/aepVimYYkVsuF4CczP8hgCJIlKiUbWF/d98xCMtz7bbuv6LkGfdfeQ==",
+      "sha512": "nes7MaBG1zWz44m+zR4SDiOVmpCFiY49BcJGRaIO0TqjsLZmuUQVXEGcNZFlme95dlaki9QYJr4FK5NKNlPA6Q==",
       "type": "package",
       "path": "microsoft.netcore.dotnethostpolicy/1.1.2",
       "files": [
@@ -7502,8 +7502,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\urdanetd\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {}
+    "C:\\Users\\urdanetd\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -7514,13 +7513,9 @@
       "packagesPath": "C:\\Users\\urdanetd\\.nuget\\packages\\",
       "outputPath": "D:\\Git\\Projects\\BusinessDaysCalculator\\ConsoleApp1\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\"
-      ],
       "configFilePaths": [
         "C:\\Users\\urdanetd\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp1.1"
@@ -7528,9 +7523,6 @@
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {},
-        "http://nugetprod.emea.roche.com/nuget/3rdParty": {},
-        "http://nugetprod.emea.roche.com/nuget/Stable": {},
-        "http://nugetprod.emea.roche.com/nuget/Unstable": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

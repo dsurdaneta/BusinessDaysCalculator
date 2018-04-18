@@ -4511,7 +4511,6 @@
   },
   "packageFolders": {
     "C:\\Users\\urdanetd\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -4524,22 +4523,17 @@
       "outputPath": "D:\\Git\\Projects\\BusinessDaysCalculator\\BusinessDays\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
         "C:\\Users\\urdanetd\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netstandard1.4"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "http://nugetprod.emea.roche.com/nuget/3rdParty": {},
-        "http://nugetprod.emea.roche.com/nuget/Stable": {},
-        "http://nugetprod.emea.roche.com/nuget/Unstable": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
