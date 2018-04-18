@@ -1,4 +1,4 @@
-﻿namespace DsuDev.BusinessDays
+﻿namespace DsuDev.BusinessDays.Constants
 {
     /// <summary>
     /// Class to maintain file extensions constants, as if it was an Enum

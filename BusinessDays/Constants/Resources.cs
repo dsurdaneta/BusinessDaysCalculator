@@ -1,4 +1,4 @@
-﻿namespace DsuDev.BusinessDays
+﻿namespace DsuDev.BusinessDays.Constants
 {
     internal class Resources
     {
