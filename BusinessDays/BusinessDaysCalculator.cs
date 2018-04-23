@@ -13,31 +13,26 @@ namespace DsuDev.BusinessDays
 	/// Class to handle every calculation related with business days and/or holidays
 	/// </summary>
 	public class BusinessDaysCalculator
-    {
-        #region static Methods
-        /// <summary>
-        /// Calculates the number of business days between two given dates
-        /// </summary>
-        /// <param name="startDate"></param>
-        /// <param name="endDate"></param>
-        /// <param name="readHolidaysFile"></param>
-        /// <param name="folder"></param>
-        /// <param name="fileName"></param>
-        /// <param name="fileExt"></param>
-        /// <returns></returns>
-        public static double GetBusinessDaysCount(DateTime startDate, DateTime endDate, bool readHolidaysFile = false, 
-            string folder = Resources.ContainingFolderName, string fileName = Resources.FileName, string fileExt = FileExtension.JSON)
-        {
-            //initial date difference calculation
-            double result = (endDate - startDate).TotalDays;
-            //minus weekends
-            int weekendCount = GetWeekendsCount(startDate, result);
-            //minus holidays
-            int holidaysCount = (readHolidaysFile) ? GetHolidaysCount(startDate, endDate, folder, fileName, fileExt) : 0;
-            result -= (weekendCount + holidaysCount);
+	{
+		#region static Methods
+		/// <summary>
+		/// Calculates the number of business days between two given dates
+		/// </summary>
+		/// <param name="startDate"></param>
+		/// <param name="endDate"></param>
+		/// <param name="readHolidaysFile"></param>
+		/// <param name="folder"></param>
+		/// <param name="fileName"></param>
+		/// <param name="fileExt"></param>
+		/// <returns></returns>
+		public static double GetBusinessDaysCount(DateTime startDate, DateTime endDate, bool readHolidaysFile = false, 
+			string folder = Resources.ContainingFolderName, string fileName = Resources.FileName, string fileExt = FileExtension.JSON)
+		{			
+			//minus holidays
+			int holidaysCount = (readHolidaysFile) ? GetHolidaysCount(startDate, endDate, folder, fileName, fileExt) : 0;
 
-            return result;
-        }
+			return AddCountersToDate(startDate, endDate, holidaysCount);
+		}
 
 		/// <summary>
 		/// Calculates the number of business days between two given dates
@@ -47,13 +42,20 @@ namespace DsuDev.BusinessDays
 		/// <param name="holidays">Holiday object list</param>
 		/// <returns></returns>
 		public static double GetBusinessDaysCount(DateTime startDate, DateTime endDate, List<Holiday> holidays)
+		{			
+			//minus holidays
+			int holidaysCount = GetHolidaysCount(startDate, endDate, holidays);
+
+			return AddCountersToDate(startDate, endDate, holidaysCount);
+		}
+				
+		internal static double AddCountersToDate(DateTime startDate, DateTime endDate, int holidaysCount)
 		{
 			//initial date difference calculation
 			double result = (endDate - startDate).TotalDays;
 			//minus weekends
 			int weekendCount = GetWeekendsCount(startDate, result);
-			//minus holidays
-			int holidaysCount = GetHolidaysCount(startDate, endDate, holidays);
+			
 			result -= (weekendCount + holidaysCount);
 
 			return result;
@@ -70,12 +72,12 @@ namespace DsuDev.BusinessDays
 		/// <param name="fileExt"></param>
 		/// <returns></returns>
 		public static DateTime AddBusinessDays(DateTime startDate, double daysCount, bool readHolidaysFile = false,
-            string folder = Resources.ContainingFolderName, string fileName = Resources.FileName, string fileExt = FileExtension.JSON)
-        {
-            //plus weekends
-            int weekendCount = GetWeekendsCount(startDate, daysCount);
-            //add everything to the initial date
-            DateTime endDate = startDate.AddDays(daysCount + weekendCount);
+			string folder = Resources.ContainingFolderName, string fileName = Resources.FileName, string fileExt = FileExtension.JSON)
+		{
+			//plus weekends
+			int weekendCount = GetWeekendsCount(startDate, daysCount);
+			//add everything to the initial date
+			DateTime endDate = startDate.AddDays(daysCount + weekendCount);
 			
 			if (readHolidaysFile)
 			{
@@ -85,23 +87,23 @@ namespace DsuDev.BusinessDays
 				if(holidaysCount > 0)
 					endDate = endDate.AddDays(holidaysCount);
 			}
-            return endDate;
-        }
+			return endDate;
+		}
 
-        /// <summary>
-        /// Adds a specific number of business days, considering also a number of holidays
-        /// </summary>
-        /// <param name="startDate"></param>
-        /// <param name="daysCount"></param>
-        /// <param name="notWeekendHolidaysCount">if you already have the holidays count</param>
-        /// <returns></returns>
-        public static DateTime AddBusinessDays(DateTime startDate, double daysCount, double notWeekendHolidaysCount)
-        {
-            //plus weekends
-            int weekendCount = GetWeekendsCount(startDate, daysCount);
-            //add everything to the initial date
-            return startDate.AddDays(daysCount + weekendCount + notWeekendHolidaysCount);
-        }
+		/// <summary>
+		/// Adds a specific number of business days, considering also a number of holidays
+		/// </summary>
+		/// <param name="startDate"></param>
+		/// <param name="daysCount"></param>
+		/// <param name="notWeekendHolidaysCount">if you already have the holidays count</param>
+		/// <returns></returns>
+		public static DateTime AddBusinessDays(DateTime startDate, double daysCount, double notWeekendHolidaysCount)
+		{
+			//plus weekends
+			int weekendCount = GetWeekendsCount(startDate, daysCount);
+			//add everything to the initial date
+			return startDate.AddDays(daysCount + weekendCount + notWeekendHolidaysCount);
+		}
 
 		/// <summary>
 		/// Adds a specific number of business days, considering also a number of holidays
@@ -123,26 +125,26 @@ namespace DsuDev.BusinessDays
 		/// <param name="daysCount"></param>
 		/// <returns></returns>
 		internal static int GetWeekendsCount(DateTime startDate, double daysCount)
-        {
-            int weekendCount = 0;
-            for (int i = 0; i < daysCount; i++)
-            {
-                DateTime calcDateTime = startDate.AddDays(i);
-                if ((calcDateTime.DayOfWeek == DayOfWeek.Saturday) || (calcDateTime.DayOfWeek == DayOfWeek.Sunday))               
-                    weekendCount++;                
-            }
-            return weekendCount;
-        }
+		{
+			int weekendCount = 0;
+			for (int i = 0; i < daysCount; i++)
+			{
+				DateTime calcDateTime = startDate.AddDays(i);
+				if ((calcDateTime.DayOfWeek == DayOfWeek.Saturday) || (calcDateTime.DayOfWeek == DayOfWeek.Sunday))               
+					weekendCount++;                
+			}
+			return weekendCount;
+		}
 
-        /// <summary>
-        /// Process a file with the holidays and saves it in a List
-        /// </summary>
-        /// <param name="folder"></param>
-        /// <param name="fileName"></param>
-        /// <param name="fileExt"></param>
-        /// <returns></returns>
-        internal static List<Holiday> ReadHolidaysFile(string folder = Resources.ContainingFolderName, string fileName = Resources.FileName, 
-            string fileExt = FileExtension.JSON)
+		/// <summary>
+		/// Process a file with the holidays and saves it in a List
+		/// </summary>
+		/// <param name="folder"></param>
+		/// <param name="fileName"></param>
+		/// <param name="fileExt"></param>
+		/// <returns></returns>
+		internal static List<Holiday> ReadHolidaysFile(string folder = Resources.ContainingFolderName, string fileName = Resources.FileName, 
+			string fileExt = FileExtension.JSON)
 		{
 			List<Holiday> holidays = new List<Holiday>();
 			string fullFilePath = GenerateFilePath(folder, fileName, fileExt);
@@ -159,7 +161,7 @@ namespace DsuDev.BusinessDays
 					holidays = HolidaysFromCSV(fullFilePath);
 					break;
 				case FileExtension.TXT:
-                    //not yet suppurted, might be useful for custom rules
+					//not yet suppurted, might be useful for custom rules
 					break;
 				default:
 					//file extension is not supported
@@ -260,11 +262,11 @@ namespace DsuDev.BusinessDays
 		/// <param name="fileExt"></param>
 		/// <returns></returns>
 		internal static int GetHolidaysCount(DateTime startDate, DateTime endDate, string folder = Resources.ContainingFolderName, 
-            string fileName = Resources.FileName, string fileExt = FileExtension.JSON)
-        {
+			string fileName = Resources.FileName, string fileExt = FileExtension.JSON)
+		{
 			List<Holiday> holidays = ReadHolidaysFile(folder, fileName, fileExt);
 			return GetHolidaysCount(startDate, endDate, holidays);
-        }
+		}
 
 		/// <summary>
 		/// Gets the number of holidays between two dates.
@@ -279,11 +281,11 @@ namespace DsuDev.BusinessDays
 			if (holidays != null && holidays.Count > 0)
 			{
 				//The holidays count must consider holidays between evaluation dates
-				Func<Holiday, bool> holidayIsBetweenDates = (holiday => holiday.HolidayDate >= startDate && holiday.HolidayDate <= endDate);
+				bool HolidayIsBetweenDates(Holiday holiday) => holiday.HolidayDate >= startDate && holiday.HolidayDate <= endDate;
 				//Holiday only counts if is on a business day
-				Func<Holiday, bool> holidayIsAWeekDay = (holiday => holiday.HolidayDate.DayOfWeek > DayOfWeek.Sunday && holiday.HolidayDate.DayOfWeek < DayOfWeek.Saturday);
+				bool HolidayIsAWeekDay(Holiday holiday) => holiday.HolidayDate.DayOfWeek > DayOfWeek.Sunday && holiday.HolidayDate.DayOfWeek < DayOfWeek.Saturday;
 
-				holidayCount = holidays.Where(holidayIsBetweenDates).Count(holidayIsAWeekDay);
+				holidayCount = holidays.Where(HolidayIsBetweenDates).Count(HolidayIsAWeekDay);
 			}
 			return holidayCount;
 		}
@@ -300,11 +302,11 @@ namespace DsuDev.BusinessDays
 			if (holidays != null && holidays.Count > 0)
 			{
 				//The holidays count must consider holidays since evaluation date
-				Func<Holiday, bool> holidaySince = (holiday => holiday.HolidayDate >= startDate);
+				bool HolidaySince(Holiday h) => h.HolidayDate >= startDate;
 				//Holiday only counts if is on a business day
-				Func<Holiday, bool> holidayIsAWeekDay = (holiday => holiday.HolidayDate.DayOfWeek > DayOfWeek.Sunday && holiday.HolidayDate.DayOfWeek < DayOfWeek.Saturday);
+				bool IsAWeekDay(Holiday h) => h.HolidayDate.DayOfWeek > DayOfWeek.Sunday && h.HolidayDate.DayOfWeek < DayOfWeek.Saturday;
 
-				holidayCount = holidays.Where(holidaySince).Count(holidayIsAWeekDay);
+				holidayCount = holidays.Where(HolidaySince).Count(IsAWeekDay);
 			}
 			return holidayCount;
 		}
