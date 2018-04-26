@@ -26,7 +26,7 @@ namespace DsuDev.BusinessDays
 		/// <param name="fileExt"></param>
 		/// <returns></returns>
 		public static double GetBusinessDaysCount(DateTime startDate, DateTime endDate, bool readHolidaysFile = false, 
-			string folder = Resources.ContainingFolderName, string fileName = Resources.FileName, string fileExt = FileExtension.JSON)
+			string folder = Resources.ContainingFolderName, string fileName = Resources.FileName, string fileExt = FileExtension.Json)
 		{			
 			//minus holidays
 			int holidaysCount = (readHolidaysFile) ? GetHolidaysCount(startDate, endDate, folder, fileName, fileExt) : 0;
@@ -72,21 +72,19 @@ namespace DsuDev.BusinessDays
 		/// <param name="fileExt"></param>
 		/// <returns></returns>
 		public static DateTime AddBusinessDays(DateTime startDate, double daysCount, bool readHolidaysFile = false,
-			string folder = Resources.ContainingFolderName, string fileName = Resources.FileName, string fileExt = FileExtension.JSON)
+			string folder = Resources.ContainingFolderName, string fileName = Resources.FileName, string fileExt = FileExtension.Json)
 		{
 			//plus weekends
 			int weekendCount = GetWeekendsCount(startDate, daysCount);
 			//add everything to the initial date
 			DateTime endDate = startDate.AddDays(daysCount + weekendCount);
-			
-			if (readHolidaysFile)
-			{
-				//holidays calculation
-				int holidaysCount = GetHolidaysCount(startDate, endDate, folder, fileName, fileExt);
-				//add the holidays to the date
-				if(holidaysCount > 0)
-					endDate = endDate.AddDays(holidaysCount);
-			}
+
+			if (!readHolidaysFile) return endDate;
+			//holidays calculation
+			int holidaysCount = GetHolidaysCount(startDate, endDate, folder, fileName, fileExt);
+			//add the holidays to the date
+			if(holidaysCount > 0)
+				endDate = endDate.AddDays(holidaysCount);
 			return endDate;
 		}
 
@@ -130,7 +128,7 @@ namespace DsuDev.BusinessDays
 			for (int i = 0; i < daysCount; i++)
 			{
 				DateTime calcDateTime = startDate.AddDays(i);
-				if ((calcDateTime.DayOfWeek == DayOfWeek.Saturday) || (calcDateTime.DayOfWeek == DayOfWeek.Sunday))               
+				if (calcDateTime.DayOfWeek == DayOfWeek.Saturday || calcDateTime.DayOfWeek == DayOfWeek.Sunday)               
 					weekendCount++;                
 			}
 			return weekendCount;
@@ -144,25 +142,24 @@ namespace DsuDev.BusinessDays
 		/// <param name="fileExt"></param>
 		/// <returns></returns>
 		internal static List<Holiday> ReadHolidaysFile(string folder = Resources.ContainingFolderName, string fileName = Resources.FileName, 
-			string fileExt = FileExtension.JSON)
+			string fileExt = FileExtension.Json)
 		{
 			List<Holiday> holidays = new List<Holiday>();
 			string fullFilePath = GenerateFilePath(folder, fileName, fileExt);
 			//format to list according to fileExt
 			switch (fileExt)
 			{
-				case FileExtension.JSON:
-					holidays = HolidaysFromJSON(fullFilePath);
+				case FileExtension.Json:
+					holidays = HolidaysFromJson(fullFilePath);
 					break;
-				case FileExtension.XML:
-					holidays = HolidaysFromXML(fullFilePath);
+				case FileExtension.Xml:
+					holidays = HolidaysFromXml(fullFilePath);
 					break;
-				case FileExtension.CSV:
-					holidays = HolidaysFromCSV(fullFilePath);
+				case FileExtension.Csv:
+					holidays = HolidaysFromCsv(fullFilePath);
 					break;
-				case FileExtension.TXT:
+				case FileExtension.Txt:
 					//not yet suppurted, might be useful for custom rules
-					break;
 				default:
 					//file extension is not supported
 					break;
@@ -172,7 +169,7 @@ namespace DsuDev.BusinessDays
 
 		protected static string GenerateFilePath(string folder, string fileName, string fileExt)
 		{
-			var currentDirectory = Directory.GetCurrentDirectory();
+			string currentDirectory = Directory.GetCurrentDirectory();
 			string folderPath = $"{currentDirectory}\\{folder}";
 
 			//if it does not exist, create directory
@@ -182,7 +179,7 @@ namespace DsuDev.BusinessDays
 			return $"{folderPath}\\{fileName}.{fileExt}";
 		}
 
-		protected static List<Holiday> HolidaysFromCSV(string fullFilePath)
+		protected static List<Holiday> HolidaysFromCsv(string fullFilePath)
 		{
 			List<Holiday> holidays = new List<Holiday>();
 			using (StreamReader file = File.OpenText(fullFilePath))
@@ -207,7 +204,7 @@ namespace DsuDev.BusinessDays
 			return holidays;
 		}
 
-		protected static List<Holiday> HolidaysFromXML(string fullFilePath)
+		protected static List<Holiday> HolidaysFromXml(string fullFilePath)
 		{
 			List<Holiday> holidays = new List<Holiday>();
 			using (XmlReader file = XmlReader.Create(fullFilePath))
@@ -234,7 +231,7 @@ namespace DsuDev.BusinessDays
 			return holidays;
 		}
 
-		protected static List<Holiday> HolidaysFromJSON(string fullFilePath)
+		protected static List<Holiday> HolidaysFromJson(string fullFilePath)
 		{
 			List<Holiday> holidays = new List<Holiday>();
 			using (StreamReader file = File.OpenText(fullFilePath))
@@ -242,12 +239,11 @@ namespace DsuDev.BusinessDays
 				string json = file.ReadToEnd();
 				var deserializedInfo = JsonConvert.DeserializeObject<HolidaysInfoList>(json);
 
-				if (deserializedInfo != null)
-				{
-					holidays = deserializedInfo.Holidays;
-					//in case its needed
-					holidays.ForEach(holiday => holiday.HolidayStringDate = holiday.HolidayDate.ToString());
-				}
+				if (deserializedInfo == null) return holidays;
+
+				holidays = deserializedInfo.Holidays;
+				//in case its needed
+				holidays.ForEach(holiday => holiday.HolidayStringDate = holiday.HolidayDate.ToString());
 			}
 			return holidays;
 		}
@@ -262,7 +258,7 @@ namespace DsuDev.BusinessDays
 		/// <param name="fileExt"></param>
 		/// <returns></returns>
 		internal static int GetHolidaysCount(DateTime startDate, DateTime endDate, string folder = Resources.ContainingFolderName, 
-			string fileName = Resources.FileName, string fileExt = FileExtension.JSON)
+			string fileName = Resources.FileName, string fileExt = FileExtension.Json)
 		{
 			List<Holiday> holidays = ReadHolidaysFile(folder, fileName, fileExt);
 			return GetHolidaysCount(startDate, endDate, holidays);

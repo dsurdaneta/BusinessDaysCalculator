@@ -7,7 +7,7 @@ namespace DsuDev.BusinessDays.ConsoleApp1
     {
         static void Main(string[] args)
         {
-            var aux = BusinessDaysCalculator.GetBusinessDaysCount(DateTime.Today, DateTime.Today.AddDays(20), true, fileExt: FileExtension.CSV);
+            var aux = BusinessDaysCalculator.GetBusinessDaysCount(DateTime.Today, DateTime.Today.AddDays(20), true, fileExt: FileExtension.Csv);
             Console.WriteLine(aux);
             Console.ReadLine();
         }
