@@ -13,13 +13,24 @@ namespace DsuDev.BusinessDays
 		public string Name { get; set; }
 		public string Description { get; set; }
 
-		public Holiday(bool currentYear = false) => HolidayDate = currentYear ? new DateTime(DateTime.Today.Year, 1, 1) : new DateTime();
+		public Holiday(bool currentYear = false)
+		{
+			if (currentYear)
+				InitializeHolidayDate(DateTime.Today.Year, 1, 1);
+			else
+				HolidayDate = new DateTime();
+		}
 
-		public Holiday(int year, int month, int day) => HolidayDate = new DateTime(year, month, day);
+		public Holiday(int year, int month, int day) => InitializeHolidayDate(year, month, day);
 
 		public Holiday(DateTime dateTime) => HolidayDate = dateTime;
 
 		public Holiday(TimeSpan timeSpan) => HolidayDate = new DateTime(timeSpan.Ticks);
+
+		private void InitializeHolidayDate(int year, int month, int day)
+		{
+			HolidayDate = new DateTime(year, month, day);
+		}
 	}
 	
 }
