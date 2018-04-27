@@ -29,7 +29,7 @@ namespace DsuDev.BusinessDays
 			string folder = Resources.ContainingFolderName, string fileName = Resources.FileName, string fileExt = FileExtension.Json)
 		{			
 			//minus holidays
-			int holidaysCount = (readHolidaysFile) ? GetHolidaysCount(startDate, endDate, folder, fileName, fileExt) : 0;
+			int holidaysCount = readHolidaysFile ? GetHolidaysCount(startDate, endDate, folder, fileName, fileExt) : 0;
 
 			return AddCountersToDate(startDate, endDate, holidaysCount);
 		}
@@ -167,7 +167,8 @@ namespace DsuDev.BusinessDays
 			return holidays;
 		}
 
-		protected static string GenerateFilePath(string folder, string fileName, string fileExt)
+		protected static string GenerateFilePath(string folder = Resources.ContainingFolderName, string fileName = Resources.FileName, 
+			string fileExt = FileExtension.Json)
 		{
 			string currentDirectory = Directory.GetCurrentDirectory();
 			string folderPath = $"{currentDirectory}\\{folder}";
@@ -277,9 +278,11 @@ namespace DsuDev.BusinessDays
 			if (holidays != null && holidays.Count > 0)
 			{
 				//The holidays count must consider holidays between evaluation dates
-				bool HolidayIsBetweenDates(Holiday holiday) => holiday.HolidayDate >= startDate && holiday.HolidayDate <= endDate;
+				bool HolidayIsBetweenDates(Holiday holiday) => holiday.HolidayDate >= startDate 
+				                                               && holiday.HolidayDate <= endDate;
 				//Holiday only counts if is on a business day
-				bool HolidayIsAWeekDay(Holiday holiday) => holiday.HolidayDate.DayOfWeek > DayOfWeek.Sunday && holiday.HolidayDate.DayOfWeek < DayOfWeek.Saturday;
+				bool HolidayIsAWeekDay(Holiday holiday) => holiday.HolidayDate.DayOfWeek > DayOfWeek.Sunday 
+				                                           && holiday.HolidayDate.DayOfWeek < DayOfWeek.Saturday;
 
 				holidayCount = holidays.Where(HolidayIsBetweenDates).Count(HolidayIsAWeekDay);
 			}
@@ -300,7 +303,8 @@ namespace DsuDev.BusinessDays
 				//The holidays count must consider holidays since evaluation date
 				bool HolidaySince(Holiday h) => h.HolidayDate >= startDate;
 				//Holiday only counts if is on a business day
-				bool IsAWeekDay(Holiday h) => h.HolidayDate.DayOfWeek > DayOfWeek.Sunday && h.HolidayDate.DayOfWeek < DayOfWeek.Saturday;
+				bool IsAWeekDay(Holiday h) => h.HolidayDate.DayOfWeek > DayOfWeek.Sunday 
+				                              && h.HolidayDate.DayOfWeek < DayOfWeek.Saturday;
 
 				holidayCount = holidays.Where(HolidaySince).Count(IsAWeekDay);
 			}
