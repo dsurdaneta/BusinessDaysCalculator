@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace DsuDev.BusinessDays
 {
@@ -10,6 +11,7 @@ namespace DsuDev.BusinessDays
 	{
 		public List<Holiday> Holidays { get; set; }
 
+		[JsonConstructor]
 		public HolidaysInfoList() => Holidays = new List<Holiday>();
 	}
 }

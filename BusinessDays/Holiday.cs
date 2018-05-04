@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace DsuDev.BusinessDays
 {
@@ -13,6 +14,7 @@ namespace DsuDev.BusinessDays
 		public string Name { get; set; }
 		public string Description { get; set; }
 
+		[JsonConstructor]
 		public Holiday(bool currentYear = false)
 		{
 			if (currentYear)
