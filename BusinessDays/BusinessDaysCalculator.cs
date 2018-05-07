@@ -244,7 +244,7 @@ namespace DsuDev.BusinessDays
 
 				holidays = deserializedInfo.Holidays;
 				//in case its needed
-				holidays.ForEach(holiday => holiday.HolidayStringDate = holiday.HolidayDate.ToString());
+				holidays.ForEach(holiday => holiday.HolidayStringDate = holiday.HolidayDate.ToString("YYYY-MM-DD"));
 			}
 			return holidays;
 		}
