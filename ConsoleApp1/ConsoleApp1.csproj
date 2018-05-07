@@ -9,4 +9,16 @@
     <ProjectReference Include="..\BusinessDays\BusinessDays.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Resources\holidays.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\holidays.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\holidays.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
