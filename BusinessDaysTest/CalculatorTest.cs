@@ -5,7 +5,7 @@ using DsuDev.BusinessDays.Constants;
 
 namespace DsuDev.BusinessDays.Test
 {
-	[TestClass]
+    [TestClass]
 	public class CalculatorTest
 	{
 		[TestMethod]

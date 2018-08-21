@@ -16,7 +16,19 @@ namespace DsuDev.BusinessDays.Test
         }
 
         [TestMethod]
-        public void Holiday_HolidayDateIsNotNull()
+        public void Holiday_WithVoidConstructorStringsAreNull()
+        {
+            //Act
+            var sut = new Holiday();
+            //Assert
+            Assert.IsNull(sut.Name);
+            Assert.IsNull(sut.Description);
+            Assert.IsNull(sut.HolidayStringDate);
+        }
+
+
+        [TestMethod]
+        public void Holiday_WithVoidConstructorHolidayDateIsNotNull()
         {
             //Act
             var sut = new Holiday();
@@ -25,7 +37,31 @@ namespace DsuDev.BusinessDays.Test
         }
 
         [TestMethod]
-        public void Holiday_HolidayInfoListObjIsNotNull()
+        public void Holiday_ConstructorCurrentDate()
+        {
+            //Act
+            var sut = new Holiday(currentYear: true);
+            //Assert
+            Assert.AreEqual(DateTime.Today.Year, sut.HolidayDate.Year);
+        }
+
+        [TestMethod]
+        public void Holiday_WithIntDateConstructorGeneratesCorrectDate()
+        {
+            //Arrange 
+            var expectedYear = 2001;
+            var expectedMonth = 7;
+            var expectedDay = 19;
+            //Act
+            var sut = new Holiday(expectedYear, expectedMonth, expectedDay);
+            //Assert
+            Assert.AreEqual(sut.HolidayDate.Year, expectedYear);
+            Assert.AreEqual(sut.HolidayDate.Month, expectedMonth);
+            Assert.AreEqual(sut.HolidayDate.Day, expectedDay);
+        }
+
+        [TestMethod]
+        public void InfoList_WithVoidConstructorHolidayInfoListObjIsNotNull()
         {
             //Act
             var sut = new HolidaysInfoList();
@@ -34,7 +70,7 @@ namespace DsuDev.BusinessDays.Test
         }
 
         [TestMethod]
-        public void Holiday_HolidayInfoListNotNullHolidaysList()
+        public void InfoList_WithVoidConstructorHolidayInfoListNotNullHolidaysList()
         {
             //Act
             var sut = new HolidaysInfoList();
