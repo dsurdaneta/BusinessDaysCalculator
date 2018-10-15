@@ -73,7 +73,7 @@ namespace DsuDev.BusinessDays.Test
 			var starDate = new DateTime(year, 4, 27);
 			var expectedDate = new DateTime(year, 5, 17);
 			//Act
-			holidays.Add(HolidayTests.GetWorkersDay(year));
+			holidays.Add(HolidayTests.GenerateHoliday(year));
 			var sut = BusinessDaysCalculator.AddBusinessDays(starDate, 15, holidays);
 			//Assert
 			Assert.AreEqual(expectedDate, sut);
@@ -88,7 +88,7 @@ namespace DsuDev.BusinessDays.Test
 			var startDate = new DateTime(year, 4, 25);
 			var expectedDate = new DateTime(year, 5, 9);
 			//Act
-			holidays.Add(HolidayTests.GetWorkersDay(year));
+			holidays.Add(HolidayTests.GenerateHoliday(year));
 			var sut = BusinessDaysCalculator.GetBusinessDaysCount(startDate, expectedDate, holidays);
 			//Assert
 			Assert.AreEqual(9, sut);

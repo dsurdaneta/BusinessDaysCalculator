@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using System.Xml;
+using BusinessDays.FluentBuilders;
 using CsvHelper;
 using DsuDev.BusinessDays.Constants;
 
@@ -159,7 +161,7 @@ namespace DsuDev.BusinessDays
 					holidays = HolidaysFromCsv(fullFilePath);
 					break;
 				case FileExtension.Txt:
-					//not yet suppurted, might be useful for custom rules
+					//not yet supported, might be useful for custom rules
 				default:
 					//file extension is not supported
 					break;
@@ -188,18 +190,16 @@ namespace DsuDev.BusinessDays
 				var csv = new CsvReader(file);
 				csv.Configuration.HasHeaderRecord = true;
 				csv.Configuration.Delimiter = ";";
-
-				while (csv.Read())
+			    var holidayBuilder = new HolidayBuilder();
+				
+			    while (csv.Read())
 				{
-					Holiday holidayInfo = new Holiday
-					{
-						HolidayDate = csv.GetField<DateTime>(0),
-						//in case its needed
-						HolidayStringDate = csv.GetField(0), 
-						Name = csv.GetField<string>(1),
-						Description = csv.GetField(2)
-					};
-					holidays.Add(holidayInfo);
+				    holidayBuilder.Create()
+				        .WithDate(csv.GetField<DateTime>(0))
+				        .WithName(csv.GetField<string>(1))
+				        .WithDescription(csv.GetField(2));
+
+					holidays.Add(holidayBuilder.Build());
 				}
 			}
 			return holidays;
@@ -213,20 +213,18 @@ namespace DsuDev.BusinessDays
 				XmlDocument xDoc = new XmlDocument();
 				xDoc.Load(file);
 
+			    var holidayBuilder = new HolidayBuilder();
 				foreach (XmlNode node in xDoc.ChildNodes[1])
 				{
 					if (node.ChildNodes.Count < 3)
 						continue;
 
-					Holiday holidayInfo = new Holiday
-					{
-						HolidayDate = Convert.ToDateTime(node.ChildNodes[0].InnerText),
-						//in case its needed
-						HolidayStringDate = node.ChildNodes[0].InnerText, 
-						Name = node.ChildNodes[1].InnerText,
-						Description = node.ChildNodes[2].InnerText
-					};
-					holidays.Add(holidayInfo);
+				    holidayBuilder.Create()
+				        .WithDate(Convert.ToDateTime(node.ChildNodes[0].InnerText))
+				        .WithName(node.ChildNodes[1].InnerText)
+				        .WithDescription(node.ChildNodes[2].InnerText);
+
+					holidays.Add(holidayBuilder.Build());
 				}
 			}
 			return holidays;
@@ -244,7 +242,7 @@ namespace DsuDev.BusinessDays
 
 				holidays = deserializedInfo.Holidays;
 				//in case its needed
-				holidays.ForEach(holiday => holiday.HolidayStringDate = holiday.HolidayDate.ToString("YYYY-MM-DD"));
+				holidays.ForEach(holiday => holiday.HolidayStringDate = holiday.HolidayDate.ToString(Holiday.DateFormat, CultureInfo.InvariantCulture));
 			}
 			return holidays;
 		}

@@ -79,12 +79,12 @@ namespace DsuDev.BusinessDays.Test
         }
 
         #region Helper Methods
-        public static Holiday GetWorkersDay(int year = 2001, string description = " ")
+        public static Holiday GenerateHoliday(int year = 2001, string description = " ", string name = "Workers Day")
         {
             return new Holiday
             {
                 HolidayDate = new DateTime(year, 5, 1),
-                Name = "Workers Day",
+                Name = name,
                 Description = description
             };
         }

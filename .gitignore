@@ -4,5 +4,15 @@
 
 /.vs/BusinessDaysCalculator/v15/Server/sqlite3
 /ConsoleApp1/obj
+/ConsoleApp1/bin
 /BusinessDaysTest/obj/Debug
+/BusinessDaysTest/obj/
+/BusinessDaysTest/bin/
 /BusinessDays/obj
+/BusinessDays/bin
+/TestResults
+/.vs/BusinessDaysCalculator/DesignTimeBuild/.dtbcache
+*.dtbcache
+*.suo
+*.pdb
+*.user

@@ -8,6 +8,7 @@ namespace DsuDev.BusinessDays
     /// </summary>
     public class Holiday
     {
+        public const string DateFormat = "YYYY-MM-DD";
         public DateTime HolidayDate { get; set; }
         //in case you need to handle the date as a string:
         public string HolidayStringDate { get; set; }
