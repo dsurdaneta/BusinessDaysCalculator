@@ -8,7 +8,7 @@
 		public const string Json = "json";
 		public const string Xml = "xml";
 		/// <summary>
-		/// CSV with headers and separeted by ;
+		/// CSV with headers and separated by ;
 		/// </summary>
 		public const string Csv = "csv";
 		/// <summary>
