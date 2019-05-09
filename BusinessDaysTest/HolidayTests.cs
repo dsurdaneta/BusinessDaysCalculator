@@ -25,6 +25,30 @@ namespace DsuDev.BusinessDays.Test
             Assert.IsNull(sut.Description);
             Assert.IsNull(sut.HolidayStringDate);
         }
+        
+        [TestMethod]
+        public void Holiday_WithDateTimeConstructor()
+        {
+            //Act
+            var sut = new Holiday(DateTime.Today);
+            //Assert
+            Assert.IsNull(sut.Name);
+            Assert.IsNull(sut.Description);
+            Assert.IsNull(sut.HolidayStringDate);
+            Assert.IsTrue(sut.HolidayDate.Year.Equals(DateTime.Today.Year));
+        }
+        
+        [TestMethod]
+        public void Holiday_WithTimeSpanConstructor()
+        {
+            //Act
+            var time = DateTime.Today.TimeOfDay;
+            var sut = new Holiday(time);
+            //Assert
+            Assert.IsNull(sut.Name);
+            Assert.IsNull(sut.Description);
+            Assert.IsNull(sut.HolidayStringDate);
+        }
 
 
         [TestMethod]
