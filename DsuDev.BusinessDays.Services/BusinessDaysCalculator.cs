@@ -45,7 +45,12 @@ namespace DsuDev.BusinessDays.Services
         /// <param name="holidays">Holiday object list</param>
         /// <returns></returns>
         public static double GetBusinessDaysCount(DateTime startDate, DateTime endDate, List<Holiday> holidays)
-        {			
+        {
+            if (holidays == null)
+            {
+                throw new ArgumentNullException(nameof(holidays));
+            }
+
             //minus holidays
             int holidaysCount = GetHolidaysCount(startDate, endDate, holidays);
 
@@ -162,10 +167,11 @@ namespace DsuDev.BusinessDays.Services
                     holidays = HolidaysFromCsv(fullFilePath);
                     break;
                 case FileExtension.Txt:
-                //not yet supported, might be useful for custom rules
+                    //not yet supported, might be useful for custom rules
+                    break;
                 default:
                     //file extension is not supported
-                    break;
+                    throw new InvalidOperationException($"File extension {fileExt} not supported");
             }
             return holidays;
         }
@@ -260,6 +266,21 @@ namespace DsuDev.BusinessDays.Services
         internal static int GetHolidaysCount(DateTime startDate, DateTime endDate, string folder = Resources.ContainingFolderName, 
             string fileName = Resources.FileName, string fileExt = FileExtension.Json)
         {
+            if (string.IsNullOrWhiteSpace(folder))
+            {
+                throw new ArgumentException("FolderName should not be empty", nameof(folder) );
+            }
+            
+            if (string.IsNullOrWhiteSpace(fileName))
+            {
+                throw new ArgumentException("FileName should not be empty", nameof(fileName) );
+            }
+            
+            if (string.IsNullOrWhiteSpace(fileExt))
+            {
+                throw new ArgumentException("fileExtension should not be empty", nameof(fileExt) );
+            }
+
             List<Holiday> holidays = ReadHolidaysFile(folder, fileName, fileExt);
             return GetHolidaysCount(startDate, endDate, holidays);
         }
