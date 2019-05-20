@@ -1,4 +1,5 @@
 ﻿using System;
+using DsuDev.BusinessDays.Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DsuDev.BusinessDays.Test
