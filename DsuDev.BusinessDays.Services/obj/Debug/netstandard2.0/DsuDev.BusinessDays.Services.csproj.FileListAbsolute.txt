@@ -1,0 +1,14 @@
+D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Services\bin\Debug\netstandard2.0\DsuDev.BusinessDays.Domain.dll
+D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Services\bin\Debug\netstandard2.0\DsuDev.BusinessDays.Tools.dll
+D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Services\obj\Debug\netstandard2.0\DsuDev.BusinessDays.Services.csprojAssemblyReference.cache
+D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Services\obj\Debug\netstandard2.0\DsuDev.BusinessDays.Services.csproj.CoreCompileInputs.cache
+D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Services\obj\Debug\netstandard2.0\DsuDev.BusinessDays.Services.AssemblyInfoInputs.cache
+D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Services\obj\Debug\netstandard2.0\DsuDev.BusinessDays.Services.AssemblyInfo.cs
+D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Services\bin\Debug\netstandard2.0\DsuDev.BusinessDays.Services.deps.json
+D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Services\bin\Debug\netstandard2.0\DsuDev.BusinessDays.Services.dll
+D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Services\bin\Debug\netstandard2.0\DsuDev.BusinessDays.Services.pdb
+D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Services\bin\Debug\netstandard2.0\DsuDev.BusinessDays.Domain.pdb
+D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Services\bin\Debug\netstandard2.0\DsuDev.BusinessDays.Tools.pdb
+D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Services\obj\Debug\netstandard2.0\DsuDev.BusinessDays.Services.csproj.CopyComplete
+D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Services\obj\Debug\netstandard2.0\DsuDev.BusinessDays.Services.dll
+D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Services\obj\Debug\netstandard2.0\DsuDev.BusinessDays.Services.pdb

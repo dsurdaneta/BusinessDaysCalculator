@@ -6,7 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BusinessDays\BusinessDays.csproj" />
+    <ProjectReference Include="..\DsuDev.BusinessDays.Domain\DsuDev.BusinessDays.Domain.csproj" />
+    <ProjectReference Include="..\DsuDev.BusinessDays.Services\DsuDev.BusinessDays.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

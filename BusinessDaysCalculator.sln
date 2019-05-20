@@ -3,11 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessDays", "BusinessDays\BusinessDays.csproj", "{CF977378-894D-4CB1-93FE-66F7C734039F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{4F9FED92-DD39-42B6-964E-0C37032443CE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessDays.Test", "BusinessDaysTest\BusinessDays.Test.csproj", "{B8503C93-3212-4778-A129-65CB756B6C7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DsuDev.BusinessDays.Domain", "DsuDev.BusinessDays.Domain\DsuDev.BusinessDays.Domain.csproj", "{5504EEB9-0608-4D15-B974-FAADE62C1ECE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DsuDev.BusinessDays.Services", "DsuDev.BusinessDays.Services\DsuDev.BusinessDays.Services.csproj", "{D4452C53-A07D-456E-B292-CEDE8667A8D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DsuDev.BusinessDays.Tools", "DsuDev.BusinessDays.Tools\DsuDev.BusinessDays.Tools.csproj", "{984B40F2-95FD-4211-BDEF-3A3FF057E303}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{BE2CD683-B0BA-495E-AF5F-99D4AEBEBE4B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CF977378-894D-4CB1-93FE-66F7C734039F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CF977378-894D-4CB1-93FE-66F7C734039F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CF977378-894D-4CB1-93FE-66F7C734039F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CF977378-894D-4CB1-93FE-66F7C734039F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4F9FED92-DD39-42B6-964E-0C37032443CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4F9FED92-DD39-42B6-964E-0C37032443CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F9FED92-DD39-42B6-964E-0C37032443CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,9 +29,26 @@ Global
 		{B8503C93-3212-4778-A129-65CB756B6C7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8503C93-3212-4778-A129-65CB756B6C7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8503C93-3212-4778-A129-65CB756B6C7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5504EEB9-0608-4D15-B974-FAADE62C1ECE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5504EEB9-0608-4D15-B974-FAADE62C1ECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5504EEB9-0608-4D15-B974-FAADE62C1ECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5504EEB9-0608-4D15-B974-FAADE62C1ECE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4452C53-A07D-456E-B292-CEDE8667A8D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4452C53-A07D-456E-B292-CEDE8667A8D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4452C53-A07D-456E-B292-CEDE8667A8D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4452C53-A07D-456E-B292-CEDE8667A8D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{984B40F2-95FD-4211-BDEF-3A3FF057E303}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{984B40F2-95FD-4211-BDEF-3A3FF057E303}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{984B40F2-95FD-4211-BDEF-3A3FF057E303}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{984B40F2-95FD-4211-BDEF-3A3FF057E303}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5504EEB9-0608-4D15-B974-FAADE62C1ECE} = {BE2CD683-B0BA-495E-AF5F-99D4AEBEBE4B}
+		{D4452C53-A07D-456E-B292-CEDE8667A8D7} = {BE2CD683-B0BA-495E-AF5F-99D4AEBEBE4B}
+		{984B40F2-95FD-4211-BDEF-3A3FF057E303} = {BE2CD683-B0BA-495E-AF5F-99D4AEBEBE4B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D13A0C8E-D264-450F-B7CC-FF8151EAA634}
