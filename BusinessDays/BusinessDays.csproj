@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.4</TargetFramework>
+    <AssemblyName>DsuDev.BusinessDays</AssemblyName>
+    <RootNamespace>DsuDev.BusinessDays</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
