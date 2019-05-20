@@ -5,16 +5,16 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using System.Xml;
-using BusinessDays.FluentBuilders;
 using CsvHelper;
 using DsuDev.BusinessDays.Constants;
+using DsuDev.BusinessDays.FluentBuilders;
 
 namespace DsuDev.BusinessDays
 {
-	/// <summary>
-	/// Class to handle every calculation related with business days and/or holidays
-	/// </summary>
-	public class BusinessDaysCalculator
+    /// <summary>
+    /// Class to handle every calculation related with business days and/or holidays
+    /// </summary>
+    public class BusinessDaysCalculator
 	{
 		#region static Methods
 		/// <summary>

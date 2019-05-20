@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
-using DsuDev.BusinessDays;
 
-namespace BusinessDays.FluentBuilders
+namespace DsuDev.BusinessDays.FluentBuilders
 {
     public class HolidayBuilder
     {

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessDays", "BusinessDays\BusinessDays.csproj", "{CF977378-894D-4CB1-93FE-66F7C734039F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessDays", "BusinessDays\BusinessDays.csproj", "{CF977378-894D-4CB1-93FE-66F7C734039F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{4F9FED92-DD39-42B6-964E-0C37032443CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{4F9FED92-DD39-42B6-964E-0C37032443CE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessDays.Test", "BusinessDaysTest\BusinessDays.Test.csproj", "{B8503C93-3212-4778-A129-65CB756B6C7D}"
 EndProject
@@ -30,5 +30,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D13A0C8E-D264-450F-B7CC-FF8151EAA634}
 	EndGlobalSection
 EndGlobal

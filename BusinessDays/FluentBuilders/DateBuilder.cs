@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace BusinessDays.FluentBuilders
+namespace DsuDev.BusinessDays.FluentBuilders
 {
     public class DateBuilder
     {
