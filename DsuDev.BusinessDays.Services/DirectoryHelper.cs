@@ -8,17 +8,8 @@ namespace DsuDev.BusinessDays.Services
     {
         public static string GenerateFilePath(FilePathInfo filePathInfo)
         {
-            if (filePathInfo == null)
-            {
-                throw new ArgumentNullException(nameof(filePathInfo));
-            }
+            ValidateFilePathInfo(filePathInfo);
 
-            if (string.IsNullOrWhiteSpace(filePathInfo.FileName) 
-                || string.IsNullOrWhiteSpace(filePathInfo.Extension))
-            {
-                throw new ArgumentException("The file name and file extension are needed to generate the complete file path.");
-            }
-            
             string currentDirectory = Directory.GetCurrentDirectory();
             string folderPath = filePathInfo.IsAbsolutePath ?
                 filePathInfo.Folder :
@@ -29,6 +20,20 @@ namespace DsuDev.BusinessDays.Services
                 Directory.CreateDirectory(folderPath);
 
             return $"{folderPath}\\{filePathInfo.FileName}.{filePathInfo.Extension}";
+        }
+
+        public static void ValidateFilePathInfo(FilePathInfo filePathInfo)
+        {
+            if (filePathInfo == null)
+            {
+                throw new ArgumentNullException(nameof(filePathInfo));
+            }
+
+            if (string.IsNullOrWhiteSpace(filePathInfo.FileName)
+                && string.IsNullOrWhiteSpace(filePathInfo.Extension))
+            {
+                throw new ArgumentException("The file name and file extension are needed to generate the complete file path.");
+            }
         }
     }
 }
