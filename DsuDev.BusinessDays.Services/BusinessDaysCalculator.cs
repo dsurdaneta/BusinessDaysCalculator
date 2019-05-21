@@ -25,13 +25,14 @@ namespace DsuDev.BusinessDays.Services
             {
                 Folder = Resources.ContainingFolderName, 
                 FileName = Resources.FileName, 
-                Extension = FileExtension.Json
+                Extension = FileExtension.Json,
+                IsAbsolutePath = false
             };
         }
         
         public BusinessDaysCalculator(FilePathInfo filePathInfo)
         {
-            this.filePathInfo = filePathInfo;
+            this.filePathInfo = filePathInfo ?? throw new ArgumentNullException(nameof(filePathInfo));
         }
 
         #region static Methods
