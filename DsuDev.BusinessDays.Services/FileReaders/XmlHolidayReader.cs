@@ -9,10 +9,6 @@ namespace DsuDev.BusinessDays.Services.FileReaders
 {
     public class XmlHolidayReader : IXmlReader
     {
-        private const int DateIndex = 0;
-        private const int NameIndex = 1;
-        private const int DescriptionIndex = 2;
-
         public List<Holiday> Holidays { get; set; }
 
         public XmlHolidayReader()
@@ -49,9 +45,9 @@ namespace DsuDev.BusinessDays.Services.FileReaders
                     if (node.ChildNodes.Count >= 3)
                     {
                         holidayBuilder.Create()
-                            .WithDate(Convert.ToDateTime(node.ChildNodes[DateIndex].InnerText))
-                            .WithName(node.ChildNodes[NameIndex].InnerText)
-                            .WithDescription(node.ChildNodes[DescriptionIndex].InnerText);
+                            .WithDate(Convert.ToDateTime(node.ChildNodes[FieldIndex.Date].InnerText))
+                            .WithName(node.ChildNodes[FieldIndex.Name].InnerText)
+                            .WithDescription(node.ChildNodes[FieldIndex.Description].InnerText);
 
                         this.Holidays.Add(holidayBuilder.Build());
                     }

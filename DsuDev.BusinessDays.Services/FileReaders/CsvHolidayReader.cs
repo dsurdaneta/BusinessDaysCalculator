@@ -11,10 +11,6 @@ namespace DsuDev.BusinessDays.Services.FileReaders
     public class CsvHolidayReader : ICsvReader
     {
         private const string DefaultDelimiter = ";";
-        private const int DateIndex = 0;
-        private const int NameIndex = 1;
-        private const int DescriptionIndex = 2;
-
         public List<Holiday> Holidays { get; set; }
         public string Delimiter { get; internal set; }
         public bool HasHeaderRecord { get; set; }
@@ -61,9 +57,9 @@ namespace DsuDev.BusinessDays.Services.FileReaders
                 while (csv.Read())
                 {
                     holidayBuilder.Create()
-                        .WithDate(csv.GetField<DateTime>(DateIndex))
-                        .WithName(csv.GetField<string>(NameIndex))
-                        .WithDescription(csv.GetField(DescriptionIndex));
+                        .WithDate(csv.GetField<DateTime>(FieldIndex.Date))
+                        .WithName(csv.GetField<string>(FieldIndex.Name))
+                        .WithDescription(csv.GetField(FieldIndex.Description));
 
                     this.Holidays.Add(holidayBuilder.Build());
                 }
