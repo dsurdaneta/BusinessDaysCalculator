@@ -6,3 +6,4 @@ D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Domain\obj\Debug\nets
 D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Domain\obj\Debug\netstandard2.0\DsuDev.BusinessDays.Domain.AssemblyInfo.cs
 D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Domain\obj\Debug\netstandard2.0\DsuDev.BusinessDays.Domain.dll
 D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Domain\obj\Debug\netstandard2.0\DsuDev.BusinessDays.Domain.pdb
+D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Domain\obj\Debug\netstandard2.0\DsuDev.BusinessDays.Domain.csprojAssemblyReference.cache

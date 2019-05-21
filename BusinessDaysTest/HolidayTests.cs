@@ -85,24 +85,6 @@ namespace DsuDev.BusinessDays.Test
             Assert.AreEqual(sut.HolidayDate.Day, expectedDay);
         }
 
-        [TestMethod]
-        public void InfoList_WithVoidConstructorHolidayInfoListObjIsNotNull()
-        {
-            //Act
-            var sut = new HolidaysInfoList();
-            //Assert
-            Assert.IsNotNull(sut);
-        }
-
-        [TestMethod]
-        public void InfoList_WithVoidConstructorHolidayInfoListNotNullHolidaysList()
-        {
-            //Act
-            var sut = new HolidaysInfoList();
-            //Assert
-            Assert.IsNotNull(sut.Holidays);
-        }
-
         #region Helper Methods
         public static Holiday GenerateHoliday(int year = 2001, string description = " ", string name = "Workers Day")
         {

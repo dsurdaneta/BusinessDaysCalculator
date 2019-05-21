@@ -5,13 +5,20 @@ using DsuDev.BusinessDays.Services.Constants;
 
 namespace DsuDev.BusinessDays.Services.FileReaders
 {
+    /// <summary>
+    /// Handles the file reading of the Holidays in different formats
+    /// </summary>
+    /// <seealso cref="IFileReadingManager" />
     internal class FileReadingManager : IFileReadingManager
     {
-        private readonly JsonHolidayReader jsonReader;
-        private readonly XmlHolidayReader xmlReader;
-        private readonly CsvHolidayReader CsvReader;
-        private readonly CustomTxtHolidayReader CustomTxtReader;
+        public IJsonReader jsonReader { get; }
+        public IXmlReader xmlReader { get; }
+        public ICsvReader CsvReader { get; }
+        public ICustomTxtReader CustomTxtReader { get; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileReadingManager"/> class.
+        /// </summary>
         public FileReadingManager()
         {
             this.jsonReader = new JsonHolidayReader();
@@ -21,11 +28,33 @@ namespace DsuDev.BusinessDays.Services.FileReaders
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="FileReadingManager"/> class.
+        /// </summary>
+        /// <param name="jsonReader">The json reader.</param>
+        /// <param name="xmlReader">The XML reader.</param>
+        /// <param name="csvReader">The CSV reader.</param>
+        /// <param name="customReader">The custom reader.</param>
+        /// <exception cref="ArgumentException">
+        /// jsonReader  or  xmlReader  or  csvReader  or  customReader
+        /// </exception>
+        public FileReadingManager(
+            IJsonReader jsonReader, 
+            IXmlReader xmlReader, 
+            ICsvReader csvReader, 
+            ICustomTxtReader customReader)
+        {
+            this.jsonReader = jsonReader ?? throw new ArgumentException(nameof(jsonReader));
+            this.xmlReader = xmlReader ?? throw new ArgumentException(nameof(xmlReader));
+            this.CsvReader = csvReader ?? throw new ArgumentException(nameof(csvReader));
+            this.CustomTxtReader = customReader ?? throw new ArgumentException(nameof(customReader));
+        }
+
+        /// <summary>
         /// Process a file with the holidays and saves it in a List
         /// </summary>
         /// <param name="filePathInfo">The file path information.</param>
         /// <returns></returns>
-        /// <exception cref="InvalidOperationException">File extension {fileExt}</exception>
+        /// <exception cref="InvalidOperationException">File extension {filePathInfo.Extension}</exception>
         public List<Holiday> ReadHolidaysFile(FilePathInfo filePathInfo)
         {
             string path = DirectoryHelper.GenerateFilePath(filePathInfo);
@@ -48,8 +77,7 @@ namespace DsuDev.BusinessDays.Services.FileReaders
                     this.CustomTxtReader.GetHolidaysFromFile(path);
                     break;
                 default:
-                    //file extension is not supported
-                    throw new InvalidOperationException($"File extension {filePathInfo.Extension} not supported");
+                    throw new InvalidOperationException($"File extension {filePathInfo.Extension} is not supported");
             }
 
             return holidays;

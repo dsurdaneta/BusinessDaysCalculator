@@ -58,6 +58,7 @@
     <Compile Include="CalculatorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="HolidayTests.cs" />
+    <Compile Include="HolidaysInfoListTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

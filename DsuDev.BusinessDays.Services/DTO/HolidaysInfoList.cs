@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using DsuDev.BusinessDays.Domain.Entities;
 using Newtonsoft.Json;
 
-namespace DsuDev.BusinessDays.Domain.Entities
+namespace DsuDev.BusinessDays.Services.DTO
 {
     /// <summary>
     /// DTO list class to handle a List of Holidays. 

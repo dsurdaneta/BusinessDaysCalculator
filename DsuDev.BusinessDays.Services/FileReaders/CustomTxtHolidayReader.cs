@@ -14,7 +14,7 @@ namespace DsuDev.BusinessDays.Services.FileReaders
 
         public List<Holiday> GetHolidaysFromFile(string absoluteFilePath)
         {
-            throw new System.NotImplementedException();
+            throw new System.NotImplementedException("Not yet supported, might be useful for custom rules.");
         }
     }
 }
