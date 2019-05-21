@@ -17,6 +17,23 @@ namespace DsuDev.BusinessDays.Services
     /// </summary>
     public class BusinessDaysCalculator
     {
+        private FilePathInfo filePathInfo;
+
+        public BusinessDaysCalculator()
+        {
+            this.filePathInfo = new FilePathInfo
+            {
+                Folder = Resources.ContainingFolderName, 
+                FileName = Resources.FileName, 
+                Extension = FileExtension.Json
+            };
+        }
+        
+        public BusinessDaysCalculator(FilePathInfo filePathInfo)
+        {
+            this.filePathInfo = filePathInfo;
+        }
+
         #region static Methods
         /// <summary>
         /// Calculates the number of business days between two given dates
