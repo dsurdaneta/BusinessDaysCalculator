@@ -5,6 +5,13 @@ namespace DsuDev.BusinessDays.Services.FileReaders
 {
     public class CustomTxtHolidayReader : IHolidayFileReader
     {
+        public List<Holiday> Holidays { get; set; }
+
+        public CustomTxtHolidayReader()
+        {
+            this.Holidays = new List<Holiday>();
+        }
+
         public List<Holiday> HolidaysFromFile(string absoluteFilePath)
         {
             throw new System.NotImplementedException();

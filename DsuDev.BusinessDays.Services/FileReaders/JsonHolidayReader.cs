@@ -10,6 +10,13 @@ namespace DsuDev.BusinessDays.Services.FileReaders
 {
     public class JsonHolidayReader : IHolidayFileReader
     {
+        public List<Holiday> Holidays { get; set; }
+
+        public JsonHolidayReader()
+        {
+            this.Holidays = new List<Holiday>();
+        }
+
         public List<Holiday> HolidaysFromFile(string absoluteFilePath)
         {
             if (string.IsNullOrWhiteSpace(absoluteFilePath))
@@ -22,26 +29,26 @@ namespace DsuDev.BusinessDays.Services.FileReaders
                 throw new InvalidOperationException($"File extension {FileExtension.Json} was expected");
             }
 
-            return HolidaysFromJson(absoluteFilePath);
+            return this.HolidaysFromJson(absoluteFilePath);
         }
 
-        protected static List<Holiday> HolidaysFromJson(string fullFilePath)
+        protected List<Holiday> HolidaysFromJson(string fullFilePath)
         {
-            List<Holiday> holidays = new List<Holiday>();
+            this.Holidays = new List<Holiday>();
             using (StreamReader file = File.OpenText(fullFilePath))
             {
                 string json = file.ReadToEnd();
                 var deserializedInfo = JsonConvert.DeserializeObject<HolidaysInfoList>(json);
 
-                if (deserializedInfo == null) return holidays;
+                if (deserializedInfo == null) return this.Holidays;
 
-                holidays = deserializedInfo.Holidays;
+                this.Holidays = deserializedInfo.Holidays;
                 //in case its needed
-                holidays.ForEach(holiday => 
+                this.Holidays.ForEach(holiday => 
                     holiday.HolidayStringDate =
                         holiday.HolidayDate.ToString(Holiday.DateFormat, CultureInfo.InvariantCulture));
             }
-            return holidays;
+            return this.Holidays;
         }
     }
 }

@@ -5,6 +5,8 @@ namespace DsuDev.BusinessDays.Services.FileReaders
 {
     public interface IHolidayFileReader
     {
+        List<Holiday> Holidays { get; set; }
+
         List<Holiday> HolidaysFromFile(string absoluteFilePath);
     }
 }

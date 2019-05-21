@@ -10,11 +10,27 @@ namespace DsuDev.BusinessDays.Services.FileReaders
 {
     public class CsvHolidayReader : IHolidayFileReader
     {
-        private static readonly int DateIndex = 0;
-        private static readonly int NameIndex = 1;
-        private static readonly int DescriptionIndex = 2;
+        private const string DefaultDelimiter = ";";
+        private const int DateIndex = 0;
+        private const int NameIndex = 1;
+        private const int DescriptionIndex = 2;
 
-        private static readonly string Delimiter = ";";
+        private readonly string delimiter;
+
+        public List<Holiday> Holidays { get; set; }
+
+        public CsvHolidayReader()
+        {
+            this.delimiter = DefaultDelimiter;
+            this.Holidays = new List<Holiday>();
+        }
+
+        public CsvHolidayReader(string delimiter)
+        {
+            this.delimiter = string.IsNullOrWhiteSpace(delimiter)  ? DefaultDelimiter : delimiter;
+            this.Holidays = new List<Holiday>();
+        }
+
         public List<Holiday> HolidaysFromFile(string absoluteFilePath)
         {
             if (string.IsNullOrWhiteSpace(absoluteFilePath))
@@ -27,30 +43,31 @@ namespace DsuDev.BusinessDays.Services.FileReaders
                 throw new InvalidOperationException($"File extension {FileExtension.Csv} was expected");
             }
 
-            return HolidaysFromCsv(absoluteFilePath);
+            return this.HolidaysFromCsv(absoluteFilePath);
         }
 
-        protected static List<Holiday> HolidaysFromCsv(string fullFilePath)
+        protected List<Holiday> HolidaysFromCsv(string fullFilePath)
         {
-            List<Holiday> holidays = new List<Holiday>();
+            this.Holidays = new List<Holiday>();
             using (StreamReader file = File.OpenText(fullFilePath))
             {
                 var csv = new CsvReader(file);
                 csv.Configuration.HasHeaderRecord = true;
-                csv.Configuration.Delimiter = Delimiter;
+                csv.Configuration.Delimiter = this.delimiter;
 
                 var holidayBuilder = new HolidayBuilder();
                 while (csv.Read())
                 {
                     holidayBuilder.Create()
-                        .WithDate(csv.GetField<DateTime>(0))
-                        .WithName(csv.GetField<string>(1))
-                        .WithDescription(csv.GetField(2));
+                        .WithDate(csv.GetField<DateTime>(DateIndex))
+                        .WithName(csv.GetField<string>(NameIndex))
+                        .WithDescription(csv.GetField(DescriptionIndex));
 
-                    holidays.Add(holidayBuilder.Build());
+                    this.Holidays.Add(holidayBuilder.Build());
                 }
             }
-            return holidays;
+            return this.Holidays;
         }
+
     }
 }

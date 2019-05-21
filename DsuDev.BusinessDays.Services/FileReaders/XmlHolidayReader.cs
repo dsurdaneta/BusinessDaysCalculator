@@ -9,9 +9,16 @@ namespace DsuDev.BusinessDays.Services.FileReaders
 {
     public class XmlHolidayReader : IHolidayFileReader
     {
-        private static readonly int DateIndex = 0;
-        private static readonly int NameIndex = 1;
-        private static readonly int DescriptionIndex = 2;
+        private const int DateIndex = 0;
+        private const int NameIndex = 1;
+        private const int DescriptionIndex = 2;
+
+        public List<Holiday> Holidays { get; set; }
+
+        public XmlHolidayReader()
+        {
+            this.Holidays = new List<Holiday>();
+        }
 
         public List<Holiday> HolidaysFromFile(string absoluteFilePath)
         {
@@ -25,12 +32,12 @@ namespace DsuDev.BusinessDays.Services.FileReaders
                 throw new InvalidOperationException($"File extension {FileExtension.Xml} was expected");
             }
 
-            return HolidaysFromXml(absoluteFilePath);
+            return this.HolidaysFromXml(absoluteFilePath);
         }
 
-        protected static List<Holiday> HolidaysFromXml(string fullFilePath)
+        protected List<Holiday> HolidaysFromXml(string fullFilePath)
         {
-            List<Holiday> holidays = new List<Holiday>();
+            this.Holidays = new List<Holiday>();
             using (XmlReader file = XmlReader.Create(fullFilePath))
             {
                 XmlDocument xDoc = new XmlDocument();
@@ -46,11 +53,11 @@ namespace DsuDev.BusinessDays.Services.FileReaders
                             .WithName(node.ChildNodes[NameIndex].InnerText)
                             .WithDescription(node.ChildNodes[DescriptionIndex].InnerText);
 
-                        holidays.Add(holidayBuilder.Build());
+                        this.Holidays.Add(holidayBuilder.Build());
                     }
                 }
             }
-            return holidays;
+            return this.Holidays;
         }
     }
 }
