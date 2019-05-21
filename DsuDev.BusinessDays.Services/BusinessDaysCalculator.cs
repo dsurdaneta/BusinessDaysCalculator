@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Xml;
-using CsvHelper;
 using DsuDev.BusinessDays.Domain.Entities;
 using DsuDev.BusinessDays.Services.Constants;
 using DsuDev.BusinessDays.Services.FileReaders;
-using DsuDev.BusinessDays.Tools.FluentBuilders;
-using DsuDev.BusinessDays.Services.DTO;
-using Newtonsoft.Json;
-
 
 namespace DsuDev.BusinessDays.Services
 {
@@ -20,12 +12,12 @@ namespace DsuDev.BusinessDays.Services
     /// </summary>
     public class BusinessDaysCalculator
     {
-        private IFileReadingManager fileReading;
-        private FilePathInfo filePathInfo;
+        private readonly IFileReadingManager fileReading;
+        public FilePathInfo FilePathInfo { get; set; }
 
         public BusinessDaysCalculator()
         {
-            this.filePathInfo = new FilePathInfo
+            this.FilePathInfo = new FilePathInfo
             {
                 Folder = Resources.ContainingFolderName, 
                 FileName = Resources.FileName, 
@@ -38,35 +30,29 @@ namespace DsuDev.BusinessDays.Services
         
         public BusinessDaysCalculator(FilePathInfo filePathInfo, IFileReadingManager fileReadingManager)
         {
-            this.filePathInfo = filePathInfo ?? throw new ArgumentNullException(nameof(filePathInfo));
+            this.FilePathInfo = filePathInfo ?? throw new ArgumentNullException(nameof(filePathInfo));
             this.fileReading = fileReadingManager ?? throw new ArgumentException(nameof(fileReadingManager));
         }
 
         //TODO: change file properties for the FileInfoPath Entity
-
-        #region static Methods
+        
         /// <summary>
         /// Calculates the number of business days between two given dates
         /// </summary>
-        /// <param name="startDate"></param>
-        /// <param name="endDate"></param>
-        /// <param name="readHolidaysFile"></param>
-        /// <param name="folder"></param>
-        /// <param name="fileName"></param>
-        /// <param name="fileExt"></param>
+        /// <param name="startDate">The start date.</param>
+        /// <param name="endDate">The end date.</param>
+        /// <param name="readHolidaysFile">if set to <c>true</c> [read holidays file].</param>
         /// <returns></returns>
-        public static double GetBusinessDaysCount(
-            DateTime startDate, 
-            DateTime endDate, 
-            bool readHolidaysFile = false, 
-            string folder = Resources.ContainingFolderName, 
-            string fileName = Resources.FileName, 
-            string fileExt = FileExtension.Json)
-        {			
-            //minus holidays
-            int holidaysCount = readHolidaysFile ? 
-                GetHolidaysCount(startDate, endDate, folder, fileName, fileExt) 
-                : 0;
+        public double GetBusinessDaysCount(DateTime startDate, DateTime endDate, bool readHolidaysFile = false)
+        {
+            int holidaysCount = 0;
+            if (readHolidaysFile)
+            {
+                DirectoryHelper.ValidateFilePathInfo(this.FilePathInfo);
+                //minus holidays
+                List<Holiday> holidays = this.fileReading.ReadHolidaysFile(this.FilePathInfo);
+                holidaysCount = this.GetHolidaysCount(startDate, endDate, holidays);
+            }
 
             return AddCountersToDate(startDate, endDate, holidaysCount);
         }
@@ -78,7 +64,7 @@ namespace DsuDev.BusinessDays.Services
         /// <param name="endDate"></param>
         /// <param name="holidays">Holiday object list</param>
         /// <returns></returns>
-        public static double GetBusinessDaysCount(DateTime startDate, DateTime endDate, List<Holiday> holidays)
+        public double GetBusinessDaysCount(DateTime startDate, DateTime endDate, List<Holiday> holidays)
         {
             if (holidays == null)
             {
@@ -86,17 +72,17 @@ namespace DsuDev.BusinessDays.Services
             }
 
             //minus holidays
-            int holidaysCount = GetHolidaysCount(startDate, endDate, holidays);
+            int holidaysCount = this.GetHolidaysCount(startDate, endDate, holidays);
 
             return AddCountersToDate(startDate, endDate, holidaysCount);
         }
 				
-        internal static double AddCountersToDate(DateTime startDate, DateTime endDate, int holidaysCount)
+        internal double AddCountersToDate(DateTime startDate, DateTime endDate, int holidaysCount)
         {
             //initial date difference calculation
             double result = (endDate - startDate).TotalDays;
             //minus weekends
-            int weekendCount = GetWeekendsCount(startDate, result);
+            int weekendCount = this.GetWeekendsCount(startDate, result);
 			
             result -= (weekendCount + holidaysCount);
 
@@ -106,29 +92,21 @@ namespace DsuDev.BusinessDays.Services
         /// <summary>
         /// Adds a specific number of business days
         /// </summary>
-        /// <param name="startDate"></param>
+        /// <param name="startDate">The start date.</param>
         /// <param name="daysCount">business days to add</param>
         /// <param name="readHolidaysFile">if you have a file with the holidays</param>
-        /// <param name="folder"></param>
-        /// <param name="fileName"></param>
-        /// <param name="fileExt"></param>
         /// <returns></returns>
-        public static DateTime AddBusinessDays(
-            DateTime startDate, 
-            double daysCount, 
-            bool readHolidaysFile = false,
-            string folder = Resources.ContainingFolderName, 
-            string fileName = Resources.FileName, 
-            string fileExt = FileExtension.Json)
+        public DateTime AddBusinessDays(DateTime startDate, double daysCount, bool readHolidaysFile = false)
         {
             //plus weekends
-            int weekendCount = GetWeekendsCount(startDate, daysCount);
+            int weekendCount = this.GetWeekendsCount(startDate, daysCount);
             //add everything to the initial date
             DateTime endDate = startDate.AddDays(daysCount + weekendCount);
 
             if (!readHolidaysFile) return endDate;
             //holidays calculation
-            int holidaysCount = GetHolidaysCount(startDate, endDate, folder, fileName, fileExt);
+            List<Holiday> holidays = this.fileReading.ReadHolidaysFile(this.FilePathInfo);
+            int holidaysCount = this.GetHolidaysCount(startDate, endDate, holidays);
             //add the holidays to the date
             if(holidaysCount > 0)
                 endDate = endDate.AddDays(holidaysCount);
@@ -142,10 +120,10 @@ namespace DsuDev.BusinessDays.Services
         /// <param name="daysCount"></param>
         /// <param name="notWeekendHolidaysCount">if you already have the holidays count</param>
         /// <returns></returns>
-        public static DateTime AddBusinessDays(DateTime startDate, double daysCount, double notWeekendHolidaysCount)
+        public DateTime AddBusinessDays(DateTime startDate, double daysCount, double notWeekendHolidaysCount)
         {
             //plus weekends
-            int weekendCount = GetWeekendsCount(startDate, daysCount);
+            int weekendCount = this.GetWeekendsCount(startDate, daysCount);
             //add everything to the initial date
             return startDate.AddDays(daysCount + weekendCount + notWeekendHolidaysCount);
         }
@@ -157,10 +135,10 @@ namespace DsuDev.BusinessDays.Services
         /// <param name="daysCount"></param>
         /// <param name="holidays">Holiday object list</param>
         /// <returns></returns>
-        public static DateTime AddBusinessDays(DateTime startDate, double daysCount, List<Holiday> holidays)
+        public DateTime AddBusinessDays(DateTime startDate, double daysCount, List<Holiday> holidays)
         {
-            int notWeekendHolidaysCount = GetHolidaysCount(startDate, holidays);
-            return AddBusinessDays(startDate, daysCount, notWeekendHolidaysCount);
+            int notWeekendHolidaysCount = this.GetHolidaysCount(startDate, holidays);
+            return this.AddBusinessDays(startDate, daysCount, notWeekendHolidaysCount);
         }
 
         /// <summary>
@@ -169,7 +147,7 @@ namespace DsuDev.BusinessDays.Services
         /// <param name="startDate"></param>
         /// <param name="daysCount"></param>
         /// <returns></returns>
-        internal static int GetWeekendsCount(DateTime startDate, double daysCount)
+        internal int GetWeekendsCount(DateTime startDate, double daysCount)
         {
             int weekendCount = 0;
             for (int i = 0; i < daysCount; i++)
@@ -182,164 +160,13 @@ namespace DsuDev.BusinessDays.Services
         }
 
         /// <summary>
-        /// Process a file with the holidays and saves it in a List
-        /// </summary>
-        /// <param name="folder"></param>
-        /// <param name="fileName"></param>
-        /// <param name="fileExt"></param>
-        /// <returns></returns>
-        internal static List<Holiday> ReadHolidaysFile(
-            string folder = Resources.ContainingFolderName,
-            string fileName = Resources.FileName, 
-            string fileExt = FileExtension.Json)
-        {
-            List<Holiday> holidays = new List<Holiday>();
-            string fullFilePath = GenerateFilePath(folder, fileName, fileExt);
-            //format to list according to fileExt
-            switch (fileExt)
-            {
-                case FileExtension.Json:
-                    holidays = HolidaysFromJson(fullFilePath);
-                    break;
-                case FileExtension.Xml:
-                    holidays = HolidaysFromXml(fullFilePath);
-                    break;
-                case FileExtension.Csv:
-                    holidays = HolidaysFromCsv(fullFilePath);
-                    break;
-                case FileExtension.Txt:
-                    //not yet supported, might be useful for custom rules
-                    break;
-                default:
-                    //file extension is not supported
-                    throw new InvalidOperationException($"File extension {fileExt} not supported");
-            }
-            return holidays;
-        }
-
-        protected static string GenerateFilePath(
-            string folder = Resources.ContainingFolderName, 
-            string fileName = Resources.FileName, 
-            string fileExt = FileExtension.Json)
-        {
-            string currentDirectory = Directory.GetCurrentDirectory();
-            string folderPath = $"{currentDirectory}\\{folder}";
-
-            //if it does not exist, create directory
-            if (!Directory.Exists(folderPath))
-                Directory.CreateDirectory(folderPath);
-
-            return $"{folderPath}\\{fileName}.{fileExt}";
-        }
-
-        protected static List<Holiday> HolidaysFromCsv(string fullFilePath)
-        {
-            List<Holiday> holidays = new List<Holiday>();
-            using (StreamReader file = File.OpenText(fullFilePath))
-            {
-                var csv = new CsvReader(file);
-                csv.Configuration.HasHeaderRecord = true;
-                csv.Configuration.Delimiter = ";";
-                var holidayBuilder = new HolidayBuilder();
-				
-                while (csv.Read())
-                {
-                    holidayBuilder.Create()
-                        .WithDate(csv.GetField<DateTime>(0))
-                        .WithName(csv.GetField<string>(1))
-                        .WithDescription(csv.GetField(2));
-
-                    holidays.Add(holidayBuilder.Build());
-                }
-            }
-            return holidays;
-        }
-
-        protected static List<Holiday> HolidaysFromXml(string fullFilePath)
-        {
-            List<Holiday> holidays = new List<Holiday>();
-            using (XmlReader file = XmlReader.Create(fullFilePath))
-            {
-                XmlDocument xDoc = new XmlDocument();
-                xDoc.Load(file);
-
-                var holidayBuilder = new HolidayBuilder();
-                foreach (XmlNode node in xDoc.ChildNodes[1])
-                {
-                    if (node.ChildNodes.Count < 3)
-                        continue;
-
-                    holidayBuilder.Create()
-                        .WithDate(Convert.ToDateTime(node.ChildNodes[0].InnerText))
-                        .WithName(node.ChildNodes[1].InnerText)
-                        .WithDescription(node.ChildNodes[2].InnerText);
-
-                    holidays.Add(holidayBuilder.Build());
-                }
-            }
-            return holidays;
-        }
-
-        protected static List<Holiday> HolidaysFromJson(string fullFilePath)
-        {
-            List<Holiday> holidays = new List<Holiday>();
-            using (StreamReader file = File.OpenText(fullFilePath))
-            {
-                string json = file.ReadToEnd();
-                var deserializedInfo = JsonConvert.DeserializeObject<HolidaysInfoList>(json);
-
-                if (deserializedInfo == null) return holidays;
-
-                holidays = deserializedInfo.Holidays;
-                //in case its needed
-                holidays.ForEach(holiday => holiday.HolidayStringDate = holiday.HolidayDate.ToString(Holiday.DateFormat, CultureInfo.InvariantCulture));
-            }
-            return holidays;
-        }
-
-        /// <summary>
-        /// Gets the number of holidays between two dates.
-        /// </summary>
-        /// <param name="startDate"></param>
-        /// <param name="endDate"></param>
-        /// <param name="folder"></param>
-        /// <param name="fileName"></param>
-        /// <param name="fileExt"></param>
-        /// <returns></returns>
-        internal static int GetHolidaysCount(
-            DateTime startDate, DateTime endDate, 
-            string folder = Resources.ContainingFolderName, 
-            string fileName = Resources.FileName, 
-            string fileExt = FileExtension.Json)
-        {
-            if (string.IsNullOrWhiteSpace(folder))
-            {
-                throw new ArgumentException("FolderName should not be empty", nameof(folder) );
-            }
-            
-            if (string.IsNullOrWhiteSpace(fileName))
-            {
-                throw new ArgumentException("FileName should not be empty", nameof(fileName) );
-            }
-            
-            if (string.IsNullOrWhiteSpace(fileExt))
-            {
-                throw new ArgumentException("fileExtension should not be empty", nameof(fileExt) );
-            }
-
-            //TODO: use FileReaderManager
-            List<Holiday> holidays = ReadHolidaysFile(folder, fileName, fileExt);
-            return GetHolidaysCount(startDate, endDate, holidays);
-        }
-
-        /// <summary>
         /// Gets the number of holidays between two dates.
         /// </summary>
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <param name="holidays">Holiday object list</param>
-        /// <returns></returns>
-        internal static int GetHolidaysCount(DateTime startDate, DateTime endDate, List<Holiday> holidays)
+        /// <returns>The amount of Holidays</returns>
+        internal int GetHolidaysCount(DateTime startDate, DateTime endDate, List<Holiday> holidays)
         {
             int holidayCount = 0;
             if (holidays != null && holidays.Count > 0)
@@ -361,8 +188,8 @@ namespace DsuDev.BusinessDays.Services
         /// </summary>
         /// <param name="startDate"></param>
         /// <param name="holidays">Holiday object list</param>
-        /// <returns></returns>
-        internal static int GetHolidaysCount(DateTime startDate, List<Holiday> holidays)
+        /// <returns>The amount of Holidays</returns>
+        internal int GetHolidaysCount(DateTime startDate, List<Holiday> holidays)
         {
             int holidayCount = 0;
             if (holidays != null && holidays.Count > 0)
@@ -377,6 +204,5 @@ namespace DsuDev.BusinessDays.Services
             }
             return holidayCount;
         }
-        #endregion
     }
 }
