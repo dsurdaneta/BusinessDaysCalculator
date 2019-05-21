@@ -7,8 +7,11 @@ using System.Xml;
 using CsvHelper;
 using DsuDev.BusinessDays.Domain.Entities;
 using DsuDev.BusinessDays.Services.Constants;
+using DsuDev.BusinessDays.Services.FileReaders;
 using DsuDev.BusinessDays.Tools.FluentBuilders;
+using DsuDev.BusinessDays.Services.DTO;
 using Newtonsoft.Json;
+
 
 namespace DsuDev.BusinessDays.Services
 {
@@ -17,6 +20,7 @@ namespace DsuDev.BusinessDays.Services
     /// </summary>
     public class BusinessDaysCalculator
     {
+        private IFileReadingManager fileReading;
         private FilePathInfo filePathInfo;
 
         public BusinessDaysCalculator()
@@ -28,12 +32,17 @@ namespace DsuDev.BusinessDays.Services
                 Extension = FileExtension.Json,
                 IsAbsolutePath = false
             };
+
+            this.fileReading = new FileReadingManager();
         }
         
-        public BusinessDaysCalculator(FilePathInfo filePathInfo)
+        public BusinessDaysCalculator(FilePathInfo filePathInfo, IFileReadingManager fileReadingManager)
         {
             this.filePathInfo = filePathInfo ?? throw new ArgumentNullException(nameof(filePathInfo));
+            this.fileReading = fileReadingManager ?? throw new ArgumentException(nameof(fileReadingManager));
         }
+
+        //TODO: change file properties for the FileInfoPath Entity
 
         #region static Methods
         /// <summary>
@@ -318,6 +327,7 @@ namespace DsuDev.BusinessDays.Services
                 throw new ArgumentException("fileExtension should not be empty", nameof(fileExt) );
             }
 
+            //TODO: use FileReaderManager
             List<Holiday> holidays = ReadHolidaysFile(folder, fileName, fileExt);
             return GetHolidaysCount(startDate, endDate, holidays);
         }
