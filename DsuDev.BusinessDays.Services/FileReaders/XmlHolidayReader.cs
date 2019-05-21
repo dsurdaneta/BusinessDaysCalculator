@@ -20,7 +20,7 @@ namespace DsuDev.BusinessDays.Services.FileReaders
             this.Holidays = new List<Holiday>();
         }
 
-        public List<Holiday> HolidaysFromFile(string absoluteFilePath)
+        public List<Holiday> GetHolidaysFromFile(string absoluteFilePath)
         {
             if (string.IsNullOrWhiteSpace(absoluteFilePath))
             {
@@ -35,10 +35,10 @@ namespace DsuDev.BusinessDays.Services.FileReaders
             return this.HolidaysFromXml(absoluteFilePath);
         }
 
-        protected List<Holiday> HolidaysFromXml(string fullFilePath)
+        protected List<Holiday> HolidaysFromXml(string absoluteFilePath)
         {
             this.Holidays = new List<Holiday>();
-            using (XmlReader file = XmlReader.Create(fullFilePath))
+            using (XmlReader file = XmlReader.Create(absoluteFilePath))
             {
                 XmlDocument xDoc = new XmlDocument();
                 xDoc.Load(file);

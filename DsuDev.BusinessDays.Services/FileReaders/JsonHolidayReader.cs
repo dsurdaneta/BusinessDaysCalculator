@@ -17,7 +17,7 @@ namespace DsuDev.BusinessDays.Services.FileReaders
             this.Holidays = new List<Holiday>();
         }
 
-        public List<Holiday> HolidaysFromFile(string absoluteFilePath)
+        public List<Holiday> GetHolidaysFromFile(string absoluteFilePath)
         {
             if (string.IsNullOrWhiteSpace(absoluteFilePath))
             {
@@ -32,10 +32,10 @@ namespace DsuDev.BusinessDays.Services.FileReaders
             return this.HolidaysFromJson(absoluteFilePath);
         }
 
-        protected List<Holiday> HolidaysFromJson(string fullFilePath)
+        protected List<Holiday> HolidaysFromJson(string absoluteFilePath)
         {
             this.Holidays = new List<Holiday>();
-            using (StreamReader file = File.OpenText(fullFilePath))
+            using (StreamReader file = File.OpenText(absoluteFilePath))
             {
                 string json = file.ReadToEnd();
                 var deserializedInfo = JsonConvert.DeserializeObject<HolidaysInfoList>(json);

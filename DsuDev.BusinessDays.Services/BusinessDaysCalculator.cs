@@ -28,11 +28,18 @@ namespace DsuDev.BusinessDays.Services
         /// <param name="fileName"></param>
         /// <param name="fileExt"></param>
         /// <returns></returns>
-        public static double GetBusinessDaysCount(DateTime startDate, DateTime endDate, bool readHolidaysFile = false, 
-            string folder = Resources.ContainingFolderName, string fileName = Resources.FileName, string fileExt = FileExtension.Json)
+        public static double GetBusinessDaysCount(
+            DateTime startDate, 
+            DateTime endDate, 
+            bool readHolidaysFile = false, 
+            string folder = Resources.ContainingFolderName, 
+            string fileName = Resources.FileName, 
+            string fileExt = FileExtension.Json)
         {			
             //minus holidays
-            int holidaysCount = readHolidaysFile ? GetHolidaysCount(startDate, endDate, folder, fileName, fileExt) : 0;
+            int holidaysCount = readHolidaysFile ? 
+                GetHolidaysCount(startDate, endDate, folder, fileName, fileExt) 
+                : 0;
 
             return AddCountersToDate(startDate, endDate, holidaysCount);
         }
@@ -79,8 +86,13 @@ namespace DsuDev.BusinessDays.Services
         /// <param name="fileName"></param>
         /// <param name="fileExt"></param>
         /// <returns></returns>
-        public static DateTime AddBusinessDays(DateTime startDate, double daysCount, bool readHolidaysFile = false,
-            string folder = Resources.ContainingFolderName, string fileName = Resources.FileName, string fileExt = FileExtension.Json)
+        public static DateTime AddBusinessDays(
+            DateTime startDate, 
+            double daysCount, 
+            bool readHolidaysFile = false,
+            string folder = Resources.ContainingFolderName, 
+            string fileName = Resources.FileName, 
+            string fileExt = FileExtension.Json)
         {
             //plus weekends
             int weekendCount = GetWeekendsCount(startDate, daysCount);
@@ -149,7 +161,9 @@ namespace DsuDev.BusinessDays.Services
         /// <param name="fileName"></param>
         /// <param name="fileExt"></param>
         /// <returns></returns>
-        internal static List<Holiday> ReadHolidaysFile(string folder = Resources.ContainingFolderName, string fileName = Resources.FileName, 
+        internal static List<Holiday> ReadHolidaysFile(
+            string folder = Resources.ContainingFolderName,
+            string fileName = Resources.FileName, 
             string fileExt = FileExtension.Json)
         {
             List<Holiday> holidays = new List<Holiday>();
@@ -176,7 +190,9 @@ namespace DsuDev.BusinessDays.Services
             return holidays;
         }
 
-        protected static string GenerateFilePath(string folder = Resources.ContainingFolderName, string fileName = Resources.FileName, 
+        protected static string GenerateFilePath(
+            string folder = Resources.ContainingFolderName, 
+            string fileName = Resources.FileName, 
             string fileExt = FileExtension.Json)
         {
             string currentDirectory = Directory.GetCurrentDirectory();
@@ -263,8 +279,11 @@ namespace DsuDev.BusinessDays.Services
         /// <param name="fileName"></param>
         /// <param name="fileExt"></param>
         /// <returns></returns>
-        internal static int GetHolidaysCount(DateTime startDate, DateTime endDate, string folder = Resources.ContainingFolderName, 
-            string fileName = Resources.FileName, string fileExt = FileExtension.Json)
+        internal static int GetHolidaysCount(
+            DateTime startDate, DateTime endDate, 
+            string folder = Resources.ContainingFolderName, 
+            string fileName = Resources.FileName, 
+            string fileExt = FileExtension.Json)
         {
             if (string.IsNullOrWhiteSpace(folder))
             {

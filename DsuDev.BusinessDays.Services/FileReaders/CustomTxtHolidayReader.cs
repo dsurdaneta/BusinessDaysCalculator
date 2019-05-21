@@ -12,7 +12,7 @@ namespace DsuDev.BusinessDays.Services.FileReaders
             this.Holidays = new List<Holiday>();
         }
 
-        public List<Holiday> HolidaysFromFile(string absoluteFilePath)
+        public List<Holiday> GetHolidaysFromFile(string absoluteFilePath)
         {
             throw new System.NotImplementedException();
         }
