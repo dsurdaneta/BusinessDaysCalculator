@@ -3,7 +3,7 @@ using DsuDev.BusinessDays.Domain.Entities;
 
 namespace DsuDev.BusinessDays.Services.FileReaders
 {
-    public class CustomTxtHolidayReader : IHolidayFileReader
+    public class CustomTxtHolidayReader : ICustomTxtReader
     {
         public List<Holiday> Holidays { get; set; }
 

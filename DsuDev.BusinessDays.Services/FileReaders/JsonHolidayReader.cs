@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace DsuDev.BusinessDays.Services.FileReaders
 {
-    public class JsonHolidayReader : IHolidayFileReader
+    public class JsonHolidayReader : IJsonReader
     {
         public List<Holiday> Holidays { get; set; }
 

@@ -7,7 +7,7 @@ using DsuDev.BusinessDays.Tools.FluentBuilders;
 
 namespace DsuDev.BusinessDays.Services.FileReaders
 {
-    public class XmlHolidayReader : IHolidayFileReader
+    public class XmlHolidayReader : IXmlReader
     {
         private const int DateIndex = 0;
         private const int NameIndex = 1;

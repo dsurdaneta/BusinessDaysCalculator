@@ -8,26 +8,28 @@ using DsuDev.BusinessDays.Tools.FluentBuilders;
 
 namespace DsuDev.BusinessDays.Services.FileReaders
 {
-    public class CsvHolidayReader : IHolidayFileReader
+    public class CsvHolidayReader : ICsvReader
     {
         private const string DefaultDelimiter = ";";
         private const int DateIndex = 0;
         private const int NameIndex = 1;
         private const int DescriptionIndex = 2;
 
-        private readonly string delimiter;
-
         public List<Holiday> Holidays { get; set; }
+        public string Delimiter { get; internal set; }
+        public bool HasHeaderRecord { get; set; }
 
         public CsvHolidayReader()
         {
-            this.delimiter = DefaultDelimiter;
+            this.Delimiter = DefaultDelimiter;
+            this.HasHeaderRecord = true;
             this.Holidays = new List<Holiday>();
         }
 
-        public CsvHolidayReader(string delimiter)
+        public CsvHolidayReader(string delimiter, bool hasHeaderRecord)
         {
-            this.delimiter = string.IsNullOrWhiteSpace(delimiter)  ? DefaultDelimiter : delimiter;
+            this.Delimiter = string.IsNullOrWhiteSpace(delimiter)  ? DefaultDelimiter : delimiter;
+            this.HasHeaderRecord = hasHeaderRecord;
             this.Holidays = new List<Holiday>();
         }
 
@@ -52,9 +54,9 @@ namespace DsuDev.BusinessDays.Services.FileReaders
             using (StreamReader file = File.OpenText(absoluteFilePath))
             {
                 var csv = new CsvReader(file);
-                csv.Configuration.HasHeaderRecord = true;
-                csv.Configuration.Delimiter = this.delimiter;
-
+                csv.Configuration.HasHeaderRecord = this.HasHeaderRecord;
+                csv.Configuration.Delimiter = this.Delimiter;
+                
                 var holidayBuilder = new HolidayBuilder();
                 while (csv.Read())
                 {
