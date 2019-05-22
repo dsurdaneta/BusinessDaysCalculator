@@ -30,7 +30,7 @@ namespace DsuDev.BusinessDays.Services
             }
 
             if (string.IsNullOrWhiteSpace(filePathInfo.FileName)
-                && string.IsNullOrWhiteSpace(filePathInfo.Extension))
+                || string.IsNullOrWhiteSpace(filePathInfo.Extension))
             {
                 throw new ArgumentException("The file name and file extension are needed to generate the complete file path.");
             }
