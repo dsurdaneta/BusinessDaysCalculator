@@ -1,9 +1,0 @@
-D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Domain\bin\Debug\netstandard2.0\DsuDev.BusinessDays.Domain.deps.json
-D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Domain\bin\Debug\netstandard2.0\DsuDev.BusinessDays.Domain.dll
-D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Domain\bin\Debug\netstandard2.0\DsuDev.BusinessDays.Domain.pdb
-D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Domain\obj\Debug\netstandard2.0\DsuDev.BusinessDays.Domain.csproj.CoreCompileInputs.cache
-D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Domain\obj\Debug\netstandard2.0\DsuDev.BusinessDays.Domain.AssemblyInfoInputs.cache
-D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Domain\obj\Debug\netstandard2.0\DsuDev.BusinessDays.Domain.AssemblyInfo.cs
-D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Domain\obj\Debug\netstandard2.0\DsuDev.BusinessDays.Domain.dll
-D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Domain\obj\Debug\netstandard2.0\DsuDev.BusinessDays.Domain.pdb
-D:\Git\Projects\BusinessDaysCalculator\DsuDev.BusinessDays.Domain\obj\Debug\netstandard2.0\DsuDev.BusinessDays.Domain.csprojAssemblyReference.cache

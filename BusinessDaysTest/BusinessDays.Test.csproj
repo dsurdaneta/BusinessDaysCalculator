@@ -64,16 +64,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DsuDev.BusinessDays.Domain\DsuDev.BusinessDays.Domain.csproj">
-      <Project>{5504eeb9-0608-4d15-b974-faade62c1ece}</Project>
+    <ProjectReference Include="..\Source\Domain\DsuDev.BusinessDays.Domain.csproj">
+      <Project>{6dc82fb2-55cb-47f2-9f89-c8368f4a346c}</Project>
       <Name>DsuDev.BusinessDays.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DsuDev.BusinessDays.Services\DsuDev.BusinessDays.Services.csproj">
-      <Project>{d4452c53-a07d-456e-b292-cede8667a8d7}</Project>
+    <ProjectReference Include="..\Source\Services\DsuDev.BusinessDays.Services.csproj">
+      <Project>{c6d38071-b746-48b9-8501-a39a24d9034d}</Project>
       <Name>DsuDev.BusinessDays.Services</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DsuDev.BusinessDays.Tools\DsuDev.BusinessDays.Tools.csproj">
-      <Project>{984b40f2-95fd-4211-bdef-3a3ff057e303}</Project>
+    <ProjectReference Include="..\Source\Tools\DsuDev.BusinessDays.Tools.csproj">
+      <Project>{0474ed6a-86eb-4873-b4e4-a04172f203d6}</Project>
       <Name>DsuDev.BusinessDays.Tools</Name>
     </ProjectReference>
   </ItemGroup>
