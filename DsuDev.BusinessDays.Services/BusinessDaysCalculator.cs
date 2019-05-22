@@ -15,6 +15,9 @@ namespace DsuDev.BusinessDays.Services
         private readonly IFileReadingManager fileReading;
         public FilePathInfo FilePathInfo { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BusinessDaysCalculator"/> class.
+        /// </summary>
         public BusinessDaysCalculator()
         {
             this.FilePathInfo = new FilePathInfo
@@ -27,15 +30,23 @@ namespace DsuDev.BusinessDays.Services
 
             this.fileReading = new FileReadingManager();
         }
-        
+
+        //TODO: add container configuration to handle dependencies
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BusinessDaysCalculator"/> class.
+        /// </summary>
+        /// <param name="filePathInfo">The file path information.</param>
+        /// <param name="fileReadingManager">The file reading manager.</param>
+        /// <exception cref="ArgumentNullException">
+        /// filePathInfo  or  fileReadingManager
+        /// </exception>
         public BusinessDaysCalculator(FilePathInfo filePathInfo, IFileReadingManager fileReadingManager)
         {
             this.FilePathInfo = filePathInfo ?? throw new ArgumentNullException(nameof(filePathInfo));
-            this.fileReading = fileReadingManager ?? throw new ArgumentException(nameof(fileReadingManager));
+            this.fileReading = fileReadingManager ?? throw new ArgumentNullException(nameof(fileReadingManager));
         }
 
-        //TODO: change file properties for the FileInfoPath Entity
-        
         /// <summary>
         /// Calculates the number of business days between two given dates
         /// </summary>
@@ -54,7 +65,7 @@ namespace DsuDev.BusinessDays.Services
                 holidaysCount = this.GetHolidaysCount(startDate, endDate, holidays);
             }
 
-            return AddCountersToDate(startDate, endDate, holidaysCount);
+            return this.AddCountersToDate(startDate, endDate, holidaysCount);
         }
 
         /// <summary>
@@ -73,22 +84,9 @@ namespace DsuDev.BusinessDays.Services
 
             //minus holidays
             int holidaysCount = this.GetHolidaysCount(startDate, endDate, holidays);
-
-            return AddCountersToDate(startDate, endDate, holidaysCount);
+            return this.AddCountersToDate(startDate, endDate, holidaysCount);
         }
-				
-        internal double AddCountersToDate(DateTime startDate, DateTime endDate, int holidaysCount)
-        {
-            //initial date difference calculation
-            double result = (endDate - startDate).TotalDays;
-            //minus weekends
-            int weekendCount = this.GetWeekendsCount(startDate, result);
-			
-            result -= (weekendCount + holidaysCount);
-
-            return result;
-        }
-
+		
         /// <summary>
         /// Adds a specific number of business days
         /// </summary>
@@ -100,16 +98,18 @@ namespace DsuDev.BusinessDays.Services
         {
             //plus weekends
             int weekendCount = this.GetWeekendsCount(startDate, daysCount);
-            //add everything to the initial date
             DateTime endDate = startDate.AddDays(daysCount + weekendCount);
 
             if (!readHolidaysFile) return endDate;
+            
             //holidays calculation
             List<Holiday> holidays = this.fileReading.ReadHolidaysFile(this.FilePathInfo);
             int holidaysCount = this.GetHolidaysCount(startDate, endDate, holidays);
+            
             //add the holidays to the date
             if(holidaysCount > 0)
                 endDate = endDate.AddDays(holidaysCount);
+            
             return endDate;
         }
 
@@ -142,6 +142,24 @@ namespace DsuDev.BusinessDays.Services
         }
 
         /// <summary>
+        /// Adds the counters to the given date.
+        /// </summary>
+        /// <param name="startDate">The start date.</param>
+        /// <param name="endDate">The end date.</param>
+        /// <param name="holidaysCount">The amount of holidays.</param>
+        /// <returns></returns>
+        internal double AddCountersToDate(DateTime startDate, DateTime endDate, int holidaysCount)
+        {
+            //initial date difference calculation
+            double result = (endDate - startDate).TotalDays;
+            //minus weekends
+            int weekendCount = this.GetWeekendsCount(startDate, result);
+            result -= (weekendCount + holidaysCount);
+
+            return result;
+        }
+
+        /// <summary>
         /// Gets the number of Saturdays and Sundays for a given number of business days
         /// </summary>
         /// <param name="startDate"></param>
@@ -152,8 +170,9 @@ namespace DsuDev.BusinessDays.Services
             int weekendCount = 0;
             for (int i = 0; i < daysCount; i++)
             {
-                DateTime calcDateTime = startDate.AddDays(i);
-                if (calcDateTime.DayOfWeek == DayOfWeek.Saturday || calcDateTime.DayOfWeek == DayOfWeek.Sunday)               
+                DateTime calculatedDateTime = startDate.AddDays(i);
+                if (calculatedDateTime.DayOfWeek == DayOfWeek.Saturday 
+                    || calculatedDateTime.DayOfWeek == DayOfWeek.Sunday)               
                     weekendCount++;                
             }
             return weekendCount;
@@ -169,7 +188,7 @@ namespace DsuDev.BusinessDays.Services
         internal int GetHolidaysCount(DateTime startDate, DateTime endDate, List<Holiday> holidays)
         {
             int holidayCount = 0;
-            if (holidays != null && holidays.Count > 0)
+            if (holidays?.Count > 0)
             {
                 //The holidays count must consider holidays between evaluation dates
                 bool HolidayIsBetweenDates(Holiday holiday) => holiday.HolidayDate >= startDate 
