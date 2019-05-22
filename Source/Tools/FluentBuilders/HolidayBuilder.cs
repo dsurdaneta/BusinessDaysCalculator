@@ -40,6 +40,14 @@ namespace DsuDev.BusinessDays.Tools.FluentBuilders
             this.dateString = this.date.ToString(Holiday.DateFormat, CultureInfo.InvariantCulture);
             return this;
         }
+        
+        public HolidayBuilder WithDate(int year, int month, int day)
+        {
+            this.date = new DateTime(year, month, day);
+            //in case its needed
+            this.dateString = this.date.ToString(Holiday.DateFormat, CultureInfo.InvariantCulture);
+            return this;
+        }
 
         public Holiday Build()
         {
