@@ -1,5 +1,4 @@
-﻿using System;
-using DsuDev.BusinessDays.Domain.Entities;
+﻿using DsuDev.BusinessDays.Domain.Entities;
 using DsuDev.BusinessDays.Tools.FluentBuilders;
 
 namespace DsuDev.BusinessDays.Tools.SampleGenerators
