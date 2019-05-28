@@ -2714,19 +2714,13 @@
       ],
       "configFilePaths": [
         "C:\\Users\\urdanetd\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "http://nugetprod.emea.roche.com/nuget/3rdParty": {},
-        "http://nugetprod.emea.roche.com/nuget/Development": {},
-        "http://nugetprod.emea.roche.com/nuget/LabcoreRelease/": {},
-        "http://nugetprod.emea.roche.com/nuget/SIS.TALL.MSO": {},
-        "http://nugetprod.emea.roche.com/nuget/Unstable": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2754,6 +2748,7 @@
       "netcoreapp2.1": {
         "dependencies": {
           "Microsoft.NETCore.App": {
+            "suppressParent": "All",
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true
