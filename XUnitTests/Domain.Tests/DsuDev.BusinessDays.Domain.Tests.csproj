@@ -14,10 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Source\Domain\DsuDev.BusinessDays.Domain.csproj" />
     <ProjectReference Include="..\..\Source\Tools\DsuDev.BusinessDays.Tools.csproj" />
   </ItemGroup>
