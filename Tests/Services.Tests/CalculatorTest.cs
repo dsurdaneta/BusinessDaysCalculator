@@ -4,7 +4,7 @@ using DsuDev.BusinessDays.Domain.Entities;
 using DsuDev.BusinessDays.Services.Constants;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace DsuDev.BusinessDays.Services.Tests
+namespace DsuDev.BusinessDays.Services.OldTests
 {
     [TestClass]
     public class CalculatorTest

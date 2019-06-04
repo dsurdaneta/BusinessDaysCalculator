@@ -1,27 +1,31 @@
 ﻿using DsuDev.BusinessDays.Services.DTO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FluentAssertions;
+using Xunit;
 
-namespace DsuDev.BusinessDays.Services.OldTests.DTO
+namespace DsuDev.BusinessDays.Services.Tests.DTO
 {
-    [TestClass]
     public class HolidaysInfoListTest
     {
-        [TestMethod]
+        [Fact]
         public void InfoList_WithVoidConstructorHolidayInfoListObjIsNotNull()
         {
             //Act
             var sut = new HolidaysInfoList();
+            
             //Assert
-            Assert.IsNotNull(sut);
+            sut.Should().NotBeNull();
         }
 
-        [TestMethod]
+        [Fact]
         public void InfoList_WithVoidConstructorHolidayInfoListNotNullHolidaysList()
         {
             //Act
             var sut = new HolidaysInfoList();
+            
             //Assert
-            Assert.IsNotNull(sut.Holidays);
+            sut.Should().NotBeNull();
+            sut.Holidays.Should().NotBeNull();
+            sut.Holidays.Count.Should().Be(0);
         }
     }
 }

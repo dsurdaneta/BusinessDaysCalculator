@@ -19,4 +19,8 @@
     <ProjectReference Include="..\..\Source\Tools\DsuDev.BusinessDays.Tools.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="FileReaders\" />
+  </ItemGroup>
+
 </Project>
