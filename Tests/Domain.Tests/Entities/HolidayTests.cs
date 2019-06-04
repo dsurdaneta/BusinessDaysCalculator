@@ -2,7 +2,7 @@
 using DsuDev.BusinessDays.Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace DsuDev.BusinessDays.Domain.Tests.Entities
+namespace DsuDev.BusinessDays.Domain.OldTests.Entities
 {
     [TestClass]
     public class HolidayTests
@@ -26,7 +26,7 @@ namespace DsuDev.BusinessDays.Domain.Tests.Entities
             Assert.IsNull(sut.Description);
             Assert.IsNull(sut.HolidayStringDate);
         }
-        
+
         [TestMethod]
         public void Holiday_WithDateTimeConstructor()
         {
@@ -38,7 +38,7 @@ namespace DsuDev.BusinessDays.Domain.Tests.Entities
             Assert.IsNull(sut.HolidayStringDate);
             Assert.IsTrue(sut.HolidayDate.Year.Equals(DateTime.Today.Year));
         }
-        
+
         [TestMethod]
         public void Holiday_WithTimeSpanConstructor()
         {
