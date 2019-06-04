@@ -1,88 +1,94 @@
-﻿using System;
-using DsuDev.BusinessDays.Domain.Entities;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using DsuDev.BusinessDays.Domain.Entities;
+using FluentAssertions;
+using System;
+using Xunit;
 
-namespace DsuDev.BusinessDays.Domain.OldTests.Entities
+namespace DsuDev.BusinessDays.Domain.Tests.Entities
 {
-    [TestClass]
     public class HolidayTests
     {
-        [TestMethod]
+        [Fact]
         public void Holiday_HolidayObjIsNotNull()
         {
             //Act
             var sut = new Holiday();
+
             //Assert
-            Assert.IsNotNull(sut);
+            sut.Should().NotBeNull();
         }
 
-        [TestMethod]
+        [Fact]
         public void Holiday_WithVoidConstructorStringsAreNull()
         {
             //Act
             var sut = new Holiday();
+
             //Assert
-            Assert.IsNull(sut.Name);
-            Assert.IsNull(sut.Description);
-            Assert.IsNull(sut.HolidayStringDate);
+            sut.Should().NotBeNull();
+            sut.Name.Should().BeNull();
+            sut.Description.Should().BeNull();
+            sut.HolidayStringDate.Should().BeNull();
         }
 
-        [TestMethod]
+        [Fact]
         public void Holiday_WithDateTimeConstructor()
         {
             //Act
             var sut = new Holiday(DateTime.Today);
+
             //Assert
-            Assert.IsNull(sut.Name);
-            Assert.IsNull(sut.Description);
-            Assert.IsNull(sut.HolidayStringDate);
-            Assert.IsTrue(sut.HolidayDate.Year.Equals(DateTime.Today.Year));
+            sut.Should().NotBeNull();
+            sut.Name.Should().BeNull();
+            sut.Description.Should().BeNull();
+            sut.Description.Should().BeNull();
+            sut.HolidayDate.Year.Should().Be(DateTime.Today.Year);
+            sut.HolidayDate.Month.Should().Be(DateTime.Today.Month);
+            sut.HolidayDate.Day.Should().Be(DateTime.Today.Day);
         }
 
-        [TestMethod]
+        [Fact]
         public void Holiday_WithTimeSpanConstructor()
         {
-            //Act
+            //Arrange
             var time = DateTime.Today.TimeOfDay;
-            var sut = new Holiday(time);
-            //Assert
-            Assert.IsNull(sut.Name);
-            Assert.IsNull(sut.Description);
-            Assert.IsNull(sut.HolidayStringDate);
-        }
 
-
-        [TestMethod]
-        public void Holiday_WithVoidConstructorHolidayDateIsNotNull()
-        {
             //Act
-            var sut = new Holiday();
+            var sut = new Holiday(time);
+            
             //Assert
-            Assert.IsNotNull(sut.HolidayDate);
+            sut.Should().NotBeNull();
+            sut.Name.Should().BeNull();
+            sut.Description.Should().BeNull();
+            sut.HolidayStringDate.Should().BeNull();
         }
-
-        [TestMethod]
-        public void Holiday_ConstructorCurrentDate()
+        
+        [Fact]
+        public void Holiday_ConstructorCurrentYear()
         {
             //Act
             var sut = new Holiday(currentYear: true);
+
             //Assert
-            Assert.AreEqual(DateTime.Today.Year, sut.HolidayDate.Year);
+            sut.Should().NotBeNull();
+            sut.HolidayDate.Year.Should().Be(DateTime.Today.Year);
         }
 
-        [TestMethod]
+        [Fact]
         public void Holiday_WithIntDateConstructorGeneratesCorrectDate()
         {
             //Arrange 
             var expectedYear = 2001;
             var expectedMonth = 7;
             var expectedDay = 19;
+            
             //Act
             var sut = new Holiday(expectedYear, expectedMonth, expectedDay);
+            
             //Assert
-            Assert.AreEqual(sut.HolidayDate.Year, expectedYear);
-            Assert.AreEqual(sut.HolidayDate.Month, expectedMonth);
-            Assert.AreEqual(sut.HolidayDate.Day, expectedDay);
+            sut.Should().NotBeNull();
+            sut.HolidayDate.Year.Should().Be(expectedYear);
+            sut.HolidayDate.Month.Should().Be(expectedMonth);
+            sut.HolidayDate.Day.Should().Be(expectedDay);
         }
     }
 }

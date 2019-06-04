@@ -17,10 +17,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DsuDev.BusinessDays.Tools",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XUnitTests", "XUnitTests", "{16E42964-7562-455A-A0D8-A0B6B60EE982}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DsuDev.BusinessDays.Domain.Tests", "XUnitTests\Domain.Tests\DsuDev.BusinessDays.Domain.Tests.csproj", "{0378182D-9D98-4984-A685-C04F01FC69AA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DsuDev.BusinessDays.Services.Tests", "XUnitTests\DsuDev.BusinessDays.Services.Tests\DsuDev.BusinessDays.Services.Tests.csproj", "{682C237E-BEE6-4B83-BB8D-4108D25CA2BC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,14 +39,6 @@ Global
 		{0474ED6A-86EB-4873-B4E4-A04172F203D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0474ED6A-86EB-4873-B4E4-A04172F203D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0474ED6A-86EB-4873-B4E4-A04172F203D6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0378182D-9D98-4984-A685-C04F01FC69AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0378182D-9D98-4984-A685-C04F01FC69AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0378182D-9D98-4984-A685-C04F01FC69AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0378182D-9D98-4984-A685-C04F01FC69AA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{682C237E-BEE6-4B83-BB8D-4108D25CA2BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{682C237E-BEE6-4B83-BB8D-4108D25CA2BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{682C237E-BEE6-4B83-BB8D-4108D25CA2BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{682C237E-BEE6-4B83-BB8D-4108D25CA2BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,8 +47,6 @@ Global
 		{6DC82FB2-55CB-47F2-9F89-C8368F4A346C} = {BE2CD683-B0BA-495E-AF5F-99D4AEBEBE4B}
 		{C6D38071-B746-48B9-8501-A39A24D9034D} = {BE2CD683-B0BA-495E-AF5F-99D4AEBEBE4B}
 		{0474ED6A-86EB-4873-B4E4-A04172F203D6} = {BE2CD683-B0BA-495E-AF5F-99D4AEBEBE4B}
-		{0378182D-9D98-4984-A685-C04F01FC69AA} = {16E42964-7562-455A-A0D8-A0B6B60EE982}
-		{682C237E-BEE6-4B83-BB8D-4108D25CA2BC} = {16E42964-7562-455A-A0D8-A0B6B60EE982}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D13A0C8E-D264-450F-B7CC-FF8151EAA634}
