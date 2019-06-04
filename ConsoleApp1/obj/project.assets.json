@@ -2697,23 +2697,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\urdanetd\\.nuget\\packages\\": {},
+    "C:\\Users\\urda\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Git\\Projects\\dsurdaneta\\BusinessDaysCalculator\\ConsoleApp1\\ConsoleApp1.csproj",
+      "projectUniqueName": "C:\\Users\\urda\\Source\\Repos\\dsurdaneta\\BusinessDaysCalculator\\ConsoleApp1\\ConsoleApp1.csproj",
       "projectName": "ConsoleApp1",
-      "projectPath": "D:\\Git\\Projects\\dsurdaneta\\BusinessDaysCalculator\\ConsoleApp1\\ConsoleApp1.csproj",
-      "packagesPath": "C:\\Users\\urdanetd\\.nuget\\packages\\",
-      "outputPath": "D:\\Git\\Projects\\dsurdaneta\\BusinessDaysCalculator\\ConsoleApp1\\obj\\",
+      "projectPath": "C:\\Users\\urda\\Source\\Repos\\dsurdaneta\\BusinessDaysCalculator\\ConsoleApp1\\ConsoleApp1.csproj",
+      "packagesPath": "C:\\Users\\urda\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\urda\\Source\\Repos\\dsurdaneta\\BusinessDaysCalculator\\ConsoleApp1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\urdanetd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\urda\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2726,14 +2726,14 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "D:\\Git\\Projects\\dsurdaneta\\BusinessDaysCalculator\\Source\\Domain\\DsuDev.BusinessDays.Domain.csproj": {
-              "projectPath": "D:\\Git\\Projects\\dsurdaneta\\BusinessDaysCalculator\\Source\\Domain\\DsuDev.BusinessDays.Domain.csproj"
+            "C:\\Users\\urda\\Source\\Repos\\dsurdaneta\\BusinessDaysCalculator\\Source\\Domain\\DsuDev.BusinessDays.Domain.csproj": {
+              "projectPath": "C:\\Users\\urda\\Source\\Repos\\dsurdaneta\\BusinessDaysCalculator\\Source\\Domain\\DsuDev.BusinessDays.Domain.csproj"
             },
-            "D:\\Git\\Projects\\dsurdaneta\\BusinessDaysCalculator\\Source\\Services\\DsuDev.BusinessDays.Services.csproj": {
-              "projectPath": "D:\\Git\\Projects\\dsurdaneta\\BusinessDaysCalculator\\Source\\Services\\DsuDev.BusinessDays.Services.csproj"
+            "C:\\Users\\urda\\Source\\Repos\\dsurdaneta\\BusinessDaysCalculator\\Source\\Services\\DsuDev.BusinessDays.Services.csproj": {
+              "projectPath": "C:\\Users\\urda\\Source\\Repos\\dsurdaneta\\BusinessDaysCalculator\\Source\\Services\\DsuDev.BusinessDays.Services.csproj"
             },
-            "D:\\Git\\Projects\\dsurdaneta\\BusinessDaysCalculator\\Source\\Tools\\DsuDev.BusinessDays.Tools.csproj": {
-              "projectPath": "D:\\Git\\Projects\\dsurdaneta\\BusinessDaysCalculator\\Source\\Tools\\DsuDev.BusinessDays.Tools.csproj"
+            "C:\\Users\\urda\\Source\\Repos\\dsurdaneta\\BusinessDaysCalculator\\Source\\Tools\\DsuDev.BusinessDays.Tools.csproj": {
+              "projectPath": "C:\\Users\\urda\\Source\\Repos\\dsurdaneta\\BusinessDaysCalculator\\Source\\Tools\\DsuDev.BusinessDays.Tools.csproj"
             }
           }
         }
