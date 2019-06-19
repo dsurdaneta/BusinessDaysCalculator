@@ -1,5 +1,8 @@
 ﻿namespace DsuDev.BusinessDays.Domain.Entities
 {
+    /// <summary>
+    /// Class to handle holiday file information
+    /// </summary>
     public class FilePathInfo
     {
         public string Folder { get; set; }

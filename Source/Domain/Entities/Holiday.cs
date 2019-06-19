@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace DsuDev.BusinessDays.Domain.Entities
 {
     /// <summary>
-    /// DTO class to handle Holidays info
+    /// DTO class to handle Holidays information
     /// </summary>
     public class Holiday
     {
