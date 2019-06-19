@@ -4,18 +4,29 @@ using FluentAssertions;
 using Moq;
 using System;
 using System.Collections.Generic;
+using DsuDev.BusinessDays.Services.Tests.TestsDataMembers;
 using Xunit;
 
 namespace DsuDev.BusinessDays.Services.Tests
 {
     public class CalculatorTest
     {
-        private Mock<IFileReadingManager> mockFileReadingManager;
-        private FilePathInfo path = new FilePathInfo();
+        private readonly Mock<IFileReadingManager> mockFileReadingManager;
+        private FilePathInfo path;
 
         public CalculatorTest()
         {
             this.mockFileReadingManager = new Mock<IFileReadingManager>();
+            this.path = new FilePathInfo();
+        }
+
+        [Theory]
+        [ClassData(typeof(CalculatorTestData))]
+        public static void Constructor_When_ParameterIsNull_Then_ThrowsException(FilePathInfo filePathInfo, IFileReadingManager fileReadingManager)
+        {
+            //Assert
+            Assert.Throws<ArgumentNullException>(
+                () => new BusinessDaysCalculator(filePathInfo, fileReadingManager));
         }
 
         [Fact]
@@ -27,27 +38,25 @@ namespace DsuDev.BusinessDays.Services.Tests
             //Assert
             sut.Should().NotBeNull();
         }
-
-        [Fact]
-        public void Constructor_When_FirstParameterIsNull_Then_ThrowsException()
-        {
-            //Assert
-            Assert.Throws<ArgumentNullException>(
-                () => new BusinessDaysCalculator(null, this.mockFileReadingManager.Object));
-        }
+       
         
-        [Fact(Skip ="Has to be fixed after Calculator refactor")]        
+        [Fact]        
         public void BusinessDays_GetBusinessDaysCountNoHolidaysFile()
         {
             //Arrange
             const int year = 2001;
             var startDate = new DateTime(year, 5, 26);
             var expectedDate = new DateTime(year, 6, 11);
-            var calculator = new BusinessDaysCalculator();
+
+            this.mockFileReadingManager.Setup(x => x.ReadHolidaysFile(It.IsAny<FilePathInfo>())).Returns(new List<Holiday>());
+
+            var calculator = new BusinessDaysCalculator(this.path, this.mockFileReadingManager.Object);
+
             //Act
-            //var sut = BusinessDaysCalculator.GetBusinessDaysCount(startDate, expectedDate);
-            ////Assert
-            //Assert.AreEqual(10, sut);
+            var sut = calculator.GetBusinessDaysCount(startDate, expectedDate);
+
+            //Assert
+            sut.Should().Be(10);
         }
 
         [Fact(Skip = "Has to be fixed after Calculator refactor")]
