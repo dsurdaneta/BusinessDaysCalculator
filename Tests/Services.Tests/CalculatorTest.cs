@@ -1,10 +1,11 @@
 using DsuDev.BusinessDays.Domain.Entities;
 using DsuDev.BusinessDays.Services.FileReaders;
+using DsuDev.BusinessDays.Services.Tests.TestsDataMembers;
+using DsuDev.BusinessDays.Tools.SampleGenerators;
 using FluentAssertions;
 using Moq;
 using System;
 using System.Collections.Generic;
-using DsuDev.BusinessDays.Services.Tests.TestsDataMembers;
 using Xunit;
 
 namespace DsuDev.BusinessDays.Services.Tests
@@ -47,10 +48,7 @@ namespace DsuDev.BusinessDays.Services.Tests
             const int year = 2001;
             var startDate = new DateTime(year, 5, 26);
             var expectedDate = new DateTime(year, 6, 11);
-
-            this.mockFileReadingManager.Setup(x => x.ReadHolidaysFile(It.IsAny<FilePathInfo>())).Returns(new List<Holiday>());
-
-            var calculator = new BusinessDaysCalculator(this.path, this.mockFileReadingManager.Object);
+            var calculator = GetCalculator();
 
             //Act
             var sut = calculator.GetBusinessDaysCount(startDate, expectedDate);
@@ -59,63 +57,79 @@ namespace DsuDev.BusinessDays.Services.Tests
             sut.Should().Be(10);
         }
 
-        [Fact(Skip = "Has to be fixed after Calculator refactor")]
+        [Fact]
         public void BusinessDays_AddBusinessDaysNoHolidaysFile()
         {
             //Arrange
             const int year = 2001;
             var startDate = new DateTime(year, 5, 26);
             var expectedDate = new DateTime(year, 6, 15);
-            
+            var calculator = GetCalculator();
+
             //Act
-            //var sut = BusinessDaysCalculator.AddBusinessDays(startDate, 15);
-            ////Assert
-            //Assert.AreEqual(expectedDate, sut);
+            var sut = calculator.AddBusinessDays(startDate, 15);
+
+            //Assert
+            sut.Should().Be(expectedDate);
         }
 
-        [Fact(Skip = "Has to be fixed after Calculator refactor")]
+        [Fact]
         public void BusinessDays_AddBusinessDaysWithHolidaysCounter()
         {
             //Arrange
             var starDate = new DateTime(2001, 5, 26);
             var expectedDate = new DateTime(2001, 6, 18);
-            
+            var calculator = GetCalculator();
+
             //Act
-            //var sut = BusinessDaysCalculator.AddBusinessDays(starDate, 15, 3);
-            ////Assert
-            //Assert.AreEqual(expectedDate, sut);
+            var sut = calculator.AddBusinessDays(starDate, 15, 3);
+
+            //Assert
+            sut.Should().Be(expectedDate);
         }
 
-        [Fact(Skip = "Has to be fixed after Calculator refactor")]
+        [Fact]
         public void BusinessDays_AddBusinessDaysFromList()
         {
             //Arrange
             const int year = 2001;
             var holidays = new List<Holiday>();
-            var starDate = new DateTime(year, 4, 27);
+            var startDate = new DateTime(year, 4, 27);
             var expectedDate = new DateTime(year, 5, 17);
-            
+            var calculator = GetCalculator();
+
             //Act
-            //holidays.Add(HolidayTests.GenerateHoliday(year));
-            //var sut = BusinessDaysCalculator.AddBusinessDays(starDate, 15, holidays);
-            ////Assert
-            //Assert.AreEqual(expectedDate, sut);
+            holidays.Add(HolidayGenerator.CreateHoliday());
+            var sut = calculator.AddBusinessDays(startDate, 15, holidays);
+
+            //Assert
+            sut.Should().Be(expectedDate);
         }
 
-        [Fact(Skip = "Has to be fixed after Calculator refactor")]
+        [Fact]
         public void BusinessDays_GetBusinessDaysCountFromList()
         {
             //Arrange
-            const int year = 2001;
+            const int year = 2009;
             var holidays = new List<Holiday>();
             var startDate = new DateTime(year, 4, 25);
-            var expectedDate = new DateTime(year, 5, 9);
-            
+            var endDate = new DateTime(year, 5, 9);
+            var calculator = GetCalculator();
+
             //Act
-            //holidays.Add(HolidayTests.GenerateHoliday(year));
-            //var sut = BusinessDaysCalculator.GetBusinessDaysCount(startDate, expectedDate, holidays);
-            ////Assert
-            //Assert.AreEqual(9, sut);
+            holidays.Add(HolidayGenerator.CreateHoliday(year: year));
+            var sut = calculator.GetBusinessDaysCount(startDate, endDate, holidays);
+
+            //Assert
+            sut.Should().Be(9);
+        }
+        
+        private BusinessDaysCalculator GetCalculator()
+        {
+            this.mockFileReadingManager.Setup(x => x.ReadHolidaysFile(It.IsAny<FilePathInfo>())).Returns(new List<Holiday>());
+
+            var calculator = new BusinessDaysCalculator(this.path, this.mockFileReadingManager.Object);
+            return calculator;
         }
     }
 }
