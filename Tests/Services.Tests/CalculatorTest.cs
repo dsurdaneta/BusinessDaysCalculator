@@ -42,7 +42,7 @@ namespace DsuDev.BusinessDays.Services.Tests
        
         
         [Fact]        
-        public void BusinessDays_GetBusinessDaysCountNoHolidaysFile()
+        public void BusinessDays_GetBusinessDaysCount_NoHolidaysFile()
         {
             //Arrange
             const int year = 2001;
@@ -56,15 +56,47 @@ namespace DsuDev.BusinessDays.Services.Tests
             //Assert
             sut.Should().Be(10);
         }
+        
+        [Fact]        
+        public void BusinessDays_GetBusinessDaysCount_WithHolidaysFile()
+        {
+            //Arrange
+            const int year = 2001;
+            var startDate = new DateTime(year, 5, 26);
+            var expectedDate = new DateTime(year, 6, 11);
+            var calculator = GetCalculator(true);
+
+            //Act
+            var sut = calculator.GetBusinessDaysCount(startDate, expectedDate, true);
+
+            //Assert
+            sut.Should().Be(10);
+        }
 
         [Fact]
-        public void BusinessDays_AddBusinessDaysNoHolidaysFile()
+        public void BusinessDays_AddBusinessDays_NoHolidaysFile()
         {
             //Arrange
             const int year = 2001;
             var startDate = new DateTime(year, 5, 26);
             var expectedDate = new DateTime(year, 6, 15);
             var calculator = GetCalculator();
+
+            //Act
+            var sut = calculator.AddBusinessDays(startDate, 15, true);
+
+            //Assert
+            sut.Should().Be(expectedDate);
+        }
+        
+        [Fact]
+        public void BusinessDays_AddBusinessDays_WithHolidaysFile()
+        {
+            //Arrange
+            const int year = 2001;
+            var startDate = new DateTime(year, 5, 26);
+            var expectedDate = new DateTime(year, 6, 15);
+            var calculator = GetCalculator(true);
 
             //Act
             var sut = calculator.AddBusinessDays(startDate, 15);
@@ -74,7 +106,7 @@ namespace DsuDev.BusinessDays.Services.Tests
         }
 
         [Fact]
-        public void BusinessDays_AddBusinessDaysWithHolidaysCounter()
+        public void BusinessDays_AddBusinessDays_WithHolidaysCounter()
         {
             //Arrange
             var starDate = new DateTime(2001, 5, 26);
@@ -124,9 +156,41 @@ namespace DsuDev.BusinessDays.Services.Tests
             sut.Should().Be(9);
         }
         
-        private BusinessDaysCalculator GetCalculator()
+        [Fact]
+        public void BusinessDays_GetBusinessDaysCountFromList_Exception()
         {
-            this.mockFileReadingManager.Setup(x => x.ReadHolidaysFile(It.IsAny<FilePathInfo>())).Returns(new List<Holiday>());
+            //Arrange
+            const int year = 2009;
+            var startDate = new DateTime(year, 4, 25);
+            var endDate = new DateTime(year, 5, 9);
+            var calculator = GetCalculator();
+
+            //Act
+            Action act = () =>
+            {
+                var sut = calculator.GetBusinessDaysCount(startDate, endDate, null);
+            };
+
+            //Assert
+            act.Should().Throw<ArgumentNullException>();
+        }
+        
+        private BusinessDaysCalculator GetCalculator(bool hasHolidayFile = false)
+        {
+            if (hasHolidayFile)
+            {
+                this.path.FileName = "testFileName";
+                this.path.Extension = "test";
+                var holidays = new List<Holiday>
+                {
+                    HolidayGenerator.CreateHoliday()
+                };
+                this.mockFileReadingManager.Setup(x => x.ReadHolidaysFile(It.IsAny<FilePathInfo>())).Returns(holidays);
+            }
+            else
+            {
+                this.mockFileReadingManager.Setup(x => x.ReadHolidaysFile(It.IsAny<FilePathInfo>())).Returns(new List<Holiday>());
+            }
 
             var calculator = new BusinessDaysCalculator(this.path, this.mockFileReadingManager.Object);
             return calculator;
