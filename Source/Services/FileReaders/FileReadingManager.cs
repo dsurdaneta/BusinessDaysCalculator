@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using DsuDev.BusinessDays.Domain.Entities;
 using DsuDev.BusinessDays.Services.Constants;
 
+[assembly: InternalsVisibleTo("DsuDev.BusinessDays.Services.Tests")]
 namespace DsuDev.BusinessDays.Services.FileReaders
 {
     /// <summary>
@@ -34,7 +36,7 @@ namespace DsuDev.BusinessDays.Services.FileReaders
         /// <param name="xmlReader">The XML reader.</param>
         /// <param name="csvReader">The CSV reader.</param>
         /// <param name="customReader">The custom reader.</param>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="ArgumentNullException">
         /// jsonReader  or  xmlReader  or  csvReader  or  customReader
         /// </exception>
         public FileReadingManager(
@@ -43,10 +45,10 @@ namespace DsuDev.BusinessDays.Services.FileReaders
             ICsvReader csvReader, 
             ICustomTxtReader customReader)
         {
-            this.jsonReader = jsonReader ?? throw new ArgumentException(nameof(jsonReader));
-            this.xmlReader = xmlReader ?? throw new ArgumentException(nameof(xmlReader));
-            this.CsvReader = csvReader ?? throw new ArgumentException(nameof(csvReader));
-            this.CustomTxtReader = customReader ?? throw new ArgumentException(nameof(customReader));
+            this.jsonReader = jsonReader ?? throw new ArgumentNullException(nameof(jsonReader));
+            this.xmlReader = xmlReader ?? throw new ArgumentNullException(nameof(xmlReader));
+            this.CsvReader = csvReader ?? throw new ArgumentNullException(nameof(csvReader));
+            this.CustomTxtReader = customReader ?? throw new ArgumentNullException(nameof(customReader));
         }
 
         /// <summary>
