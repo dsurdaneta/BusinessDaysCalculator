@@ -13,8 +13,8 @@ namespace DsuDev.BusinessDays.Services.FileReaders
     /// <seealso cref="IFileReadingManager" />
     internal class FileReadingManager : IFileReadingManager
     {
-        public IJsonReader jsonReader { get; }
-        public IXmlReader xmlReader { get; }
+        public IJsonReader JsonReader { get; }
+        public IXmlReader XmlReader { get; }
         public ICsvReader CsvReader { get; }
         public ICustomTxtReader CustomTxtReader { get; }
 
@@ -23,8 +23,8 @@ namespace DsuDev.BusinessDays.Services.FileReaders
         /// </summary>
         public FileReadingManager()
         {
-            this.jsonReader = new JsonHolidayReader();
-            this.xmlReader = new XmlHolidayReader();
+            this.JsonReader = new JsonHolidayReader();
+            this.XmlReader = new XmlHolidayReader();
             this.CsvReader = new CsvHolidayReader();
             this.CustomTxtReader = new CustomTxtHolidayReader();
         }
@@ -45,8 +45,8 @@ namespace DsuDev.BusinessDays.Services.FileReaders
             ICsvReader csvReader, 
             ICustomTxtReader customReader)
         {
-            this.jsonReader = jsonReader ?? throw new ArgumentNullException(nameof(jsonReader));
-            this.xmlReader = xmlReader ?? throw new ArgumentNullException(nameof(xmlReader));
+            this.JsonReader = jsonReader ?? throw new ArgumentNullException(nameof(jsonReader));
+            this.XmlReader = xmlReader ?? throw new ArgumentNullException(nameof(xmlReader));
             this.CsvReader = csvReader ?? throw new ArgumentNullException(nameof(csvReader));
             this.CustomTxtReader = customReader ?? throw new ArgumentNullException(nameof(customReader));
         }
@@ -66,10 +66,10 @@ namespace DsuDev.BusinessDays.Services.FileReaders
             switch (filePathInfo.Extension)
             {
                 case FileExtension.Json:
-                    holidays = this.jsonReader.GetHolidaysFromFile(path);
+                    holidays = this.JsonReader.GetHolidaysFromFile(path);
                     break;
                 case FileExtension.Xml:
-                    holidays = this.xmlReader.GetHolidaysFromFile(path);
+                    holidays = this.XmlReader.GetHolidaysFromFile(path);
                     break;
                 case FileExtension.Csv:
                     holidays = this.CsvReader.GetHolidaysFromFile(path);
