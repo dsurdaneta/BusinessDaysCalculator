@@ -6,19 +6,14 @@ namespace DsuDev.BusinessDays.Tools
 {
     public static class RandomValuesGenerator
     {
-        const string Chars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        const string ValidChars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
         public static string RandomString(int size)
         {
-            StringBuilder builder = new StringBuilder();
             Random random = new Random();
-            for (int i = 0; i < size; i++)
-            {
-                builder.Append(Enumerable.Range(0, size)
-                    .Select(x => Chars[random.Next(1, Chars.Length)]));
-            }
-
-            return builder.ToString();
+            var chars = Enumerable.Range(1, size)
+                .Select(x => ValidChars[random.Next(1, ValidChars.Length)]);
+            return new string(chars.ToArray());
         }
 
         public static int RandomInt(int min, int max)
