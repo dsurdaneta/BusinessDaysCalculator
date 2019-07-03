@@ -10,10 +10,7 @@ namespace DsuDev.BusinessDays.Services
         {
             ValidateFilePathInfo(filePathInfo);
 
-            string currentDirectory = Directory.GetCurrentDirectory();
-            string folderPath = filePathInfo.IsAbsolutePath ?
-                filePathInfo.Folder :
-                $"{currentDirectory}\\{filePathInfo.Folder}";
+            var folderPath = GetFolderPath(filePathInfo);
 
             //if it does not exist, create directory
             if (!Directory.Exists(folderPath))
@@ -21,7 +18,7 @@ namespace DsuDev.BusinessDays.Services
 
             return $"{folderPath}\\{filePathInfo.FileName}.{filePathInfo.Extension}";
         }
-
+        
         public static void ValidateFilePathInfo(FilePathInfo filePathInfo)
         {
             if (filePathInfo == null)
@@ -34,6 +31,24 @@ namespace DsuDev.BusinessDays.Services
             {
                 throw new ArgumentException("The file name and file extension are needed to generate the complete file path.");
             }
+        }
+
+        internal static void RemoveFolder(FilePathInfo filePathInfo, bool recursive)
+        {
+            var folderPath = GetFolderPath(filePathInfo);
+
+            if (Directory.Exists(folderPath))
+                Directory.Delete(folderPath, recursive);
+        }
+
+        private static string GetFolderPath(FilePathInfo filePathInfo)
+        {
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string folderPath = filePathInfo.IsAbsolutePath
+                ? filePathInfo.Folder
+                : $"{currentDirectory}\\{filePathInfo.Folder}";
+
+            return folderPath;
         }
     }
 }

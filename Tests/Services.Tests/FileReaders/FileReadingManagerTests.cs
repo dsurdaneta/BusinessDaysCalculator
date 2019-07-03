@@ -60,6 +60,9 @@ namespace DsuDev.BusinessDays.Services.Tests.FileReaders
             // Assert
             sut.Should().NotBeNull();
             sut.Count.Should().Be(expectedAmount);
+
+            // CleanUp
+            DirectoryHelper.RemoveFolder(pathInfo,true);
         }
         
         [Fact]
