@@ -62,9 +62,9 @@ namespace DsuDev.BusinessDays.Services.Tests
         {
             //Arrange
             const int year = 2001;
-            var startDate = new DateTime(year, 5, 26);
-            var expectedDate = new DateTime(year, 6, 11);
-            var calculator = GetCalculator(true);
+            var startDate = new DateTime(year, 4, 26);
+            var expectedDate = new DateTime(year, 5, 11);
+            var calculator = GetCalculator(year,true);
 
             //Act
             var sut = calculator.GetBusinessDaysCount(startDate, expectedDate, true);
@@ -83,7 +83,7 @@ namespace DsuDev.BusinessDays.Services.Tests
             var calculator = GetCalculator();
 
             //Act
-            var sut = calculator.AddBusinessDays(startDate, 15, true);
+            var sut = calculator.AddBusinessDays(startDate, 15);
 
             //Assert
             sut.Should().Be(expectedDate);
@@ -94,12 +94,12 @@ namespace DsuDev.BusinessDays.Services.Tests
         {
             //Arrange
             const int year = 2001;
-            var startDate = new DateTime(year, 5, 26);
-            var expectedDate = new DateTime(year, 6, 15);
-            var calculator = GetCalculator(true);
+            var startDate = new DateTime(year, 4, 26);
+            var expectedDate = new DateTime(year, 5, 16);
+            var calculator = GetCalculator(year,true);
 
             //Act
-            var sut = calculator.AddBusinessDays(startDate, 15);
+            var sut = calculator.AddBusinessDays(startDate, 15, true);
 
             //Assert
             sut.Should().Be(expectedDate);
@@ -175,7 +175,7 @@ namespace DsuDev.BusinessDays.Services.Tests
             act.Should().Throw<ArgumentNullException>();
         }
         
-        private BusinessDaysCalculator GetCalculator(bool hasHolidayFile = false)
+        private BusinessDaysCalculator GetCalculator(int year = 2001, bool hasHolidayFile = false)
         {
             if (hasHolidayFile)
             {
@@ -183,7 +183,7 @@ namespace DsuDev.BusinessDays.Services.Tests
                 this.path.Extension = "test";
                 var holidays = new List<Holiday>
                 {
-                    HolidayGenerator.CreateHoliday()
+                    HolidayGenerator.CreateHoliday(year)
                 };
                 this.mockFileReadingManager.Setup(x => x.ReadHolidaysFile(It.IsAny<FilePathInfo>())).Returns(holidays);
             }
