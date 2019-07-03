@@ -25,6 +25,24 @@ namespace DsuDev.BusinessDays.Services.Tests.FileReaders
             csvMock = new Mock<ICsvReader>();
             txtMock = new Mock<ICustomTxtReader>();
         }
+        private FileReadingManager Setup(int expectedAmount)
+        {
+            jsonMock.Setup(setup => setup.GetHolidaysFromFile(It.IsAny<string>()))
+                .Returns(HolidayGenerator.CreateHolidays(expectedAmount, 2010));
+
+            xmlMock.Setup(setup => setup.GetHolidaysFromFile(It.IsAny<string>()))
+                .Returns(HolidayGenerator.CreateHolidays(expectedAmount, 2010));
+
+            csvMock.Setup(setup => setup.GetHolidaysFromFile(It.IsAny<string>()))
+                .Returns(HolidayGenerator.CreateHolidays(expectedAmount, 2010));
+
+            txtMock.Setup(setup => setup.GetHolidaysFromFile(It.IsAny<string>()))
+                .Returns(HolidayGenerator.CreateHolidays(expectedAmount, 2010));
+
+
+            var fileReading = new FileReadingManager(jsonMock.Object, xmlMock.Object, csvMock.Object, txtMock.Object);
+            return fileReading;
+        }
 
         [Theory]
         [ClassData(typeof(FileReadingManagerTestData))]
@@ -39,19 +57,20 @@ namespace DsuDev.BusinessDays.Services.Tests.FileReaders
                 () => new FileReadingManager(jsonReader, xmlReader, csvReader, customReader));
         }
 
-        [Fact]
-        public void ReadHolidaysFile_When_ValidFileExtension_ReturnsHolidayList()
+        [Theory]
+        [InlineData(FileExtension.Json)]
+        [InlineData(FileExtension.Xml)]
+        [InlineData(FileExtension.Csv)]
+        [InlineData(FileExtension.Txt)]
+        public void ReadHolidaysFile_When_ValidFileExtension_ReturnsHolidayList(string extension)
         {
             // Arrange
             var expectedAmount = 4;
-            jsonMock.Setup(setup => setup.GetHolidaysFromFile(It.IsAny<string>()))
-                .Returns(HolidayGenerator.CreateHolidays(expectedAmount, 2010));
-            
-            var fileReading = new FileReadingManager(jsonMock.Object, xmlMock.Object, csvMock.Object, txtMock.Object);
+            var fileReading = Setup(expectedAmount);
             var pathInfo = new FilePathInfoBuilder().Create()
                 .WithFolder(Resources.ContainingFolderName)
                 .WithFileName(Resources.FileName)
-                .WithExtension(FileExtension.Json)
+                .WithExtension(extension)
                 .Build();
 
             // Act
@@ -64,7 +83,7 @@ namespace DsuDev.BusinessDays.Services.Tests.FileReaders
             // CleanUp
             DirectoryHelper.RemoveFolder(pathInfo,true);
         }
-        
+
         [Fact]
         public void ReadHolidaysFile_When_InvalidFileExtension_ThrowsException()
         {
