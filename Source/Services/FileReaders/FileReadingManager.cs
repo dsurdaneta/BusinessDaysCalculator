@@ -60,7 +60,7 @@ namespace DsuDev.BusinessDays.Services.FileReaders
         public List<Holiday> ReadHolidaysFile(FilePathInfo filePathInfo)
         {
             string path = DirectoryHelper.GenerateFilePath(filePathInfo);
-            List<Holiday> holidays = new List<Holiday>();
+            List<Holiday> holidays;
             
             //format to list according to fileExt
             switch (filePathInfo.Extension)
