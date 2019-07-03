@@ -76,7 +76,7 @@ namespace DsuDev.BusinessDays.Services.FileReaders
                     break;
                 case FileExtension.Txt:
                     //not yet supported, might be useful for custom rules
-                    this.CustomTxtReader.GetHolidaysFromFile(path);
+                    holidays = this.CustomTxtReader.GetHolidaysFromFile(path);
                     break;
                 default:
                     throw new InvalidOperationException($"File extension {filePathInfo.Extension} is not supported");
