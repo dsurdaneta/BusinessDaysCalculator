@@ -8,15 +8,12 @@ namespace DsuDev.BusinessDays.Tools.FluentBuilders
     {
         private DateTime date;
         private string name;
-        private string description;
-        //in case its needed
-        private string dateString;
+        private string desc;
 
         public HolidayBuilder Create()
         {
             this.date = new DateTime();
-            this.dateString = string.Empty;
-            this.description = string.Empty;
+            this.desc = string.Empty;
             this.name = string.Empty;
             return this;
         }
@@ -29,23 +26,19 @@ namespace DsuDev.BusinessDays.Tools.FluentBuilders
 
         public HolidayBuilder WithDescription(string description)
         {
-            this.description = description;
+            this.desc = description;
             return this;
         }
 
         public HolidayBuilder WithDate(DateTime dateTime)
         {
             this.date = dateTime;
-            //in case its needed
-            this.dateString = this.date.ToString(Holiday.DateFormat, CultureInfo.InvariantCulture);
             return this;
         }
         
         public HolidayBuilder WithDate(int year, int month, int day)
         {
             this.date = new DateTime(year, month, day);
-            //in case its needed
-            this.dateString = this.date.ToString(Holiday.DateFormat, CultureInfo.InvariantCulture);
             return this;
         }
 
@@ -55,8 +48,8 @@ namespace DsuDev.BusinessDays.Tools.FluentBuilders
             {
                 Name = this.name,
                 HolidayDate = this.date,
-                HolidayStringDate = this.dateString,
-                Description = this.description
+                HolidayStringDate = this.date.ToString(Holiday.DateFormat, CultureInfo.InvariantCulture),
+                Description = this.desc
             };
         }
     }

@@ -63,6 +63,7 @@ namespace DsuDev.BusinessDays.Services.FileReaders
 
                     this.Holidays.Add(holidayBuilder.Build());
                 }
+                csv.Dispose();
             }
             return this.Holidays;
         }
