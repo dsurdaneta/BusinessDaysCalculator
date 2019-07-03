@@ -3,7 +3,7 @@
     /// <summary>
     /// Class to maintain file extensions constants, as if it was an Enum
     /// </summary>
-    public class FileExtension
+    public static class FileExtension
     {
         public const string Json = "json";
         public const string Xml = "xml";

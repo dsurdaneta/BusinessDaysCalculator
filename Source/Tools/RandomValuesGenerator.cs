@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Linq;
-using System.Text;
 
 namespace DsuDev.BusinessDays.Tools
 {
     public static class RandomValuesGenerator
     {
-        const string ValidChars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        private const string ValidChars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
         public static string RandomString(int size)
         {
