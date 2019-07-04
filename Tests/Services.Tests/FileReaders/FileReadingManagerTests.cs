@@ -52,9 +52,11 @@ namespace DsuDev.BusinessDays.Services.Tests.FileReaders
             ICsvReader csvReader, 
             ICustomTxtReader customReader)
         {
+            // Act
+            Action action = () => new FileReadingManager(jsonReader, xmlReader, csvReader, customReader);
+
             //Assert
-            Assert.Throws<ArgumentNullException>(
-                () => new FileReadingManager(jsonReader, xmlReader, csvReader, customReader));
+            action.Should().Throw<ArgumentNullException>();
         }
 
         [Theory]
