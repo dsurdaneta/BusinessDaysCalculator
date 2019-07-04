@@ -22,7 +22,7 @@ namespace DsuDev.BusinessDays.Services.FileReaders
             this.Holidays = new List<Holiday>();
         }
 
-        public CsvHolidayReader(string delimiter, bool hasHeaderRecord)
+        public CsvHolidayReader(bool hasHeaderRecord, string delimiter = "")
         {
             this.Delimiter = string.IsNullOrWhiteSpace(delimiter)  ? DefaultDelimiter : delimiter;
             this.HasHeaderRecord = hasHeaderRecord;
