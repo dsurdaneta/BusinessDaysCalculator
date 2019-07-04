@@ -52,5 +52,11 @@ namespace DsuDev.BusinessDays.Services.Tests.FileReaders
             // Assert
             action.Should().Throw<InvalidOperationException>();
         }
+
+        [Fact]
+        public void Something()
+        {
+
+        }
     }
 }

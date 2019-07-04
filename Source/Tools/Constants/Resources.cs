@@ -1,5 +1,9 @@
-﻿namespace DsuDev.BusinessDays.Services.Constants
-{
+﻿using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("DsuDev.BusinessDays.Services")]
+[assembly: InternalsVisibleTo("DsuDev.BusinessDays.Services.Tests")]
+namespace DsuDev.BusinessDays.Tools.Constants{
+    
     internal static class Resources
     {
         internal const string ContainingFolderName = "Resources";

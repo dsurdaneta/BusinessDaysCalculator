@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using CsvHelper;
 using DsuDev.BusinessDays.Domain.Entities;
-using DsuDev.BusinessDays.Services.Constants;
+using DsuDev.BusinessDays.Tools.Constants;
 using DsuDev.BusinessDays.Tools.FluentBuilders;
 
 namespace DsuDev.BusinessDays.Services.FileReaders

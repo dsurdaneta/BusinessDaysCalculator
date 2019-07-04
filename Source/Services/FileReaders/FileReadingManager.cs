@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using DsuDev.BusinessDays.Domain.Entities;
-using DsuDev.BusinessDays.Services.Constants;
+using DsuDev.BusinessDays.Tools.Constants;
 
 [assembly: InternalsVisibleTo("DsuDev.BusinessDays.Services.Tests")]
 namespace DsuDev.BusinessDays.Services.FileReaders
