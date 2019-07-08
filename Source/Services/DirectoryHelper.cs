@@ -4,7 +4,7 @@ using DsuDev.BusinessDays.Domain.Entities;
 
 namespace DsuDev.BusinessDays.Services
 {
-    public class DirectoryHelper
+    public static class DirectoryHelper
     {
         public static string GenerateFilePath(FilePathInfo filePathInfo)
         {

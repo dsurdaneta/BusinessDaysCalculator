@@ -4,7 +4,7 @@ using DsuDev.BusinessDays.Tools.FluentBuilders;
 
 namespace DsuDev.BusinessDays.Tools.SampleGenerators
 {
-    public class FilePathGenerator
+    public static class FilePathGenerator
     {
         private static readonly FilePathInfoBuilder FilePathInfoBuilder = new FilePathInfoBuilder();
         
