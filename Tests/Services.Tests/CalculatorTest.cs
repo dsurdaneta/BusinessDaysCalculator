@@ -13,7 +13,7 @@ namespace DsuDev.BusinessDays.Services.Tests
     public class CalculatorTest
     {
         private readonly Mock<IFileReadingManager> mockFileReadingManager;
-        private FilePathInfo path;
+        private readonly FilePathInfo path;
 
         public CalculatorTest()
         {
