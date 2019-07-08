@@ -31,8 +31,6 @@ namespace DsuDev.BusinessDays.Services
             this.fileReading = new FileReadingManager();
         }
 
-        //TODO: add container configuration to handle dependencies
-
         /// <summary>
         /// Initializes a new instance of the <see cref="BusinessDaysCalculator"/> class.
         /// </summary>
