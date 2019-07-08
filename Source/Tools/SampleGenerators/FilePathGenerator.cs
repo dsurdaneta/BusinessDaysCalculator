@@ -7,7 +7,8 @@ namespace DsuDev.BusinessDays.Tools.SampleGenerators
     public class FilePathGenerator
     {
         private static readonly FilePathInfoBuilder FilePathInfoBuilder = new FilePathInfoBuilder();
-        public FilePathInfo CreatePath(string fileExtension)
+        
+        public static FilePathInfo CreatePath(string fileExtension)
         {
             return FilePathInfoBuilder.Create()
                 .WithFolder(Resources.ContainingFolderName)

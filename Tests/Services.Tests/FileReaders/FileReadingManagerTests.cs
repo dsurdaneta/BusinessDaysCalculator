@@ -1,12 +1,11 @@
 ﻿using DsuDev.BusinessDays.Services.FileReaders;
 using DsuDev.BusinessDays.Services.Tests.TestsDataMembers;
 using DsuDev.BusinessDays.Tools;
-using DsuDev.BusinessDays.Tools.FluentBuilders;
+using DsuDev.BusinessDays.Tools.Constants;
 using DsuDev.BusinessDays.Tools.SampleGenerators;
 using FluentAssertions;
 using Moq;
 using System;
-using DsuDev.BusinessDays.Tools.Constants;
 using Xunit;
 
 namespace DsuDev.BusinessDays.Services.Tests.FileReaders
@@ -69,11 +68,7 @@ namespace DsuDev.BusinessDays.Services.Tests.FileReaders
             // Arrange
             var expectedAmount = 4;
             var fileReading = Setup(expectedAmount);
-            var pathInfo = new FilePathInfoBuilder().Create()
-                .WithFolder(Resources.ContainingFolderName)
-                .WithFileName(Resources.FileName)
-                .WithExtension(extension)
-                .Build();
+            var pathInfo = FilePathGenerator.CreatePath(extension);
 
             // Act
             var sut = fileReading.ReadHolidaysFile(pathInfo);
@@ -92,11 +87,7 @@ namespace DsuDev.BusinessDays.Services.Tests.FileReaders
             // Arrange
             var fileReading = new FileReadingManager(jsonMock.Object, xmlMock.Object, csvMock.Object, txtMock.Object);
             var ext = RandomValuesGenerator.RandomString(3);
-            var pathInfo = new FilePathInfoBuilder().Create()
-                .WithFolder(Resources.ContainingFolderName)
-                .WithFileName(Resources.FileName)
-                .WithExtension(ext)
-                .Build();
+            var pathInfo = FilePathGenerator.CreatePath(ext);
 
             // Act
             Action action = () => fileReading.ReadHolidaysFile(pathInfo);
