@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using DsuDev.BusinessDays.Domain.Entities;
-using DsuDev.BusinessDays.Services.FileReaders;
+﻿using DsuDev.BusinessDays.Domain.Entities;
+using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
 using Moq;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace DsuDev.BusinessDays.Services.Tests.TestsDataMembers
 {
