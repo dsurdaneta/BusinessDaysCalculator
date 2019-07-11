@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DsuDev.BusinessDays.Domain.Entities;
+using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
 
 namespace DsuDev.BusinessDays.Services.FileReaders
 {

@@ -1,4 +1,4 @@
-﻿namespace DsuDev.BusinessDays.Services.FileReaders
+﻿namespace DsuDev.BusinessDays.Services.Interfaces.FileReaders
 {
     public interface ICsvReader : IHolidayFileReader
     {

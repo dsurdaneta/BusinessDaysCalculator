@@ -5,6 +5,8 @@ using CsvHelper;
 using DsuDev.BusinessDays.Domain.Entities;
 using DsuDev.BusinessDays.Tools.Constants;
 using DsuDev.BusinessDays.Tools.FluentBuilders;
+using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
+using ICsvReader = DsuDev.BusinessDays.Services.Interfaces.FileReaders.ICsvReader;
 
 namespace DsuDev.BusinessDays.Services.FileReaders
 {

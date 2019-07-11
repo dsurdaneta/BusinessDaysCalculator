@@ -1,4 +1,4 @@
-﻿using DsuDev.BusinessDays.Services.FileReaders;
+﻿using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
 using Moq;
 using System.Collections;
 using System.Collections.Generic;

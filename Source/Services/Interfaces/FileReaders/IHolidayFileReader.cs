@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using DsuDev.BusinessDays.Domain.Entities;
 
-namespace DsuDev.BusinessDays.Services.FileReaders
+namespace DsuDev.BusinessDays.Services.Interfaces.FileReaders
 {
     /// <summary>
     /// Holiday File Reader Interface

@@ -6,6 +6,7 @@ using DsuDev.BusinessDays.Tools.SampleGenerators;
 using FluentAssertions;
 using Moq;
 using System;
+using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
 using Xunit;
 
 namespace DsuDev.BusinessDays.Services.Tests.FileReaders

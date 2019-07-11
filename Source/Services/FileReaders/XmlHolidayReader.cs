@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Xml;
 using DsuDev.BusinessDays.Domain.Entities;
+using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
 using DsuDev.BusinessDays.Tools.Constants;
 using DsuDev.BusinessDays.Tools.FluentBuilders;
 

@@ -1,5 +1,5 @@
 using DsuDev.BusinessDays.Domain.Entities;
-using DsuDev.BusinessDays.Services.FileReaders;
+using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
 using DsuDev.BusinessDays.Services.Tests.TestsDataMembers;
 using DsuDev.BusinessDays.Tools.SampleGenerators;
 using FluentAssertions;

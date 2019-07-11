@@ -1,4 +1,5 @@
 ﻿using DsuDev.BusinessDays.Services.FileReaders;
+using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
 using SimpleInjector;
 
 namespace DsuDev.BusinessDays.Services.Configuration
