@@ -12,7 +12,7 @@ namespace DsuDev.BusinessDays.Services.Tests.TestsDataMembers
         {
             var jsonMock = new Mock<IJsonReader>();
             var xmlMock = new Mock<IXmlReader>();
-            var csvMock = new Mock<ICsvReader>();
+            var csvMock = new Mock<ICsvHolidayReader>();
             var txtMock = new Mock<ICustomTxtReader>();
 
             yield return new object[] {null, xmlMock.Object, csvMock.Object, txtMock.Object };

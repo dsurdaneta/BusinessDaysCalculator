@@ -10,7 +10,7 @@ namespace DsuDev.BusinessDays.Services.Configuration
         {
             container.Register<IJsonReader,JsonHolidayReader>();
             container.Register<IXmlReader,XmlHolidayReader>();
-            container.Register<ICsvReader,CsvHolidayReader>();
+            container.Register<ICsvHolidayReader,CsvHolidayReader>();
             container.Register<ICustomTxtReader,CustomTxtHolidayReader>();
             container.Register<IFileReadingManager,FileReadingManager>();
 

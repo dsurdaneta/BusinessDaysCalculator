@@ -15,14 +15,14 @@ namespace DsuDev.BusinessDays.Services.Tests.FileReaders
     {
         private readonly Mock<IJsonReader> jsonMock;
         private readonly Mock<IXmlReader> xmlMock;
-        private readonly Mock<ICsvReader> csvMock;
+        private readonly Mock<ICsvHolidayReader> csvMock;
         private readonly Mock<ICustomTxtReader> txtMock;
 
         public FileReadingManagerTests()
         {
             jsonMock = new Mock<IJsonReader>();
             xmlMock = new Mock<IXmlReader>();
-            csvMock = new Mock<ICsvReader>();
+            csvMock = new Mock<ICsvHolidayReader>();
             txtMock = new Mock<ICustomTxtReader>();
         }
         private FileReadingManager Setup(int expectedAmount)
@@ -50,11 +50,11 @@ namespace DsuDev.BusinessDays.Services.Tests.FileReaders
         public static void Constructor_When_ParameterIsNull_Then_ThrowsException(
             IJsonReader jsonReader, 
             IXmlReader xmlReader, 
-            ICsvReader csvReader, 
+            ICsvHolidayReader csvHolidayReader, 
             ICustomTxtReader customReader)
         {
             // Act
-            Action action = () => new FileReadingManager(jsonReader, xmlReader, csvReader, customReader);
+            Action action = () => new FileReadingManager(jsonReader, xmlReader, csvHolidayReader, customReader);
 
             //Assert
             action.Should().Throw<ArgumentNullException>();

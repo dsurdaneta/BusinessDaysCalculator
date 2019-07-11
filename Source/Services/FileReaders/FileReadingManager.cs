@@ -16,7 +16,7 @@ namespace DsuDev.BusinessDays.Services.FileReaders
     {
         public IJsonReader JsonReader { get; }
         public IXmlReader XmlReader { get; }
-        public ICsvReader CsvReader { get; }
+        public ICsvHolidayReader CsvHolidayReader { get; }
         public ICustomTxtReader CustomTxtReader { get; }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace DsuDev.BusinessDays.Services.FileReaders
         {
             this.JsonReader = new JsonHolidayReader();
             this.XmlReader = new XmlHolidayReader();
-            this.CsvReader = new CsvHolidayReader();
+            this.CsvHolidayReader = new CsvHolidayReader();
             this.CustomTxtReader = new CustomTxtHolidayReader();
         }
 
@@ -35,20 +35,20 @@ namespace DsuDev.BusinessDays.Services.FileReaders
         /// </summary>
         /// <param name="jsonReader">The json reader.</param>
         /// <param name="xmlReader">The XML reader.</param>
-        /// <param name="csvReader">The CSV reader.</param>
+        /// <param name="csvHolidayReader">The CSV reader.</param>
         /// <param name="customReader">The custom reader.</param>
         /// <exception cref="ArgumentNullException">
-        /// jsonReader  or  xmlReader  or  csvReader  or  customReader
+        /// jsonReader  or  xmlReader  or  csvHolidayReader  or  customReader
         /// </exception>
         public FileReadingManager(
             IJsonReader jsonReader, 
             IXmlReader xmlReader, 
-            ICsvReader csvReader, 
+            ICsvHolidayReader csvHolidayReader, 
             ICustomTxtReader customReader)
         {
             this.JsonReader = jsonReader ?? throw new ArgumentNullException(nameof(jsonReader));
             this.XmlReader = xmlReader ?? throw new ArgumentNullException(nameof(xmlReader));
-            this.CsvReader = csvReader ?? throw new ArgumentNullException(nameof(csvReader));
+            this.CsvHolidayReader = csvHolidayReader ?? throw new ArgumentNullException(nameof(csvHolidayReader));
             this.CustomTxtReader = customReader ?? throw new ArgumentNullException(nameof(customReader));
         }
 
@@ -73,7 +73,7 @@ namespace DsuDev.BusinessDays.Services.FileReaders
                     holidays = this.XmlReader.GetHolidaysFromFile(path);
                     break;
                 case FileExtension.Csv:
-                    holidays = this.CsvReader.GetHolidaysFromFile(path);
+                    holidays = this.CsvHolidayReader.GetHolidaysFromFile(path);
                     break;
                 case FileExtension.Txt:
                     //not yet supported, might be useful for custom rules

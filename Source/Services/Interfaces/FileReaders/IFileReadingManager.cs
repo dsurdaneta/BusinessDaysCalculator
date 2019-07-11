@@ -12,7 +12,7 @@ namespace DsuDev.BusinessDays.Services.Interfaces.FileReaders
     {
         IJsonReader JsonReader { get; }
         IXmlReader XmlReader { get; }
-        ICsvReader CsvReader { get; }
+        ICsvHolidayReader CsvHolidayReader { get; }
         ICustomTxtReader CustomTxtReader { get; }
 
         /// <summary>

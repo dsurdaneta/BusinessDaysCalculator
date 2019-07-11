@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using CsvHelper;
+﻿using CsvHelper;
 using DsuDev.BusinessDays.Domain.Entities;
+using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
 using DsuDev.BusinessDays.Tools.Constants;
 using DsuDev.BusinessDays.Tools.FluentBuilders;
-using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
-using ICsvReader = DsuDev.BusinessDays.Services.Interfaces.FileReaders.ICsvReader;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace DsuDev.BusinessDays.Services.FileReaders
 {
-    public class CsvHolidayReader : ICsvReader
+    public class CsvHolidayReader : ICsvHolidayReader
     {
         private const string DefaultDelimiter = ";";
         public List<Holiday> Holidays { get; set; }

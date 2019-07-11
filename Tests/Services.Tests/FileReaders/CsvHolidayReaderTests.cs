@@ -6,7 +6,7 @@ using Xunit;
 
 namespace DsuDev.BusinessDays.Services.Tests.FileReaders
 {
-    public class CsvReaderTests
+    public class CsvHolidayReaderTests
     {
         [Theory]
         [InlineData(true, "")]
