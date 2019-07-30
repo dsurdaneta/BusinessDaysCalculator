@@ -6,7 +6,7 @@ namespace DsuDev.BusinessDays.Domain.Entities
     /// <summary>
     /// DTO class to handle Holidays information
     /// </summary>
-    public class Holiday
+    public class Holiday : IEquatable<Holiday>
     {
         public const string DateFormat = "YYYY-MM-DD";
         public DateTime HolidayDate { get; set; }
@@ -36,6 +36,13 @@ namespace DsuDev.BusinessDays.Domain.Entities
         private void InitializeHolidayDate(int year, int month, int day)
         {
             HolidayDate = new DateTime(year, month, day);
+        }
+
+        public bool Equals(Holiday other)
+        {
+            return Name.Equals(other.Name, StringComparison.InvariantCultureIgnoreCase) 
+                    && HolidayDate.Month == other.HolidayDate.Month 
+                    && HolidayDate.Day == other.HolidayDate.Day;
         }
     }
 	
