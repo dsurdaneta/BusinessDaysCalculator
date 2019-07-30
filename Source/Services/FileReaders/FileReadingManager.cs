@@ -22,12 +22,10 @@ namespace DsuDev.BusinessDays.Services.FileReaders
         /// <summary>
         /// Initializes a new instance of the <see cref="FileReadingManager"/> class.
         /// </summary>
-        public FileReadingManager()
+        public FileReadingManager() 
+            : this(new JsonHolidayReader(), new XmlHolidayReader(), new CsvHolidayReader(), new CustomTxtHolidayReader())
         {
-            this.JsonReader = new JsonHolidayReader();
-            this.XmlReader = new XmlHolidayReader();
-            this.CsvHolidayReader = new CsvHolidayReader();
-            this.CustomTxtReader = new CustomTxtHolidayReader();
+            
         }
 
         /// <summary>

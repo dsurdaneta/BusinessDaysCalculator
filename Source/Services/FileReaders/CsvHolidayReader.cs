@@ -16,16 +16,14 @@ namespace DsuDev.BusinessDays.Services.FileReaders
         public string Delimiter { get; internal set; }
         public bool HasHeaderRecord { get; set; }
 
-        public CsvHolidayReader()
+        public CsvHolidayReader() : this(true)
         {
-            this.Delimiter = DefaultDelimiter;
-            this.HasHeaderRecord = true;
-            this.Holidays = new List<Holiday>();
+            
         }
 
         public CsvHolidayReader(bool hasHeaderRecord, string delimiter = "")
         {
-            this.Delimiter = string.IsNullOrWhiteSpace(delimiter)  ? DefaultDelimiter : delimiter;
+            this.Delimiter = string.IsNullOrWhiteSpace(delimiter) ? DefaultDelimiter : delimiter;
             this.HasHeaderRecord = hasHeaderRecord;
             this.Holidays = new List<Holiday>();
         }

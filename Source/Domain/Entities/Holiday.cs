@@ -28,7 +28,10 @@ namespace DsuDev.BusinessDays.Domain.Entities
 
         public Holiday(DateTime dateTime) => HolidayDate = dateTime;
 
-        public Holiday(TimeSpan timeSpan) => HolidayDate = new DateTime(timeSpan.Ticks);
+        public Holiday(TimeSpan timeSpan) : this (new DateTime(timeSpan.Ticks))
+        {
+
+        }
 
         private void InitializeHolidayDate(int year, int month, int day)
         {
