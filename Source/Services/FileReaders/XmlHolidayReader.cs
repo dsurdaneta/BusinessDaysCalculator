@@ -8,6 +8,9 @@ using DsuDev.BusinessDays.Tools.FluentBuilders;
 
 namespace DsuDev.BusinessDays.Services.FileReaders
 {
+    /// <summary>
+    /// A class to read the holiday information from a XML file
+    /// </summary>
     public class XmlHolidayReader : IXmlReader
     {
         public List<Holiday> Holidays { get; set; }

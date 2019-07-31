@@ -9,6 +9,9 @@ using System.IO;
 
 namespace DsuDev.BusinessDays.Services.FileReaders
 {
+    /// <summary>
+    /// A class to read the holiday information from a CSV file
+    /// </summary>
     public class CsvHolidayReader : ICsvHolidayReader
     {
         private const string DefaultDelimiter = ";";

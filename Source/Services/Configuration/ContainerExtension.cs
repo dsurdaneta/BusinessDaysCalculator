@@ -6,6 +6,11 @@ namespace DsuDev.BusinessDays.Services.Configuration
 {
     public static class ContainerExtension
     {
+        /// <summary>
+        /// Registers all the needed FileReader classes into the given container
+        /// </summary>
+        /// <param name="container"></param>
+        /// <returns></returns>
         public static Container RegisterFileReaders(this Container container)
         {
             container.Register<IJsonReader,JsonHolidayReader>();

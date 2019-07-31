@@ -4,6 +4,9 @@ using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
 
 namespace DsuDev.BusinessDays.Services.FileReaders
 {
+    /// <summary>
+    /// A class to read the holiday information from a customized TXT file
+    /// </summary>
     public class CustomTxtHolidayReader : ICustomTxtReader
     {
         public List<Holiday> Holidays { get; set; }

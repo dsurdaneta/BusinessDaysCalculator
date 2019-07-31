@@ -10,6 +10,9 @@ using Newtonsoft.Json;
 
 namespace DsuDev.BusinessDays.Services.FileReaders
 {
+    /// <summary>
+    /// A class to read the holiday information from a Json file
+    /// </summary>
     public class JsonHolidayReader : IJsonReader
     {
         public List<Holiday> Holidays { get; set; }
