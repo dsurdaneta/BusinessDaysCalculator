@@ -4,6 +4,9 @@ using DsuDev.BusinessDays.Domain.Entities;
 
 namespace DsuDev.BusinessDays.Tools.FluentBuilders
 {
+    /// <summary>
+    /// Fluent Builder class to Build a <seea cref="Holiday"/> object
+    /// </summary>
     public class HolidayBuilder
     {
         private DateTime date;

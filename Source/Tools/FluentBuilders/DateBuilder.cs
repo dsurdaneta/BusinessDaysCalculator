@@ -2,6 +2,9 @@
 
 namespace DsuDev.BusinessDays.Tools.FluentBuilders
 {
+    /// <summary>
+    /// Fluent Builder class to Build a <seea cref="DateTime"/> object
+    /// </summary>
     public class DateBuilder
     {
         private int day;

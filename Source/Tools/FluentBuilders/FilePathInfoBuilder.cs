@@ -2,6 +2,9 @@
 
 namespace DsuDev.BusinessDays.Tools.FluentBuilders
 {
+    /// <summary>
+    /// Fluent Builder class to Build a <seea cref="FilePathInfo"/> object
+    /// </summary>
     public class FilePathInfoBuilder
     {
         private string currentFolder;

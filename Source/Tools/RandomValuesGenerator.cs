@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace DsuDev.BusinessDays.Tools
 {
+    /// <summary>
+    /// Class to help the creation of randome values
+    /// </summary>
     public static class RandomValuesGenerator
     {
         private const string ValidChars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
