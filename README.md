@@ -1,6 +1,6 @@
 # BusinessDaysCalculator
-Library to calculate dates by Business Days.(Adding weekends and holidays)
-Supports different file formats to load the Holidays
+Library to calculate dates by Business Days (Adding weekends and holidays).
+Supports different file formats to load the Holidays.
 
 # JSON example:
 ```sh
@@ -8,12 +8,12 @@ Supports different file formats to load the Holidays
   "Holidays":
   [
     {
-      "HolidayDate": "2017-05-01",
+      "HolidayDate": "2011-05-01",
       "Name": "Workers Day",
       "Description": ""
     },
     {
-      "HolidayDate": "2017-12-25",
+      "HolidayDate": "2011-12-25",
       "Name": "Christmas",
       "Description": ""
     }
@@ -24,8 +24,8 @@ Supports different file formats to load the Holidays
 # CSV example:
 ```sh
 HolidayDate; Name; Description
-"2017-12-25"; "Christmas"; "Xmas"
-"2017-05-01"; "Workers Day"; " "
+"2217-12-25"; "Christmas"; "Xmas"
+"2217-05-01"; "Workers Day"; " "
 ```
 
 # XML example:
