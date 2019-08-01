@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Common\DsuDev.BusinessDays.Common.csproj" />
     <ProjectReference Include="..\Domain\DsuDev.BusinessDays.Domain.csproj" />
     <ProjectReference Include="..\Tools\DsuDev.BusinessDays.Tools.csproj" />
   </ItemGroup>

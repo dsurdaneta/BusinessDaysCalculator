@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DsuDev.BusinessDays.Domain.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DsuDev.BusinessDays.Services.Tests", "Tests\Services.Tests\DsuDev.BusinessDays.Services.Tests.csproj", "{6F332B53-6C07-4BAD-BE93-C493C175BF36}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DsuDev.BusinessDays.Common", "Source\Common\DsuDev.BusinessDays.Common.csproj", "{BE4A852B-9315-43CC-87CC-CEB9C674A367}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{6F332B53-6C07-4BAD-BE93-C493C175BF36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F332B53-6C07-4BAD-BE93-C493C175BF36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F332B53-6C07-4BAD-BE93-C493C175BF36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE4A852B-9315-43CC-87CC-CEB9C674A367}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE4A852B-9315-43CC-87CC-CEB9C674A367}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE4A852B-9315-43CC-87CC-CEB9C674A367}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE4A852B-9315-43CC-87CC-CEB9C674A367}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +65,7 @@ Global
 		{0474ED6A-86EB-4873-B4E4-A04172F203D6} = {BE2CD683-B0BA-495E-AF5F-99D4AEBEBE4B}
 		{EFB22BFE-03A3-416E-BF2D-A784F5CDAC36} = {71144CB8-64D0-4884-AC0F-8F1686C74A79}
 		{6F332B53-6C07-4BAD-BE93-C493C175BF36} = {71144CB8-64D0-4884-AC0F-8F1686C74A79}
+		{BE4A852B-9315-43CC-87CC-CEB9C674A367} = {BE2CD683-B0BA-495E-AF5F-99D4AEBEBE4B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D13A0C8E-D264-450F-B7CC-FF8151EAA634}

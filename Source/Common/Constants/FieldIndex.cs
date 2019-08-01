@@ -1,4 +1,4 @@
-﻿namespace DsuDev.BusinessDays.Tools.Constants
+﻿namespace DsuDev.BusinessDays.Common.Constants
 {
     internal static class FieldIndex
     {
