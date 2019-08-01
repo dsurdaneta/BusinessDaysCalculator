@@ -2,6 +2,7 @@
 
 [assembly: InternalsVisibleTo("DsuDev.BusinessDays.Services")]
 [assembly: InternalsVisibleTo("DsuDev.BusinessDays.Services.Tests")]
+[assembly: InternalsVisibleTo("DsuDev.BusinessDays.Tools")]
 namespace DsuDev.BusinessDays.Common.Constants
 {
 

@@ -1,12 +1,12 @@
-﻿using DsuDev.BusinessDays.Services.FileReaders;
+﻿using DsuDev.BusinessDays.Common.Constants;
+using DsuDev.BusinessDays.Services.FileReaders;
+using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
 using DsuDev.BusinessDays.Services.Tests.TestsDataMembers;
 using DsuDev.BusinessDays.Tools;
-using DsuDev.BusinessDays.Tools.Constants;
 using DsuDev.BusinessDays.Tools.SampleGenerators;
 using FluentAssertions;
 using Moq;
 using System;
-using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
 using Xunit;
 
 namespace DsuDev.BusinessDays.Services.Tests.FileReaders
