@@ -13,8 +13,11 @@ namespace DsuDev.BusinessDays.Services
     /// </summary>
     public class BusinessDaysCalculator
     {
-        private readonly IFileReadingManager fileReading;
-        public FilePathInfo FilePathInfo { get; set; }
+        private readonly IFileReadingManager fileReading; 
+        //Holiday only counts if is on a business day
+        private bool HolidayIsAWeekDay(Holiday holiday) => holiday.HolidayDate.DayOfWeek > DayOfWeek.Sunday 
+                                                           && holiday.HolidayDate.DayOfWeek < DayOfWeek.Saturday;
+        public FilePathInfo FilePathInfo { get; set; }       
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BusinessDaysCalculator"/> class.
@@ -192,9 +195,6 @@ namespace DsuDev.BusinessDays.Services
                 //The holidays count must consider holidays between evaluation dates
                 bool HolidayIsBetweenDates(Holiday holiday) => holiday.HolidayDate >= startDate 
                                                                && holiday.HolidayDate <= endDate;
-                //Holiday only counts if is on a business day
-                bool HolidayIsAWeekDay(Holiday holiday) => holiday.HolidayDate.DayOfWeek > DayOfWeek.Sunday 
-                                                           && holiday.HolidayDate.DayOfWeek < DayOfWeek.Saturday;
 
                 holidayCount = holidays.Where(HolidayIsBetweenDates).Count(HolidayIsAWeekDay);
             }
@@ -214,11 +214,8 @@ namespace DsuDev.BusinessDays.Services
             {
                 //The holidays count must consider holidays since evaluation date
                 bool HolidaySince(Holiday h) => h.HolidayDate >= startDate;
-                //Holiday only counts if is on a business day
-                bool IsAWeekDay(Holiday h) => h.HolidayDate.DayOfWeek > DayOfWeek.Sunday 
-                                              && h.HolidayDate.DayOfWeek < DayOfWeek.Saturday;
 
-                holidayCount = holidays.Where(HolidaySince).Count(IsAWeekDay);
+                holidayCount = holidays.Where(HolidaySince).Count(HolidayIsAWeekDay);
             }
             return holidayCount;
         }
