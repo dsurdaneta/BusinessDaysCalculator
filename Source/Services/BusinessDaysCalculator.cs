@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using DsuDev.BusinessDays.Common.Constants;
+using DsuDev.BusinessDays.Common.Extensions;
 using DsuDev.BusinessDays.Domain.Entities;
 using DsuDev.BusinessDays.Services.FileReaders;
 using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
-using DsuDev.BusinessDays.Tools.Constants;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DsuDev.BusinessDays.Services
 {
@@ -15,8 +16,7 @@ namespace DsuDev.BusinessDays.Services
     {
         private readonly IFileReadingManager fileReading; 
         //Holiday only counts if is on a business day
-        private bool HolidayIsAWeekDay(Holiday holiday) => holiday.HolidayDate.DayOfWeek > DayOfWeek.Sunday 
-                                                           && holiday.HolidayDate.DayOfWeek < DayOfWeek.Saturday;
+        private bool HolidayIsAWeekDay(Holiday holiday) => holiday.HolidayDate.IsAWeekDay();
         public FilePathInfo FilePathInfo { get; set; }       
 
         /// <summary>
@@ -98,6 +98,8 @@ namespace DsuDev.BusinessDays.Services
         /// <returns></returns>
         public DateTime AddBusinessDays(DateTime startDate, double daysCount, bool readHolidaysFile = false)
         {
+            if(daysCount <= 0) return startDate;
+
             //plus weekends
             int weekendCount = this.GetWeekendsCount(startDate, daysCount);
             DateTime endDate = startDate.AddDays(daysCount + weekendCount);
@@ -124,6 +126,7 @@ namespace DsuDev.BusinessDays.Services
         /// <returns></returns>
         public DateTime AddBusinessDays(DateTime startDate, double daysCount, double notWeekendHolidaysCount)
         {
+            if(daysCount <= 0) return startDate;
             //plus weekends
             int weekendCount = this.GetWeekendsCount(startDate, daysCount);
             //add everything to the initial date
@@ -139,6 +142,7 @@ namespace DsuDev.BusinessDays.Services
         /// <returns></returns>
         public DateTime AddBusinessDays(DateTime startDate, double daysCount, List<Holiday> holidays)
         {
+            if(daysCount <= 0) return startDate;
             int notWeekendHolidaysCount = this.GetHolidaysCount(startDate, holidays);
             return this.AddBusinessDays(startDate, daysCount, notWeekendHolidaysCount);
         }
@@ -173,8 +177,7 @@ namespace DsuDev.BusinessDays.Services
             for (int i = 0; i < daysCount; i++)
             {
                 DateTime calculatedDateTime = startDate.AddDays(i);
-                if (calculatedDateTime.DayOfWeek == DayOfWeek.Saturday 
-                    || calculatedDateTime.DayOfWeek == DayOfWeek.Sunday)               
+                if (calculatedDateTime.IsWeekend())            
                     weekendCount++;                
             }
             return weekendCount;
@@ -196,7 +199,7 @@ namespace DsuDev.BusinessDays.Services
                 bool HolidayIsBetweenDates(Holiday holiday) => holiday.HolidayDate >= startDate 
                                                                && holiday.HolidayDate <= endDate;
 
-                holidayCount = holidays.Where(HolidayIsBetweenDates).Count(HolidayIsAWeekDay);
+                holidayCount = holidays.Where(HolidayIsBetweenDates).Count(this.HolidayIsAWeekDay);
             }
             return holidayCount;
         }
@@ -215,7 +218,7 @@ namespace DsuDev.BusinessDays.Services
                 //The holidays count must consider holidays since evaluation date
                 bool HolidaySince(Holiday h) => h.HolidayDate >= startDate;
 
-                holidayCount = holidays.Where(HolidaySince).Count(HolidayIsAWeekDay);
+                holidayCount = holidays.Where(HolidaySince).Count(this.HolidayIsAWeekDay);
             }
             return holidayCount;
         }
