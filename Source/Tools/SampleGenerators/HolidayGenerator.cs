@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using DsuDev.BusinessDays.Domain.Entities;
 using DsuDev.BusinessDays.Tools.FluentBuilders;
 
@@ -7,6 +8,7 @@ namespace DsuDev.BusinessDays.Tools.SampleGenerators
     /// <summary>
     /// Class to help the creation of a Holiday object
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class HolidayGenerator
     {
         private static readonly HolidayBuilder HolidayBuilder = new HolidayBuilder();

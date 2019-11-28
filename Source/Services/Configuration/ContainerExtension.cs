@@ -1,9 +1,11 @@
-﻿using DsuDev.BusinessDays.Services.FileReaders;
+﻿using System.Diagnostics.CodeAnalysis;
+using DsuDev.BusinessDays.Services.FileReaders;
 using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
 using SimpleInjector;
 
 namespace DsuDev.BusinessDays.Services.Configuration
 {
+    [ExcludeFromCodeCoverage]
     public static class ContainerExtension
     {
         /// <summary>

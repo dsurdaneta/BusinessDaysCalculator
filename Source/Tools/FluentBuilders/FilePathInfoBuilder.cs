@@ -1,10 +1,12 @@
-﻿using DsuDev.BusinessDays.Domain.Entities;
+﻿using System.Diagnostics.CodeAnalysis;
+using DsuDev.BusinessDays.Domain.Entities;
 
 namespace DsuDev.BusinessDays.Tools.FluentBuilders
 {
     /// <summary>
     /// Fluent Builder class to Build a <seea cref="FilePathInfo"/> object
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class FilePathInfoBuilder
     {
         private string currentFolder;

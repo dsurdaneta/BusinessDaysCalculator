@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace DsuDev.BusinessDays.Tools.FluentBuilders
 {
     /// <summary>
     /// Fluent Builder class to Build a <seea cref="DateTime"/> object
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class DateBuilder
     {
         private int day;

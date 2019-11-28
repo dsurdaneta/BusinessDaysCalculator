@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace DsuDev.BusinessDays.Tools
 {
     /// <summary>
-    /// Class to help the creation of randome values
+    /// Class to help the creation of random values
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public static class RandomValuesGenerator
     {
         private const string ValidChars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

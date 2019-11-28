@@ -1,8 +1,10 @@
 ﻿using DsuDev.BusinessDays.Services;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace DsuDev.BusinessDays.ConsoleApp1
 {
+    [ExcludeFromCodeCoverage]
     internal class Program
     {
         //TODO: implement tests to validate holidays file reading by mocking the IFileReadingManager and all the readers
