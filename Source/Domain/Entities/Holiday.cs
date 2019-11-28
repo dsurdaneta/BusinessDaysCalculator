@@ -40,7 +40,8 @@ namespace DsuDev.BusinessDays.Domain.Entities
 
         public bool Equals(Holiday other)
         {
-            return Name.Equals(other.Name, StringComparison.InvariantCultureIgnoreCase) 
+            return other != null
+                    && Name.Equals(other.Name, StringComparison.InvariantCultureIgnoreCase) 
                     && HolidayDate.Month == other.HolidayDate.Month 
                     && HolidayDate.Day == other.HolidayDate.Day;
         }

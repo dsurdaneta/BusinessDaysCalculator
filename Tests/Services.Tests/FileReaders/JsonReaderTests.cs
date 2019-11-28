@@ -9,7 +9,7 @@ namespace DsuDev.BusinessDays.Services.Tests.FileReaders
     public class JsonReaderTests
     {
         [Fact]
-        public void JsonHolidateReader_When_new_Then_hasExpectedProperties()
+        public void JsonHolidayReader_When_new_Then_hasExpectedProperties()
         {
             // Act
             var reader = new JsonHolidayReader();

@@ -90,5 +90,19 @@ namespace DsuDev.BusinessDays.Domain.Tests.Entities
             sut.HolidayDate.Month.Should().Be(expectedMonth);
             sut.HolidayDate.Day.Should().Be(expectedDay);
         }
+
+        [Fact]
+        public void Holiday_Equality()
+        {
+            // Arrange
+            var someHoliday = new Holiday(2003,7,6) { Name = "Some"};
+            var otherHoliday = new Holiday(2015,11,28) { Name = "Other"};
+
+            // Act
+            var sut = someHoliday.Equals(otherHoliday);
+
+            // Assert
+            sut.Should().BeFalse();
+        }
     }
 }
