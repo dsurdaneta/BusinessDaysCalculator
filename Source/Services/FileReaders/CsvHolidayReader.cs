@@ -5,6 +5,7 @@ using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
 using DsuDev.BusinessDays.Tools.FluentBuilders;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 namespace DsuDev.BusinessDays.Services.FileReaders
@@ -46,6 +47,7 @@ namespace DsuDev.BusinessDays.Services.FileReaders
             return this.HolidaysFromCsv(absoluteFilePath);
         }
 
+        [ExcludeFromCodeCoverage]
         protected List<Holiday> HolidaysFromCsv(string absoluteFilePath)
         {
             this.Holidays = new List<Holiday>();

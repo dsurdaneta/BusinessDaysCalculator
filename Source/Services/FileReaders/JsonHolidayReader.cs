@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using DsuDev.BusinessDays.Common.Constants;
@@ -37,6 +38,7 @@ namespace DsuDev.BusinessDays.Services.FileReaders
             return this.HolidaysFromJson(absoluteFilePath);
         }
 
+        [ExcludeFromCodeCoverage]
         protected List<Holiday> HolidaysFromJson(string absoluteFilePath)
         {
             this.Holidays = new List<Holiday>();
