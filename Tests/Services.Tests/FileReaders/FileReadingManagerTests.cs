@@ -25,6 +25,7 @@ namespace DsuDev.BusinessDays.Services.Tests.FileReaders
             csvMock = new Mock<ICsvHolidayReader>();
             txtMock = new Mock<ICustomTxtReader>();
         }
+
         private FileReadingManager Setup(int expectedAmount)
         {
             const int year = 2010;
@@ -70,7 +71,7 @@ namespace DsuDev.BusinessDays.Services.Tests.FileReaders
             // Arrange
             var expectedAmount = 4;
             var fileReading = Setup(expectedAmount);
-            var pathInfo = FilePathGenerator.CreatePath(extension);
+            var pathInfo = FilePathGenerator.CreateBasePath(extension);
 
             // Act
             var sut = fileReading.ReadHolidaysFile(pathInfo);
@@ -88,8 +89,8 @@ namespace DsuDev.BusinessDays.Services.Tests.FileReaders
         {
             // Arrange
             var fileReading = new FileReadingManager(jsonMock.Object, xmlMock.Object, csvMock.Object, txtMock.Object);
-            var ext = RandomValuesGenerator.RandomString(3);
-            var pathInfo = FilePathGenerator.CreatePath(ext);
+            var ext = "unknown";
+            var pathInfo = FilePathGenerator.CreateBasePath(ext);
 
             // Act
             Action action = () => fileReading.ReadHolidaysFile(pathInfo);

@@ -13,7 +13,7 @@ namespace DsuDev.BusinessDays.Tools.SampleGenerators
     {
         private static readonly FilePathInfoBuilder FilePathInfoBuilder = new FilePathInfoBuilder();
         
-        public static FilePathInfo CreatePath(string fileExtension)
+        public static FilePathInfo CreateBasePath(string fileExtension)
         {
             return FilePathInfoBuilder.Create()
                 .WithFolder(Resources.ContainingFolderName)
