@@ -13,7 +13,7 @@ namespace DsuDev.BusinessDays.Services.Tests.FileReaders
         [InlineData(false, null)]
         [InlineData(false, ":")]
         [InlineData(true, "|")]
-        public void CsvHolidateReader_When_new_Then_hasExpectedProperties(bool hasHeader, string delimiter)
+        public void CsvHolidayReader_When_new_Then_hasExpectedProperties(bool hasHeader, string delimiter)
         {
             // Act
             var expectedDelimiter =  string.IsNullOrWhiteSpace(delimiter)  ? ";" : delimiter;
