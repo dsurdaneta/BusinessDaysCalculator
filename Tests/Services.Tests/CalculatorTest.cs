@@ -90,6 +90,21 @@ namespace DsuDev.BusinessDays.Services.Tests
         }
         
         [Fact]
+        public void BusinessDays_AddBusinessDays_NoHolidaysFileWithNegativeCount()
+        {
+            //Arrange
+            const int year = 2001;
+            var startDate = new DateTime(year, 5, 26);
+            var calculator = GetCalculator();
+
+            //Act
+            var sut = calculator.AddBusinessDays(startDate, -5);
+
+            //Assert
+            sut.Should().Be(startDate);
+        }
+        
+        [Fact]
         public void BusinessDays_AddBusinessDays_WithHolidaysFile()
         {
             //Arrange
@@ -121,6 +136,20 @@ namespace DsuDev.BusinessDays.Services.Tests
         }
 
         [Fact]
+        public void BusinessDays_AddBusinessDays_WithNegativeHolidaysCounter()
+        {
+            //Arrange
+            var starDate = new DateTime(2001, 5, 26);
+            var calculator = GetCalculator();
+
+            //Act
+            var sut = calculator.AddBusinessDays(starDate, -15, -3);
+
+            //Assert
+            sut.Should().Be(starDate);
+        }
+
+        [Fact]
         public void BusinessDays_AddBusinessDaysFromList()
         {
             //Arrange
@@ -136,6 +165,23 @@ namespace DsuDev.BusinessDays.Services.Tests
 
             //Assert
             sut.Should().Be(expectedDate);
+        }
+        
+        [Fact]
+        public void BusinessDays_AddBusinessDaysFromListWithNegativeCount()
+        {
+            //Arrange
+            const int year = 2001;
+            var holidays = new List<Holiday>();
+            var startDate = new DateTime(year, 4, 27);
+            var calculator = GetCalculator();
+
+            //Act
+            holidays.Add(HolidayGenerator.CreateHoliday());
+            var sut = calculator.AddBusinessDays(startDate, -5, holidays);
+
+            //Assert
+            sut.Should().Be(startDate);
         }
 
         [Fact]

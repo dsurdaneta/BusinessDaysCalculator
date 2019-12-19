@@ -92,7 +92,7 @@ namespace DsuDev.BusinessDays.Domain.Tests.Entities
         }
 
         [Fact]
-        public void Holiday_Equality()
+        public void HolidayEquality_NotEquals()
         {
             // Arrange
             var someHoliday = new Holiday(2003,7,6) { Name = "Some"};
@@ -100,6 +100,33 @@ namespace DsuDev.BusinessDays.Domain.Tests.Entities
 
             // Act
             var sut = someHoliday.Equals(otherHoliday);
+
+            // Assert
+            sut.Should().BeFalse();
+        }
+        
+        [Fact]
+        public void HolidayEquality_Equals()
+        {
+            // Arrange
+            var someHoliday = new Holiday(2003,10,8) { Name = "Holiday"};
+            var otherHoliday = new Holiday(2015,10,8) { Name = "Holiday"};
+
+            // Act
+            var sut = someHoliday.Equals(otherHoliday);
+
+            // Assert
+            sut.Should().BeTrue();
+        }
+        
+        [Fact]
+        public void HolidayEquality_NullHoliday()
+        {
+            // Arrange
+            var someHoliday = new Holiday(2013,2,26) { Name = "Hello"};
+
+            // Act
+            var sut = someHoliday.Equals(null);
 
             // Assert
             sut.Should().BeFalse();
