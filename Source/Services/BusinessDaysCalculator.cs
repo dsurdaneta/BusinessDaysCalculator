@@ -128,9 +128,15 @@ namespace DsuDev.BusinessDays.Services
         {
             if(daysCount <= 0) return startDate;
             //plus weekends
-            int weekendCount = this.GetWeekendsCount(startDate, daysCount);
+            double fullDaysCount = daysCount + this.GetWeekendsCount(startDate, daysCount);
+
+            if (notWeekendHolidaysCount > 0)
+            {
+                fullDaysCount += notWeekendHolidaysCount;
+            }
+
             //add everything to the initial date
-            return startDate.AddDays(daysCount + weekendCount + notWeekendHolidaysCount);
+            return startDate.AddDays(fullDaysCount);
         }
 
         /// <summary>
