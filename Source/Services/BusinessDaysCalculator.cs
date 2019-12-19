@@ -199,7 +199,7 @@ namespace DsuDev.BusinessDays.Services
                 bool HolidayIsBetweenDates(Holiday holiday) => holiday.HolidayDate >= startDate 
                                                                && holiday.HolidayDate <= endDate;
 
-                holidayCount = holidays.Where(HolidayIsBetweenDates).Count(this.HolidayIsAWeekDay);
+                holidayCount = holidays.AsParallel().Where(HolidayIsBetweenDates).Count(this.HolidayIsAWeekDay);
             }
             return holidayCount;
         }
@@ -218,7 +218,7 @@ namespace DsuDev.BusinessDays.Services
                 //The holidays count must consider holidays since evaluation date
                 bool HolidaySince(Holiday h) => h.HolidayDate >= startDate;
 
-                holidayCount = holidays.Where(HolidaySince).Count(this.HolidayIsAWeekDay);
+                holidayCount = holidays.AsParallel().Where(HolidaySince).Count(this.HolidayIsAWeekDay);
             }
             return holidayCount;
         }
