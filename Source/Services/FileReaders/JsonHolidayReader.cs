@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
+using System.Threading.Tasks;
 using DsuDev.BusinessDays.Common.Constants;
 using DsuDev.BusinessDays.Domain.Entities;
 using DsuDev.BusinessDays.Services.DTO;
@@ -25,6 +26,36 @@ namespace DsuDev.BusinessDays.Services.FileReaders
 
         public List<Holiday> GetHolidaysFromFile(string absoluteFilePath)
         {
+            ValidatePath(absoluteFilePath);
+
+            return this.HolidaysFromJson(absoluteFilePath);
+        }
+
+
+        public async Task<List<Holiday>> GetHolidaysFromFileAsync(string absoluteFilePath)
+        {
+            ValidatePath(absoluteFilePath);
+
+            this.Holidays = new List<Holiday>();
+            using (StreamReader file = File.OpenText(absoluteFilePath))
+            {
+                string json = await file.ReadToEndAsync();
+                var deserializedInfo = JsonConvert.DeserializeObject<HolidaysInfoList>(json);
+
+                if (deserializedInfo == null) return this.Holidays;
+
+                this.Holidays = deserializedInfo.Holidays;
+                //in case its needed
+                Parallel.ForEach(this.Holidays, holiday =>
+                    holiday.HolidayStringDate =
+                        holiday.HolidayDate.ToString(Holiday.DateFormat, CultureInfo.InvariantCulture));
+            }
+            return this.Holidays;
+
+        }
+        
+        private static void ValidatePath(string absoluteFilePath)
+        {
             if (string.IsNullOrWhiteSpace(absoluteFilePath))
             {
                 throw new ArgumentException(nameof(absoluteFilePath));
@@ -34,8 +65,6 @@ namespace DsuDev.BusinessDays.Services.FileReaders
             {
                 throw new InvalidOperationException($"File extension {FileExtension.Json} was expected");
             }
-
-            return this.HolidaysFromJson(absoluteFilePath);
         }
 
         [ExcludeFromCodeCoverage]
