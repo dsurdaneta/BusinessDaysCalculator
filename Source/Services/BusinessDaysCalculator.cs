@@ -77,7 +77,7 @@ namespace DsuDev.BusinessDays.Services
         /// <param name="endDate"></param>
         /// <param name="holidays">Holiday object list</param>
         /// <returns></returns>
-        public double GetBusinessDaysCount(DateTime startDate, DateTime endDate, List<Holiday> holidays)
+        public double GetBusinessDaysCount(DateTime startDate, DateTime endDate, ICollection<Holiday> holidays)
         {
             if (holidays == null)
             {
@@ -127,9 +127,9 @@ namespace DsuDev.BusinessDays.Services
         public DateTime AddBusinessDays(DateTime startDate, double daysCount, double notWeekendHolidaysCount)
         {
             if(daysCount <= 0) return startDate;
+
             //plus weekends
             double fullDaysCount = daysCount + this.GetWeekendsCount(startDate, daysCount);
-
             if (notWeekendHolidaysCount > 0)
             {
                 fullDaysCount += notWeekendHolidaysCount;
@@ -146,10 +146,19 @@ namespace DsuDev.BusinessDays.Services
         /// <param name="daysCount"></param>
         /// <param name="holidays">Holiday object list</param>
         /// <returns></returns>
-        public DateTime AddBusinessDays(DateTime startDate, double daysCount, List<Holiday> holidays)
+        public DateTime AddBusinessDays(DateTime startDate, double daysCount, ICollection<Holiday> holidays)
         {
             if(daysCount <= 0) return startDate;
-            int notWeekendHolidaysCount = this.GetHolidaysCount(startDate, holidays);
+
+            int notWeekendHolidaysCount = 0;
+            if (holidays != null && holidays.Any())
+            {
+                //The holidays count must consider holidays since evaluation date
+                bool HolidaySince(Holiday h) => h.HolidayDate >= startDate;
+
+                notWeekendHolidaysCount = holidays.AsParallel().Where(HolidaySince).Count(this.HolidayIsAWeekDay);
+            }
+
             return this.AddBusinessDays(startDate, daysCount, notWeekendHolidaysCount);
         }
 
@@ -206,25 +215,6 @@ namespace DsuDev.BusinessDays.Services
                                                                && holiday.HolidayDate <= endDate;
 
                 holidayCount = holidays.AsParallel().Where(HolidayIsBetweenDates).Count(this.HolidayIsAWeekDay);
-            }
-            return holidayCount;
-        }
-
-        /// <summary>
-        /// Gets the number of holidays since a specific day.
-        /// </summary>
-        /// <param name="startDate"></param>
-        /// <param name="holidays">Holiday object list</param>
-        /// <returns>The amount of Holidays</returns>
-        internal int GetHolidaysCount(DateTime startDate, ICollection<Holiday> holidays)
-        {
-            int holidayCount = 0;
-            if (holidays != null && holidays.Count > 0)
-            {
-                //The holidays count must consider holidays since evaluation date
-                bool HolidaySince(Holiday h) => h.HolidayDate >= startDate;
-
-                holidayCount = holidays.AsParallel().Where(HolidaySince).Count(this.HolidayIsAWeekDay);
             }
             return holidayCount;
         }
