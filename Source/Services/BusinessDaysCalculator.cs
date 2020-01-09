@@ -196,7 +196,7 @@ namespace DsuDev.BusinessDays.Services
         /// <param name="endDate"></param>
         /// <param name="holidays">Holiday object list</param>
         /// <returns>The amount of Holidays</returns>
-        internal int GetHolidaysCount(DateTime startDate, DateTime endDate, List<Holiday> holidays)
+        internal int GetHolidaysCount(DateTime startDate, DateTime endDate, ICollection<Holiday> holidays)
         {
             int holidayCount = 0;
             if (holidays?.Count > 0)
@@ -216,7 +216,7 @@ namespace DsuDev.BusinessDays.Services
         /// <param name="startDate"></param>
         /// <param name="holidays">Holiday object list</param>
         /// <returns>The amount of Holidays</returns>
-        internal int GetHolidaysCount(DateTime startDate, List<Holiday> holidays)
+        internal int GetHolidaysCount(DateTime startDate, ICollection<Holiday> holidays)
         {
             int holidayCount = 0;
             if (holidays != null && holidays.Count > 0)
