@@ -12,7 +12,7 @@ namespace DsuDev.BusinessDays.Services.FileReaders
     /// <summary>
     /// A class to read the holiday information from a XML file
     /// </summary>
-    public class XmlHolidayReader : IXmlReader
+    public class XmlHolidayReader : FileReaderBase, IXmlReader
     {
         public List<Holiday> Holidays { get; set; }
 
@@ -23,21 +23,14 @@ namespace DsuDev.BusinessDays.Services.FileReaders
 
         public List<Holiday> GetHolidaysFromFile(string absoluteFilePath)
         {
-            if (string.IsNullOrWhiteSpace(absoluteFilePath))
-            {
-                throw new ArgumentException(nameof(absoluteFilePath));
-            }
+            ValidatePath(absoluteFilePath, FileExtension.Xml);
 
-            if (!absoluteFilePath.EndsWith($".{FileExtension.Xml}"))
-            {
-                throw new InvalidOperationException($"File extension {FileExtension.Xml} was expected");
-            }
-
-            return this.HolidaysFromXml(absoluteFilePath);
+            return this.ReadHolidaysFromFile(absoluteFilePath);
         }
 
+        /// <inheritdoc />
         [ExcludeFromCodeCoverage]
-        protected List<Holiday> HolidaysFromXml(string absoluteFilePath)
+        protected override List<Holiday> ReadHolidaysFromFile(string absoluteFilePath)
         {
             this.Holidays = new List<Holiday>();
             using (XmlReader file = XmlReader.Create(absoluteFilePath))

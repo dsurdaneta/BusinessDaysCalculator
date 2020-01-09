@@ -13,7 +13,7 @@ namespace DsuDev.BusinessDays.Services.FileReaders
     /// <summary>
     /// A class to read the holiday information from a CSV file
     /// </summary>
-    public class CsvHolidayReader : ICsvHolidayReader
+    public class CsvHolidayReader : FileReaderBase, ICsvHolidayReader
     {
         private const string DefaultDelimiter = ";";
         public List<Holiday> Holidays { get; set; }
@@ -34,21 +34,13 @@ namespace DsuDev.BusinessDays.Services.FileReaders
 
         public List<Holiday> GetHolidaysFromFile(string absoluteFilePath)
         {
-            if (string.IsNullOrWhiteSpace(absoluteFilePath))
-            {
-                throw new ArgumentException(nameof(absoluteFilePath));
-            }
+           ValidatePath(absoluteFilePath, FileExtension.Csv);
 
-            if (!absoluteFilePath.EndsWith($".{FileExtension.Csv}"))
-            {
-                throw new InvalidOperationException($"File extension {FileExtension.Csv} was expected");
-            }
-
-            return this.HolidaysFromCsv(absoluteFilePath);
+            return this.ReadHolidaysFromFile(absoluteFilePath);
         }
 
         [ExcludeFromCodeCoverage]
-        protected List<Holiday> HolidaysFromCsv(string absoluteFilePath)
+        protected override List<Holiday> ReadHolidaysFromFile(string absoluteFilePath)
         {
             this.Holidays = new List<Holiday>();
             using (StreamReader file = File.OpenText(absoluteFilePath))

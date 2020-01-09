@@ -15,7 +15,7 @@ namespace DsuDev.BusinessDays.Services.FileReaders
     /// <summary>
     /// A class to read the holiday information from a Json file
     /// </summary>
-    public class JsonHolidayReader : IJsonReader
+    public class JsonHolidayReader : FileReaderBase, IJsonReader
     {
         public List<Holiday> Holidays { get; set; }
 
@@ -26,15 +26,14 @@ namespace DsuDev.BusinessDays.Services.FileReaders
 
         public List<Holiday> GetHolidaysFromFile(string absoluteFilePath)
         {
-            ValidatePath(absoluteFilePath);
+            ValidatePath(absoluteFilePath, FileExtension.Json);
 
-            return this.HolidaysFromJson(absoluteFilePath);
+            return this.ReadHolidaysFromFile(absoluteFilePath);
         }
-
-
+        
         public async Task<List<Holiday>> GetHolidaysFromFileAsync(string absoluteFilePath)
         {
-            ValidatePath(absoluteFilePath);
+            ValidatePath(absoluteFilePath, FileExtension.Json);
 
             this.Holidays = new List<Holiday>();
             using (StreamReader file = File.OpenText(absoluteFilePath))
@@ -54,21 +53,9 @@ namespace DsuDev.BusinessDays.Services.FileReaders
 
         }
         
-        private static void ValidatePath(string absoluteFilePath)
-        {
-            if (string.IsNullOrWhiteSpace(absoluteFilePath))
-            {
-                throw new ArgumentException(nameof(absoluteFilePath));
-            }
-
-            if (!absoluteFilePath.EndsWith($".{FileExtension.Json}"))
-            {
-                throw new InvalidOperationException($"File extension {FileExtension.Json} was expected");
-            }
-        }
-
+        /// <inheritdoc />
         [ExcludeFromCodeCoverage]
-        protected List<Holiday> HolidaysFromJson(string absoluteFilePath)
+        protected override List<Holiday> ReadHolidaysFromFile(string absoluteFilePath)
         {
             this.Holidays = new List<Holiday>();
             using (StreamReader file = File.OpenText(absoluteFilePath))
@@ -80,7 +67,7 @@ namespace DsuDev.BusinessDays.Services.FileReaders
 
                 this.Holidays = deserializedInfo.Holidays;
                 //in case its needed
-                this.Holidays.ForEach(holiday => 
+                this.Holidays.ForEach(holiday =>
                     holiday.HolidayStringDate =
                         holiday.HolidayDate.ToString(Holiday.DateFormat, CultureInfo.InvariantCulture));
             }

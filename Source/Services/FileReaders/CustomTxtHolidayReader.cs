@@ -8,7 +8,7 @@ namespace DsuDev.BusinessDays.Services.FileReaders
     /// <summary>
     /// A class to read the holiday information from a customized TXT file
     /// </summary>
-    public class CustomTxtHolidayReader : ICustomTxtReader
+    public class CustomTxtHolidayReader : FileReaderBase, ICustomTxtReader
     {
         public List<Holiday> Holidays { get; set; }
 
@@ -21,6 +21,13 @@ namespace DsuDev.BusinessDays.Services.FileReaders
         public List<Holiday> GetHolidaysFromFile(string absoluteFilePath)
         {
             throw new System.NotImplementedException("Not yet supported, might be useful for custom rules.");
+        }
+
+        /// <inheritdoc />
+        [ExcludeFromCodeCoverage]
+        protected override List<Holiday> ReadHolidaysFromFile(string absoluteFilePath)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
