@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DsuDev.BusinessDays.DataAccess
 {
-    public interface IDbContext
+    public interface IContext<TContext> where TContext : class
     {
 
     }
