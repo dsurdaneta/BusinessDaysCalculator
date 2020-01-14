@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using DsuDev.BusinessDays.Common.Constants;
+using DsuDev.BusinessDays.Common.Tools.FluentBuilders;
 using DsuDev.BusinessDays.Domain.Entities;
-using DsuDev.BusinessDays.Tools.FluentBuilders;
 
-namespace DsuDev.BusinessDays.Tools.SampleGenerators
+namespace DsuDev.BusinessDays.Common.Tools.SampleGenerators
 {
     /// <summary>
     /// Class to help the creation of a FilePathInfo object

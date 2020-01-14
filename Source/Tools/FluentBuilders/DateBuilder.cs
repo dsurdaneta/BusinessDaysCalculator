@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace DsuDev.BusinessDays.Tools.FluentBuilders
+namespace DsuDev.BusinessDays.Common.Tools.FluentBuilders
 {
     /// <summary>
     /// Fluent Builder class to Build a <seea cref="DateTime"/> object

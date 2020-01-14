@@ -3,6 +3,7 @@
 [assembly: InternalsVisibleTo("DsuDev.BusinessDays.Services")]
 [assembly: InternalsVisibleTo("DsuDev.BusinessDays.Services.Tests")]
 [assembly: InternalsVisibleTo("DsuDev.BusinessDays.Tools")]
+[assembly: InternalsVisibleTo("DsuDev.BusinessDays.Common.Tools")]
 namespace DsuDev.BusinessDays.Common.Constants
 {
 

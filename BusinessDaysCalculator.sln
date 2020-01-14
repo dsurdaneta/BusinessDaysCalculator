@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DsuDev.BusinessDays.Domain"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DsuDev.BusinessDays.Services", "Source\Services\DsuDev.BusinessDays.Services.csproj", "{C6D38071-B746-48B9-8501-A39A24D9034D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DsuDev.BusinessDays.Tools", "Source\Tools\DsuDev.BusinessDays.Tools.csproj", "{0474ED6A-86EB-4873-B4E4-A04172F203D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DsuDev.BusinessDays.Common.Tools", "Source\Tools\DsuDev.BusinessDays.Common.Tools.csproj", "{0474ED6A-86EB-4873-B4E4-A04172F203D6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DsuDev.BusinessDays.Domain.Tests", "Tests\Domain.Tests\DsuDev.BusinessDays.Domain.Tests.csproj", "{EFB22BFE-03A3-416E-BF2D-A784F5CDAC36}"
 EndProject

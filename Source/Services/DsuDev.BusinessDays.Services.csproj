@@ -13,7 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\DsuDev.BusinessDays.Common.csproj" />
     <ProjectReference Include="..\Domain\DsuDev.BusinessDays.Domain.csproj" />
-    <ProjectReference Include="..\Tools\DsuDev.BusinessDays.Tools.csproj" />
+    <ProjectReference Include="..\Tools\DsuDev.BusinessDays.Common.Tools.csproj" />
   </ItemGroup>
 
 </Project>

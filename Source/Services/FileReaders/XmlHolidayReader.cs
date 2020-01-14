@@ -1,11 +1,11 @@
 ﻿using DsuDev.BusinessDays.Common.Constants;
 using DsuDev.BusinessDays.Domain.Entities;
 using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
-using DsuDev.BusinessDays.Tools.FluentBuilders;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Xml;
+using DsuDev.BusinessDays.Common.Tools.FluentBuilders;
 
 namespace DsuDev.BusinessDays.Services.FileReaders
 {
