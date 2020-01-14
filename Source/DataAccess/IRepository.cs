@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DsuDev.BusinessDays.DataAccess
 {
-    public interface IRepository<T>
+    public interface IRepository<T> where T : class
     {
         bool Insert(T entity);
 
@@ -18,5 +18,7 @@ namespace DsuDev.BusinessDays.DataAccess
         bool Delete(T entity);
 
         bool Update(string id, T entity);
+
+        bool Save();
     }
 }
