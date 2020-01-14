@@ -38,7 +38,7 @@ namespace DsuDev.BusinessDays.DataAccess.SQLite
             {
                 return false;
             }
-            entity.CreatedDateTime = DateTime.UtcNow;
+            entity.CreatedDate = DateTime.UtcNow;
             this.dbContext.Holidays.Add(entity);
             this.dbContext.SaveChanges();
             return true;
@@ -46,6 +46,7 @@ namespace DsuDev.BusinessDays.DataAccess.SQLite
 
         public bool Update(string id, DbEntites.Holiday entity)
         {
+            entity.UpdatedDate = DateTime.UtcNow;
             throw new NotImplementedException();
         }}
 }

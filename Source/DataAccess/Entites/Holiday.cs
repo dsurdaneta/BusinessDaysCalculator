@@ -1,16 +1,13 @@
 ﻿using System;
+using DsuDev.BusinessDays.DataAccess.Entites.Base;
 
 namespace DsuDev.BusinessDays.DataAccess.Entites
 {
-    public class Holiday
+    public class Holiday : DbEntity
     {
-        public string Id { get; set; }
         public int Year { get; set; }
         public DateTime HolidayDate { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public DateTime CreatedDateTime { get; set; }
-        public DateTime UpdatedDateTime { get; set; }
-
     }
 }
