@@ -1,6 +1,6 @@
-﻿using DsuDev.BusinessDays.Tools.FluentBuilders;
-using FluentAssertions;
+﻿using FluentAssertions;
 using System;
+using DsuDev.BusinessDays.Common.Tools.FluentBuilders;
 using Xunit;
 
 namespace DsuDev.BusinessDays.Services.Tests

@@ -1,7 +1,7 @@
 ﻿using DsuDev.BusinessDays.Services.FileReaders;
-using DsuDev.BusinessDays.Tools;
 using FluentAssertions;
 using System;
+using DsuDev.BusinessDays.Common.Tools;
 using Xunit;
 
 namespace DsuDev.BusinessDays.Services.Tests.FileReaders

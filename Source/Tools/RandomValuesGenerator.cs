@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
-namespace DsuDev.BusinessDays.Tools
+namespace DsuDev.BusinessDays.Common.Tools
 {
     /// <summary>
     /// Class to help the creation of random values

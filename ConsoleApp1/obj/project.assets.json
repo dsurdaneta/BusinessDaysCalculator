@@ -43,6 +43,32 @@
           "lib/netstandard1.3/Microsoft.CSharp.dll": {}
         }
       },
+      "Microsoft.Extensions.Configuration.Abstractions/1.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "1.1.0",
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "lib/netstandard1.0/Microsoft.Extensions.Configuration.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/Microsoft.Extensions.Configuration.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Primitives/1.1.0": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "System.Runtime.CompilerServices.Unsafe": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard1.0/Microsoft.Extensions.Primitives.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/Microsoft.Extensions.Primitives.dll": {}
+        }
+      },
       "Microsoft.NETCore.App/2.1.0": {
         "type": "package",
         "dependencies": {
@@ -521,14 +547,26 @@
           "ref/netstandard1.0/_._": {}
         }
       },
-      "System.Runtime/4.1.0": {
+      "System.Runtime/4.3.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.0.1",
-          "Microsoft.NETCore.Targets": "1.0.1"
+          "Microsoft.NETCore.Platforms": "1.1.0",
+          "Microsoft.NETCore.Targets": "1.1.0"
         },
         "compile": {
           "ref/netstandard1.5/System.Runtime.dll": {}
+        }
+      },
+      "System.Runtime.CompilerServices.Unsafe/4.3.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Runtime": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll": {}
         }
       },
       "System.Runtime.Extensions/4.1.0": {
@@ -602,6 +640,30 @@
           "ref/netstandard1.3/System.Threading.Tasks.dll": {}
         }
       },
+      "DsuDev.BusinessDays.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/DsuDev.BusinessDays.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DsuDev.BusinessDays.Common.dll": {}
+        }
+      },
+      "DsuDev.BusinessDays.Common.Tools/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "DsuDev.BusinessDays.Common": "1.0.0",
+          "DsuDev.BusinessDays.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/DsuDev.BusinessDays.Common.Tools.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DsuDev.BusinessDays.Common.Tools.dll": {}
+        }
+      },
       "DsuDev.BusinessDays.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
@@ -620,8 +682,10 @@
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
           "CsvHelper": "2.16.3",
+          "DsuDev.BusinessDays.Common": "1.0.0",
+          "DsuDev.BusinessDays.Common.Tools": "1.0.0",
           "DsuDev.BusinessDays.Domain": "1.0.0",
-          "DsuDev.BusinessDays.Tools": "1.0.0",
+          "Microsoft.Extensions.Configuration.Abstractions": "1.1.0",
           "SimpleInjector": "4.6.0"
         },
         "compile": {
@@ -629,19 +693,6 @@
         },
         "runtime": {
           "bin/placeholder/DsuDev.BusinessDays.Services.dll": {}
-        }
-      },
-      "DsuDev.BusinessDays.Tools/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "dependencies": {
-          "DsuDev.BusinessDays.Domain": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/DsuDev.BusinessDays.Tools.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/DsuDev.BusinessDays.Tools.dll": {}
         }
       }
     }
@@ -725,6 +776,32 @@
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._"
+      ]
+    },
+    "Microsoft.Extensions.Configuration.Abstractions/1.1.0": {
+      "sha512": "ggfk85eY5+Nr90O9wN0ei8YyouHTeLOSj4R7PJAEkAAR1TNCoeErydX2OuFjT/lF6o7Zupwd+DIRifC17XL2VA==",
+      "type": "package",
+      "path": "microsoft.extensions.configuration.abstractions/1.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard1.0/Microsoft.Extensions.Configuration.Abstractions.dll",
+        "lib/netstandard1.0/Microsoft.Extensions.Configuration.Abstractions.xml",
+        "microsoft.extensions.configuration.abstractions.1.1.0.nupkg.sha512",
+        "microsoft.extensions.configuration.abstractions.nuspec"
+      ]
+    },
+    "Microsoft.Extensions.Primitives/1.1.0": {
+      "sha512": "GhQG5CBUR9/czBLTblt1giKBkfvHVDeppWd6KIgPyexrspECqzzSW5IXe0STTTs2NlUp9vIFwjSWG8O9c74R9g==",
+      "type": "package",
+      "path": "microsoft.extensions.primitives/1.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard1.0/Microsoft.Extensions.Primitives.dll",
+        "lib/netstandard1.0/Microsoft.Extensions.Primitives.xml",
+        "microsoft.extensions.primitives.1.1.0.nupkg.sha512",
+        "microsoft.extensions.primitives.nuspec"
       ]
     },
     "Microsoft.NETCore.App/2.1.0": {
@@ -2276,12 +2353,13 @@
         "system.resources.resourcemanager.nuspec"
       ]
     },
-    "System.Runtime/4.1.0": {
-      "sha512": "v6c/4Yaa9uWsq+JMhnOFewrYkgdNHNG2eMKuNqRn8P733rNXeRCGvV5FkkjBXn2dbVkPXOsO0xjsEeM1q2zC0g==",
+    "System.Runtime/4.3.0": {
+      "sha512": "JufQi0vPQ0xGnAczR13AUFglDyVYt4Kqnz1AZaiKZ5+GICq0/1MH/mO/eAJHt/mHW1zjKBJd7kV26SrxddAhiw==",
       "type": "package",
-      "path": "system.runtime/4.1.0",
+      "path": "system.runtime/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -2363,8 +2441,23 @@
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._",
-        "system.runtime.4.1.0.nupkg.sha512",
+        "system.runtime.4.3.0.nupkg.sha512",
         "system.runtime.nuspec"
+      ]
+    },
+    "System.Runtime.CompilerServices.Unsafe/4.3.0": {
+      "sha512": "rcnXA1U9W3QUtMSGoyoNHH6w4V5Rxa/EKXmzpORUYlDAlDB34hIQoU57ATXl8xHa83VvzRm6PcElEizgUd7U5w==",
+      "type": "package",
+      "path": "system.runtime.compilerservices.unsafe/4.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "system.runtime.compilerservices.unsafe.4.3.0.nupkg.sha512",
+        "system.runtime.compilerservices.unsafe.nuspec"
       ]
     },
     "System.Runtime.Extensions/4.1.0": {
@@ -2777,6 +2870,16 @@
         "system.threading.tasks.nuspec"
       ]
     },
+    "DsuDev.BusinessDays.Common/1.0.0": {
+      "type": "project",
+      "path": "../Source/Common/DsuDev.BusinessDays.Common.csproj",
+      "msbuildProject": "../Source/Common/DsuDev.BusinessDays.Common.csproj"
+    },
+    "DsuDev.BusinessDays.Common.Tools/1.0.0": {
+      "type": "project",
+      "path": "../Source/Tools/DsuDev.BusinessDays.Common.Tools.csproj",
+      "msbuildProject": "../Source/Tools/DsuDev.BusinessDays.Common.Tools.csproj"
+    },
     "DsuDev.BusinessDays.Domain/1.0.0": {
       "type": "project",
       "path": "../Source/Domain/DsuDev.BusinessDays.Domain.csproj",
@@ -2786,18 +2889,13 @@
       "type": "project",
       "path": "../Source/Services/DsuDev.BusinessDays.Services.csproj",
       "msbuildProject": "../Source/Services/DsuDev.BusinessDays.Services.csproj"
-    },
-    "DsuDev.BusinessDays.Tools/1.0.0": {
-      "type": "project",
-      "path": "../Source/Tools/DsuDev.BusinessDays.Tools.csproj",
-      "msbuildProject": "../Source/Tools/DsuDev.BusinessDays.Tools.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
+      "DsuDev.BusinessDays.Common.Tools >= 1.0.0",
       "DsuDev.BusinessDays.Domain >= 1.0.0",
       "DsuDev.BusinessDays.Services >= 1.0.0",
-      "DsuDev.BusinessDays.Tools >= 1.0.0",
       "Microsoft.NETCore.App >= 2.1.0"
     ]
   },
@@ -2837,8 +2935,8 @@
             "C:\\Users\\urda\\source\\repos\\dsurdaneta\\BusinessDaysCalculator\\Source\\Services\\DsuDev.BusinessDays.Services.csproj": {
               "projectPath": "C:\\Users\\urda\\source\\repos\\dsurdaneta\\BusinessDaysCalculator\\Source\\Services\\DsuDev.BusinessDays.Services.csproj"
             },
-            "C:\\Users\\urda\\source\\repos\\dsurdaneta\\BusinessDaysCalculator\\Source\\Tools\\DsuDev.BusinessDays.Tools.csproj": {
-              "projectPath": "C:\\Users\\urda\\source\\repos\\dsurdaneta\\BusinessDaysCalculator\\Source\\Tools\\DsuDev.BusinessDays.Tools.csproj"
+            "C:\\Users\\urda\\source\\repos\\dsurdaneta\\BusinessDaysCalculator\\Source\\Tools\\DsuDev.BusinessDays.Common.Tools.csproj": {
+              "projectPath": "C:\\Users\\urda\\source\\repos\\dsurdaneta\\BusinessDaysCalculator\\Source\\Tools\\DsuDev.BusinessDays.Common.Tools.csproj"
             }
           }
         }
@@ -2860,10 +2958,16 @@
           }
         },
         "imports": [
-          "net461"
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
         ],
         "assetTargetFallback": true,
-        "warn": true
+        "warn": true,
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

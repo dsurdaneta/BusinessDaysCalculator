@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using DsuDev.BusinessDays.Domain.Entities;
 
-namespace DsuDev.BusinessDays.Tools.FluentBuilders
+namespace DsuDev.BusinessDays.Common.Tools.FluentBuilders
 {
     /// <summary>
     /// Fluent Builder class to Build a <seea cref="FilePathInfo"/> object
