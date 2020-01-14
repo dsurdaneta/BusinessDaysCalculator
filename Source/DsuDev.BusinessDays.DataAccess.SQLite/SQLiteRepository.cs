@@ -1,45 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
-using DsuDev.BusinessDays.Domain.Entities;
+using DbEntites = DsuDev.BusinessDays.DataAccess.Entites;
 
 namespace DsuDev.BusinessDays.DataAccess.SQLite
 {
-    public class SQLiteRepository : IRepository<Holiday>
+    public class SQLiteRepository : IRepository<DbEntites.Holiday>
     {
-        public bool Delete(Holiday entity)
+        private Context dbContext;
+
+        public bool Delete(DbEntites.Holiday entity)
+        {
+            this.dbContext.Holidays.Remove(entity);
+            this.dbContext.SaveChanges();
+            return true;
+        }
+
+        public IEnumerable<DbEntites.Holiday> Get()
+        {
+            return this.dbContext.Holidays;
+        }
+
+        public DbEntites.Holiday Get(string id)
+        {
+            return this.dbContext.Holidays.FirstOrDefault(x => x.Id.Equals(id));
+        }
+
+        public IEnumerable<DbEntites.Holiday> Get(Expression<Func<DbEntites.Holiday, bool>> expression)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Holiday> Get()
+        public bool Insert(DbEntites.Holiday entity)
         {
-            throw new NotImplementedException();
+            if (this.dbContext.Holidays.Any(x => x.Id.Equals(entity.Id) || x.HolidayDate.Equals(entity.HolidayDate)))
+            {
+                return false;
+            }
+            entity.CreatedDateTime = DateTime.UtcNow;
+            this.dbContext.Holidays.Add(entity);
+            this.dbContext.SaveChanges();
+            return true;
         }
 
-        public Holiday Get(string id)
+        public bool Update(string id, DbEntites.Holiday entity)
         {
             throw new NotImplementedException();
-        }
-
-        public IEnumerable<Holiday> Get(Expression<Func<Holiday, bool>> expression)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Insert(Holiday entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(string id, Holiday entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Save()
-        {
-            throw new NotImplementedException();
-        }
-    }
+        }}
 }

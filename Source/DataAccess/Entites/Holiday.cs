@@ -9,5 +9,8 @@ namespace DsuDev.BusinessDays.DataAccess.Entites
         public DateTime HolidayDate { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public DateTime CreatedDateTime { get; set; }
+        public DateTime UpdatedDateTime { get; set; }
+
     }
 }

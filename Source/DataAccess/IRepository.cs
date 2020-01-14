@@ -17,7 +17,5 @@ namespace DsuDev.BusinessDays.DataAccess
         bool Delete(T entity);
 
         bool Update(string id, T entity);
-
-        bool Save();
     }
 }
