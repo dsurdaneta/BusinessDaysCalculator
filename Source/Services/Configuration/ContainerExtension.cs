@@ -1,7 +1,9 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using DsuDev.BusinessDays.Services.FileReaders;
 using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
 using SimpleInjector;
+using Microsoft.Extensions.Configuration;
 
 namespace DsuDev.BusinessDays.Services.Configuration
 {
@@ -22,6 +24,11 @@ namespace DsuDev.BusinessDays.Services.Configuration
             container.Register<IFileReadingManager,FileReadingManager>();
 
             return container;
+        }
+
+        public static bool IsLoaded(this IConfiguration config)
+        {
+            return config != null && config.AsEnumerable().Any();
         }
     }
 }

@@ -19,7 +19,7 @@ namespace DsuDev.BusinessDays.Services.Tests
 
         [Theory]
         [InlineData(null, "hello")]
-        [InlineData("hello", "")]
+        [InlineData("hi", "")]
         public void ValidateFilePathInfo_NotValidPath(string filename, string ext)
         {
             // Arrange
