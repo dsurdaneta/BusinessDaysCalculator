@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace DsuDev.BusinessDays.DataAccess
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<TEntity> where TEntity : class
     {
-        bool Insert(T entity);
+        Task<TEntity> AddAsync(TEntity entity);
 
-        IEnumerable<T> Get();
+        Task<IEnumerable<TEntity>> GetAllAsync();
 
-        T Get(string id);
+        Task<TEntity> GetByIdAsync(int id);
 
-        IEnumerable<T> Get(Expression<Func<T, bool>> expression);
+        IEnumerable<TEntity> Get(Func<TEntity, bool> expression);
         
-        bool Delete(T entity);
+        Task<bool> DeleteAsync(TEntity entity);
 
-        bool Update(string id, T entity);
+        Task<bool> UpdateAsync(int id, TEntity entity);
+
+        Task<bool> AnyAsync(TEntity entity);
     }
 }
