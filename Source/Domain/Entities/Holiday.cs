@@ -9,6 +9,8 @@ namespace DsuDev.BusinessDays.Domain.Entities
     public class Holiday : IEquatable<Holiday>
     {
         public const string DateFormat = "YYYY-MM-DD";
+        
+        public int Id { get; set; }
         public DateTime HolidayDate { get; set; }
         //in case you need to handle the date as a string:
         public string HolidayStringDate { get; set; }
