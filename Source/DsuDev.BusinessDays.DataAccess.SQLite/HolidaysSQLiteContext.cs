@@ -1,5 +1,4 @@
-﻿using System.Data.SQLite;
-using DsuDev.BusinessDays.DataAccess.Entites;
+﻿using DsuDev.BusinessDays.DataAccess.Entites;
 using Microsoft.EntityFrameworkCore;
 
 namespace DsuDev.BusinessDays.DataAccess.SQLite
@@ -17,13 +16,6 @@ namespace DsuDev.BusinessDays.DataAccess.SQLite
 
         }
         
-        public static SQLiteConnection GetInstance()
-        {
-            var db = new SQLiteConnection(DefaultConnectionString);
-            db.Open();
-            return db;
-        }
-        
         /// <inheritdoc />
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -33,6 +25,7 @@ namespace DsuDev.BusinessDays.DataAccess.SQLite
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            _isDbRecentlyCreated = true;
         }
     }
 }
