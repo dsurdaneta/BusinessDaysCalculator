@@ -1,52 +1,69 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
+using System.Threading.Tasks;
+using DsuDev.BusinessDays.DataAccess.Entites;
+using Microsoft.EntityFrameworkCore;
 using DbEntites = DsuDev.BusinessDays.DataAccess.Entites;
 
 namespace DsuDev.BusinessDays.DataAccess.SQLite
 {
     public class SQLiteRepository : IRepository<DbEntites.Holiday>
     {
-        private Context dbContext;
+        private readonly HolidaysSQLiteContext dbContext;
 
-        public bool Delete(DbEntites.Holiday entity)
+        public SQLiteRepository(HolidaysSQLiteContext context)
+        {
+            this.dbContext = context;
+        }
+
+        public async Task<bool> DeleteAsync(DbEntites.Holiday entity)
         {
             this.dbContext.Holidays.Remove(entity);
-            this.dbContext.SaveChanges();
-            return true;
+            int result = await this.dbContext.SaveChangesAsync().ConfigureAwait(false);
+            return result > 0;
         }
 
-        public IEnumerable<DbEntites.Holiday> Get()
+        public async Task<IEnumerable<DbEntites.Holiday>> GetAllAsync()
         {
-            return this.dbContext.Holidays;
+            return await this.dbContext.Holidays.ToListAsync().ConfigureAwait(false);
         }
 
-        public DbEntites.Holiday Get(string id)
+        public async Task<DbEntites.Holiday> GetByIdAsync(int id)
         {
-            return this.dbContext.Holidays.FirstOrDefault(x => x.Id.Equals(id));
+            return await this.dbContext.Holidays.FirstOrDefaultAsync(x => x.Id.Equals(id))
+                .ConfigureAwait(false);
         }
 
-        public IEnumerable<DbEntites.Holiday> Get(Expression<Func<DbEntites.Holiday, bool>> expression)
+        public IEnumerable<DbEntites.Holiday> Get(Func<DbEntites.Holiday, bool> expression)
         {
-            throw new NotImplementedException();
+            return this.dbContext.Holidays.AsParallel().Where(expression);
         }
 
-        public bool Insert(DbEntites.Holiday entity)
+        public async Task<DbEntites.Holiday> AddAsync(DbEntites.Holiday entity)
         {
-            if (this.dbContext.Holidays.Any(x => x.Id.Equals(entity.Id) || x.HolidayDate.Equals(entity.HolidayDate)))
+            if (await this.AnyAsync(entity).ConfigureAwait(false))
             {
-                return false;
+                return null;
             }
             entity.CreatedDate = DateTime.UtcNow;
             this.dbContext.Holidays.Add(entity);
-            this.dbContext.SaveChanges();
-            return true;
+            int result = await this.dbContext.SaveChangesAsync().ConfigureAwait(false);
+            return result > 0 ? entity : null;
         }
 
-        public bool Update(string id, DbEntites.Holiday entity)
+        public async Task<bool> UpdateAsync(int id, DbEntites.Holiday entity)
         {
             entity.UpdatedDate = DateTime.UtcNow;
-            throw new NotImplementedException();
-        }}
+            this.dbContext.Entry(entity).State = EntityState.Modified;
+            int result = await this.dbContext.SaveChangesAsync().ConfigureAwait(false);
+            return result > 0;
+        }
+
+        public async Task<bool> AnyAsync(Holiday entity)
+        {
+            return await this.dbContext.Holidays.AnyAsync(x => x.Id.Equals(entity.Id) || x.HolidayDate.Equals(entity.HolidayDate))
+                .ConfigureAwait(false);
+        }
+    }
 }
