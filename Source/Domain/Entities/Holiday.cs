@@ -42,11 +42,15 @@ namespace DsuDev.BusinessDays.Domain.Entities
 
         public bool Equals(Holiday other)
         {
-            return other != null
-                    && Name.Equals(other.Name, StringComparison.InvariantCultureIgnoreCase) 
-                    && HolidayDate.Month == other.HolidayDate.Month 
-                    && HolidayDate.Day == other.HolidayDate.Day;
-        }
+            if (other == null)
+                return false;
+
+            var myHolidayUtc = HolidayDate.ToUniversalTime();
+            var otherHolidayUtc = other.HolidayDate.ToUniversalTime();
+
+            return Name.Equals(other.Name, StringComparison.InvariantCultureIgnoreCase)
+                         && myHolidayUtc.Month == otherHolidayUtc.Month
+                         && myHolidayUtc.Day == otherHolidayUtc.Day;}
     }
 	
 }

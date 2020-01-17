@@ -22,7 +22,9 @@ namespace DsuDev.BusinessDays.Domain
             }
 
             var stringComparison = string.Compare(x.Name, y.Name, StringComparison.InvariantCultureIgnoreCase);
-            var comparingResult = SortBy == CompareField.Name ? stringComparison : x.HolidayDate.CompareTo(y.HolidayDate);
+            var comparingResult = SortBy == CompareField.Name 
+                                ? stringComparison 
+                                : x.HolidayDate.ToUniversalTime().CompareTo(y.HolidayDate.ToUniversalTime());
 
             return comparingResult;
         }
