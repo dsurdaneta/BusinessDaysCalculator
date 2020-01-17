@@ -154,7 +154,7 @@ namespace DsuDev.BusinessDays.Services
             if (holidays != null && holidays.Any())
             {
                 //The holidays count must consider holidays since evaluation date
-                bool HolidaySince(Holiday h) => h.HolidayDate >= startDate;
+                bool HolidaySince(Holiday h) => h.HolidayDate.ToUniversalTime() >= startDate.ToUniversalTime();
 
                 notWeekendHolidaysCount = holidays.AsParallel().Where(HolidaySince).Count(this.HolidayIsAWeekDay);
             }
@@ -172,7 +172,8 @@ namespace DsuDev.BusinessDays.Services
         internal double AddCountersToDate(DateTime startDate, DateTime endDate, int holidaysCount)
         {
             //initial date difference calculation
-            double result = (endDate - startDate).TotalDays;
+            double result = (endDate.ToUniversalTime() - startDate.ToUniversalTime()).TotalDays;
+            
             //minus weekends
             int weekendCount = this.GetWeekendsCount(startDate, result);
             result -= (weekendCount + holidaysCount);
@@ -211,8 +212,8 @@ namespace DsuDev.BusinessDays.Services
             if (holidays?.Count > 0)
             {
                 //The holidays count must consider holidays between evaluation dates
-                bool HolidayIsBetweenDates(Holiday holiday) => holiday.HolidayDate >= startDate 
-                                                               && holiday.HolidayDate <= endDate;
+                bool HolidayIsBetweenDates(Holiday holiday) => holiday.HolidayDate.ToUniversalTime() >= startDate.ToUniversalTime() 
+                                                               && holiday.HolidayDate.ToUniversalTime() <= endDate.ToUniversalTime();
 
                 holidayCount = holidays.AsParallel().Where(HolidayIsBetweenDates).Count(this.HolidayIsAWeekDay);
             }
