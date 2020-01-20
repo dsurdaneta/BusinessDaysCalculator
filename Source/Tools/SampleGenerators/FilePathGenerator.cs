@@ -6,7 +6,7 @@ using DsuDev.BusinessDays.Domain.Entities;
 namespace DsuDev.BusinessDays.Common.Tools.SampleGenerators
 {
     /// <summary>
-    /// Class to help the creation of a FilePathInfo object
+    /// Class to help the sample creation of a FilePathInfo object
     /// </summary>
     [ExcludeFromCodeCoverage]
     public static class FilePathGenerator

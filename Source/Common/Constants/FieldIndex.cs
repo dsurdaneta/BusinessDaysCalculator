@@ -1,5 +1,8 @@
 ﻿namespace DsuDev.BusinessDays.Common.Constants
 {
+    /// <summary>
+    /// Constant class to identify the (standard) index of every field of the holiday inside the files
+    /// </summary>
     internal static class FieldIndex
     {
         internal const int Date = 0;
