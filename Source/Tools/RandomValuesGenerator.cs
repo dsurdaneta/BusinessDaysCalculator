@@ -36,5 +36,12 @@ namespace DsuDev.BusinessDays.Common.Tools
             Random random = new Random();
             return min > 0 ? random.Next(min, max) : random.Next(max);
         }
+        
+        /// <summary>
+        /// Generates a random int
+        /// </summary>
+        /// <param name="max">The maximum value.</param>
+        /// <returns></returns>
+        public static int RandomInt(int max) => RandomInt(0, max);
     }
 }
