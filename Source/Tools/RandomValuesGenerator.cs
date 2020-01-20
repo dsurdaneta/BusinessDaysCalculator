@@ -12,6 +12,11 @@ namespace DsuDev.BusinessDays.Common.Tools
     {
         private const string ValidChars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
+        /// <summary>
+        /// Generates a random string.
+        /// </summary>
+        /// <param name="size">The size of the desired string.</param>
+        /// <returns></returns>
         public static string RandomString(int size)
         {
             Random random = new Random();
@@ -20,6 +25,12 @@ namespace DsuDev.BusinessDays.Common.Tools
             return new string(chars.ToArray());
         }
 
+        /// <summary>
+        /// Generates a random int
+        /// </summary>
+        /// <param name="min">The minimum value.</param>
+        /// <param name="max">The maximum value.</param>
+        /// <returns></returns>
         public static int RandomInt(int min, int max)
         {
             Random random = new Random();

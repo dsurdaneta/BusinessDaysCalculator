@@ -5,14 +5,20 @@
     /// </summary>
     public static class FileExtension
     {
+        /// <summary>
+        /// The JSON file extension
+        /// </summary>
         public const string Json = "json";
+        /// <summary>
+        /// The XML file extension
+        /// </summary>
         public const string Xml = "xml";
         /// <summary>
-        /// CSV with headers and separated by ;
+        /// The CSV file extension with headers and separated by ;
         /// </summary>
         public const string Csv = "csv";
         /// <summary>
-        /// txt file for Custom protocol
+        /// the TXT file extension, for Custom protocols
         /// </summary>
         public const string Txt = "txt";
     }
