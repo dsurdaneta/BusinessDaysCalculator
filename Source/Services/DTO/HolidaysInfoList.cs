@@ -12,6 +12,9 @@ namespace DsuDev.BusinessDays.Services.DTO
     {
         public List<Holiday> Holidays { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HolidaysInfoList"/> class.
+        /// </summary>
         [JsonConstructor]
         public HolidaysInfoList() => Holidays = new List<Holiday>();
     }

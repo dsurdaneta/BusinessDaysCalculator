@@ -20,11 +20,19 @@ namespace DsuDev.BusinessDays.Services.FileReaders
         public string Delimiter { get; internal set; }
         public bool HasHeaderRecord { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CsvHolidayReader"/> class.
+        /// </summary>
         public CsvHolidayReader() : this(true)
         {
             
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CsvHolidayReader"/> class.
+        /// </summary>
+        /// <param name="hasHeaderRecord">if set to <c>true</c> [has header record].</param>
+        /// <param name="delimiter">The delimiter.</param>
         public CsvHolidayReader(bool hasHeaderRecord, string delimiter = "")
         {
             this.Delimiter = string.IsNullOrWhiteSpace(delimiter) ? DefaultDelimiter : delimiter;
@@ -32,6 +40,7 @@ namespace DsuDev.BusinessDays.Services.FileReaders
             this.Holidays = new List<Holiday>();
         }
 
+        /// <inheritdoc />
         public List<Holiday> GetHolidaysFromFile(string absoluteFilePath)
         {
            ValidatePath(absoluteFilePath, FileExtension.Csv);
@@ -39,6 +48,7 @@ namespace DsuDev.BusinessDays.Services.FileReaders
             return this.ReadHolidaysFromFile(absoluteFilePath);
         }
 
+        /// <inheritdoc />
         [ExcludeFromCodeCoverage]
         protected override List<Holiday> ReadHolidaysFromFile(string absoluteFilePath)
         {
