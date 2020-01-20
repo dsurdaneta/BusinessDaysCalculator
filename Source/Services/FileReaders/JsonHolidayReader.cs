@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
@@ -23,13 +24,23 @@ namespace DsuDev.BusinessDays.Services.FileReaders
             this.Holidays = new List<Holiday>();
         }
 
+        /// <summary>
+        /// Gets the holidays from the specified file.
+        /// </summary>
+        /// <param name="absoluteFilePath">The absolute file path.</param>
+        /// <returns></returns>
         public List<Holiday> GetHolidaysFromFile(string absoluteFilePath)
         {
             ValidatePath(absoluteFilePath, FileExtension.Json);
 
             return this.ReadHolidaysFromFile(absoluteFilePath);
         }
-        
+
+        /// <summary>
+        /// Gets the holidays from the specified file asynchronously.
+        /// </summary>
+        /// <param name="absoluteFilePath">The absolute file path.</param>
+        /// <returns></returns>
         public async Task<List<Holiday>> GetHolidaysFromFileAsync(string absoluteFilePath)
         {
             ValidatePath(absoluteFilePath, FileExtension.Json);
@@ -44,9 +55,7 @@ namespace DsuDev.BusinessDays.Services.FileReaders
 
                 this.Holidays = deserializedInfo.Holidays;
                 //in case its needed
-                Parallel.ForEach(this.Holidays, holiday =>
-                    holiday.HolidayStringDate =
-                        holiday.HolidayDate.ToString(Holiday.DateFormat, CultureInfo.InvariantCulture));
+                Parallel.ForEach(this.Holidays, FormatHolidayDate);
             }
             return this.Holidays;
 
@@ -66,11 +75,23 @@ namespace DsuDev.BusinessDays.Services.FileReaders
 
                 this.Holidays = deserializedInfo.Holidays;
                 //in case its needed
-                this.Holidays.ForEach(holiday =>
-                    holiday.HolidayStringDate =
-                        holiday.HolidayDate.ToString(Holiday.DateFormat, CultureInfo.InvariantCulture));
+                foreach (var holiday in Holidays)
+                {
+                    FormatHolidayDate(holiday);
+                }
             }
             return this.Holidays;
+        }
+
+        /// <summary>
+        /// Formats the holiday: Removes the Time part, and asign the correct string format to HolidayStringDate value.
+        /// </summary>
+        /// <param name="holiday">The holiday.</param>
+        private static void FormatHolidayDate(Holiday holiday)
+        {
+            holiday.HolidayDate = holiday.HolidayDate.Date;
+            holiday.HolidayStringDate =
+                holiday.HolidayDate.ToString(Holiday.DateFormat, CultureInfo.InvariantCulture);
         }
     }
 }

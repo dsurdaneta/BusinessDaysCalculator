@@ -37,7 +37,7 @@ namespace DsuDev.BusinessDays.Common.Tools.FluentBuilders
 
         public HolidayBuilder WithDate(DateTime dateTime)
         {
-            this.date = dateTime;
+            this.date = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day);
             return this;
         }
         
