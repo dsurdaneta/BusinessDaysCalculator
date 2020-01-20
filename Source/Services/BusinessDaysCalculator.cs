@@ -15,7 +15,7 @@ namespace DsuDev.BusinessDays.Services
     public class BusinessDaysCalculator
     {
         private readonly IFileReadingManager fileReading; 
-        //Holiday only counts if is on a business day
+        /// <remarks>Holiday only counts if is on a business day</remarks>
         private bool HolidayIsAWeekDay(Holiday holiday) => holiday.HolidayDate.IsAWeekDay();
         public FilePathInfo FilePathInfo { get; set; }       
 

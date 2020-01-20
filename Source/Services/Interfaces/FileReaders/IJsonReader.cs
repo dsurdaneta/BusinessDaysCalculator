@@ -4,7 +4,9 @@ using DsuDev.BusinessDays.Domain.Entities;
 
 namespace DsuDev.BusinessDays.Services.Interfaces.FileReaders
 {
-    /// <inheritdoc/>
+    /// <summary>
+    /// Holiday JSON File Reader Interface
+    /// </summary>
     public interface IJsonReader : IHolidayFileReader
     {
         /// <summary>

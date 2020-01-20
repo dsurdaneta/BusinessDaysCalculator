@@ -12,11 +12,15 @@ namespace DsuDev.BusinessDays.Services.FileReaders
     {
         public List<Holiday> Holidays { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CustomTxtHolidayReader"/> class.
+        /// </summary>
         public CustomTxtHolidayReader()
         {
             this.Holidays = new List<Holiday>();
         }
 
+        /// <inheritdoc />
         [ExcludeFromCodeCoverage]
         public List<Holiday> GetHolidaysFromFile(string absoluteFilePath)
         {

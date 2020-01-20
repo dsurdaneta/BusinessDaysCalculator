@@ -16,11 +16,15 @@ namespace DsuDev.BusinessDays.Services.FileReaders
     {
         public List<Holiday> Holidays { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XmlHolidayReader"/> class.
+        /// </summary>
         public XmlHolidayReader()
         {
             this.Holidays = new List<Holiday>();
         }
 
+        /// <inheritdoc />
         public List<Holiday> GetHolidaysFromFile(string absoluteFilePath)
         {
             ValidatePath(absoluteFilePath, FileExtension.Xml);
