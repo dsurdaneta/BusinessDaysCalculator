@@ -5,6 +5,7 @@ using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.IO;
 using DsuDev.BusinessDays.Common.Tools.FluentBuilders;
 
@@ -54,8 +55,8 @@ namespace DsuDev.BusinessDays.Services.FileReaders
         {
             this.Holidays = new List<Holiday>();
             using (StreamReader file = File.OpenText(absoluteFilePath))
+            using (CsvReader csv = new CsvReader(file, CultureInfo.InvariantCulture))
             {
-                var csv = new CsvReader(file);
                 csv.Configuration.HasHeaderRecord = this.HasHeaderRecord;
                 csv.Configuration.Delimiter = this.Delimiter;
                 
@@ -69,7 +70,6 @@ namespace DsuDev.BusinessDays.Services.FileReaders
 
                     this.Holidays.Add(holidayBuilder.Build());
                 }
-                csv.Dispose();
             }
             return this.Holidays;
         }
