@@ -107,7 +107,7 @@
       },
       "DsuDev.BusinessDays.Common/1.0.0": {
         "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
+        "framework": ".NETCoreApp,Version=v3.0",
         "compile": {
           "bin/placeholder/DsuDev.BusinessDays.Common.dll": {}
         },
@@ -117,7 +117,7 @@
       },
       "DsuDev.BusinessDays.Common.Tools/1.0.0": {
         "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
+        "framework": ".NETCoreApp,Version=v3.0",
         "dependencies": {
           "DsuDev.BusinessDays.Common": "1.0.0",
           "DsuDev.BusinessDays.Domain": "1.0.0"
@@ -131,7 +131,7 @@
       },
       "DsuDev.BusinessDays.Domain/1.0.0": {
         "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
+        "framework": ".NETCoreApp,Version=v3.0",
         "dependencies": {
           "Newtonsoft.Json": "12.0.3"
         },
@@ -144,7 +144,7 @@
       },
       "DsuDev.BusinessDays.Services/1.0.0": {
         "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
+        "framework": ".NETCoreApp,Version=v3.0",
         "dependencies": {
           "CsvHelper": "13.0.0",
           "DsuDev.BusinessDays.Common": "1.0.0",
