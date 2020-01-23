@@ -1,10 +1,9 @@
-﻿using DsuDev.BusinessDays.DataAccess.Entites;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DbEntites = DsuDev.BusinessDays.DataAccess.Entites;
+using DbModels = DsuDev.BusinessDays.DataAccess.Models;
 
 namespace DsuDev.BusinessDays.DataAccess.SQLite
 {
@@ -12,7 +11,7 @@ namespace DsuDev.BusinessDays.DataAccess.SQLite
     /// The SQLite repository
     /// </summary>
     /// <seealso cref="DsuDev.BusinessDays.DataAccess.IRepository{DsuDev.BusinessDays.DataAccess.Entites.Holiday}" />
-    public class SQLiteRepository : IRepository<DbEntites.Holiday>
+    public class SQLiteRepository : IRepository<DbModels.Holiday>
     {
         private readonly HolidaysSQLiteContext dbContext;
 
@@ -26,7 +25,7 @@ namespace DsuDev.BusinessDays.DataAccess.SQLite
         }
 
         /// <inheritdoc />
-        public async Task<bool> DeleteAsync(DbEntites.Holiday entity)
+        public async Task<bool> DeleteAsync(DbModels.Holiday entity)
         {
             this.dbContext.Holidays.Remove(entity);
             int result = await this.dbContext.SaveChangesAsync().ConfigureAwait(false);
@@ -34,26 +33,26 @@ namespace DsuDev.BusinessDays.DataAccess.SQLite
         }
 
         /// <inheritdoc />
-        public async Task<ICollection<DbEntites.Holiday>> GetAllAsync()
+        public async Task<ICollection<DbModels.Holiday>> GetAllAsync()
         {
             return await this.dbContext.Holidays.ToListAsync().ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<DbEntites.Holiday> GetByIdAsync(int id)
+        public async Task<DbModels.Holiday> GetByIdAsync(int id)
         {
             return await this.dbContext.Holidays.FirstOrDefaultAsync(x => x.Id.Equals(id))
                 .ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public ICollection<DbEntites.Holiday> Get(Func<DbEntites.Holiday, bool> expression)
+        public ICollection<DbModels.Holiday> Get(Func<DbModels.Holiday, bool> expression)
         {
             return this.dbContext.Holidays.AsParallel().Where(expression).ToList();
         }
 
         /// <inheritdoc />
-        public async Task<DbEntites.Holiday> AddAsync(DbEntites.Holiday entity)
+        public async Task<DbModels.Holiday> AddAsync(DbModels.Holiday entity)
         {
             if (await this.AnyAsync(entity).ConfigureAwait(false))
             {
@@ -66,7 +65,7 @@ namespace DsuDev.BusinessDays.DataAccess.SQLite
         }
 
         /// <inheritdoc />
-        public async Task<bool> UpdateAsync(int id, DbEntites.Holiday entity)
+        public async Task<bool> UpdateAsync(int id, DbModels.Holiday entity)
         {
             entity.UpdatedDate = DateTime.UtcNow;
             this.dbContext.Entry(entity).State = EntityState.Modified;
@@ -75,7 +74,7 @@ namespace DsuDev.BusinessDays.DataAccess.SQLite
         }
 
         /// <inheritdoc />
-        public async Task<bool> AnyAsync(Holiday entity)
+        public async Task<bool> AnyAsync(DbModels.Holiday entity)
         {
             return await this.dbContext.Holidays.AnyAsync(x => x.Id.Equals(entity.Id) || x.HolidayDate.Equals(entity.HolidayDate))
                 .ConfigureAwait(false);

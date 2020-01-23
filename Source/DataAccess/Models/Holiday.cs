@@ -1,14 +1,14 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using DsuDev.BusinessDays.DataAccess.Entites.Base;
+using DsuDev.BusinessDays.DataAccess.Models.Base;
 
-namespace DsuDev.BusinessDays.DataAccess.Entites
+namespace DsuDev.BusinessDays.DataAccess.Models
 {
     /// <summary>
-    /// The Holiday DbEntity
+    /// The Holiday DbModelBase
     /// </summary>
-    /// <seealso cref="DsuDev.BusinessDays.DataAccess.Entites.Base.DbEntity" />
-    public class Holiday : DbEntity
+    /// <seealso cref="DbModelBase" />
+    public class Holiday : DbModelBase
     {
         /// <summary>
         /// Gets or sets the year.

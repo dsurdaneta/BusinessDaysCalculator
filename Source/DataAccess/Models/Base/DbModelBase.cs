@@ -1,12 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace DsuDev.BusinessDays.DataAccess.Entites.Base
+namespace DsuDev.BusinessDays.DataAccess.Models.Base
 {
     /// <summary>
     /// Base class for all database entities. with general porpouse fields.
     /// </summary>
-    public abstract class DbEntity
+    public abstract class DbModelBase
     {
         /// <summary>
         /// Gets or sets the identifier.

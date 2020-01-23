@@ -1,4 +1,4 @@
-﻿using DsuDev.BusinessDays.DataAccess.Entites;
+﻿using DbModels = DsuDev.BusinessDays.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DsuDev.BusinessDays.DataAccess.SQLite
@@ -14,7 +14,7 @@ namespace DsuDev.BusinessDays.DataAccess.SQLite
         private static readonly string DefaultConnectionString = $"Data Source={DbName};Version=3;";
         private static bool _isDbRecentlyCreated = false;
         
-        public DbSet<Holiday> Holidays { get; set; }
+        public DbSet<DbModels.Holiday> Holidays { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HolidaysSQLiteContext"/> class.
