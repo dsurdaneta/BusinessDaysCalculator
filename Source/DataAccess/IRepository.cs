@@ -21,7 +21,7 @@ namespace DsuDev.BusinessDays.DataAccess
         /// Gets all the entities asynchronously.
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<TEntity>> GetAllAsync();
+        Task<ICollection<TEntity>> GetAllAsync();
 
         /// <summary>
         /// Gets the entity by identifier asynchronously.
@@ -35,7 +35,7 @@ namespace DsuDev.BusinessDays.DataAccess
         /// </summary>
         /// <param name="expression">The expression.</param>
         /// <returns></returns>
-        IEnumerable<TEntity> Get(Func<TEntity, bool> expression);
+        ICollection<TEntity> Get(Func<TEntity, bool> expression);
 
         /// <summary>
         /// Deletes the entity asynchronously.
