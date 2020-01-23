@@ -10,7 +10,7 @@ namespace DsuDev.BusinessDays.DataAccess.SQLite
     /// <summary>
     /// The SQLite repository
     /// </summary>
-    /// <seealso cref="DsuDev.BusinessDays.DataAccess.IRepository{DsuDev.BusinessDays.DataAccess.Entites.Holiday}" />
+    /// <seealso cref="DsuDev.BusinessDays.DataAccess.IRepository{DsuDev.BusinessDays.DataAccess.Models.Holiday}" />
     public class SQLiteRepository : IRepository<DbModels.Holiday>
     {
         private readonly HolidaysSQLiteContext dbContext;
