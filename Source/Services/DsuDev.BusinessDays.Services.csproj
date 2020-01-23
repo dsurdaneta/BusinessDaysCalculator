@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="CsvHelper" Version="13.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.0.2" />
     <PackageReference Include="SimpleInjector" Version="4.9.0" />
@@ -12,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Common\DsuDev.BusinessDays.Common.csproj" />
+    <ProjectReference Include="..\DataAccess\DsuDev.BusinessDays.DataAccess.csproj" />
     <ProjectReference Include="..\Domain\DsuDev.BusinessDays.Domain.csproj" />
     <ProjectReference Include="..\Tools\DsuDev.BusinessDays.Common.Tools.csproj" />
   </ItemGroup>

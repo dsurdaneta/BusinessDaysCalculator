@@ -1,9 +1,9 @@
-﻿using System;
+﻿using DsuDev.BusinessDays.DataAccess.Entites;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DsuDev.BusinessDays.DataAccess.Entites;
-using Microsoft.EntityFrameworkCore;
 using DbEntites = DsuDev.BusinessDays.DataAccess.Entites;
 
 namespace DsuDev.BusinessDays.DataAccess.SQLite
@@ -34,7 +34,7 @@ namespace DsuDev.BusinessDays.DataAccess.SQLite
         }
 
         /// <inheritdoc />
-        public async Task<IEnumerable<DbEntites.Holiday>> GetAllAsync()
+        public async Task<ICollection<DbEntites.Holiday>> GetAllAsync()
         {
             return await this.dbContext.Holidays.ToListAsync().ConfigureAwait(false);
         }
@@ -47,9 +47,9 @@ namespace DsuDev.BusinessDays.DataAccess.SQLite
         }
 
         /// <inheritdoc />
-        public IEnumerable<DbEntites.Holiday> Get(Func<DbEntites.Holiday, bool> expression)
+        public ICollection<DbEntites.Holiday> Get(Func<DbEntites.Holiday, bool> expression)
         {
-            return this.dbContext.Holidays.AsParallel().Where(expression);
+            return this.dbContext.Holidays.AsParallel().Where(expression).ToList();
         }
 
         /// <inheritdoc />
