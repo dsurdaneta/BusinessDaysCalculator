@@ -1,5 +1,5 @@
-﻿using DbModels = DsuDev.BusinessDays.DataAccess.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using DbModels = DsuDev.BusinessDays.DataAccess.Models;
 
 namespace DsuDev.BusinessDays.DataAccess.SQLite
 {
