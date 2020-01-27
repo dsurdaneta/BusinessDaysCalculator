@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DsuDev.BusinessDays.DataAccess.Models.Base;
 
 namespace DsuDev.BusinessDays.DataAccess
 {
@@ -8,7 +9,7 @@ namespace DsuDev.BusinessDays.DataAccess
     /// Interface for generic Repositories
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
-    public interface IRepository<TEntity> where TEntity : class
+    public interface IRepository<TEntity> where TEntity : DbModelBase
     {
         /// <summary>
         /// Adds the entity asynchronously.
