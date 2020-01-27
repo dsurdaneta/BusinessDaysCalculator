@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 using AutoMapper;
 using DsuDev.BusinessDays.Common.Extensions;
 using DsuDev.BusinessDays.Domain.Entities;
@@ -9,6 +9,9 @@ using DsuDev.BusinessDays.Services.Interfaces;
 
 namespace DsuDev.BusinessDays.Services
 {
+    /// <summary>
+    /// Class to handle every calculation related with business days and/or holidays.
+    /// </summary>
     public class Calculator : ICalculator
     {
         private readonly IMapper mapper;
@@ -16,6 +19,14 @@ namespace DsuDev.BusinessDays.Services
         /// <remarks>Holiday only counts if is on a business day</remarks>
         private bool HolidayIsAWeekDay(Holiday holiday) => holiday.HolidayDate.IsAWeekDay();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Calculator"/> class.
+        /// </summary>
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="dataProvider">The data provider.</param>
+        /// <exception cref="ArgumentNullException">
+        /// mapper  or  dataProvider
+        /// </exception>
         public Calculator(IMapper mapper, IDataProvider dataProvider)
         {
             this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
@@ -25,7 +36,15 @@ namespace DsuDev.BusinessDays.Services
         /// <inheritdoc />
         public double GetBusinessDaysCount(DateTime startDate, DateTime endDate)
         {
-            throw new NotImplementedException();
+            if (startDate >= endDate)
+            {
+                return 0;
+            }
+
+            //read holiday list and count them
+            var holidays = this.dataProvider.GetHolidays(startDate, endDate);
+            var holidaysCount = this.GetHolidaysCount(startDate, endDate, holidays);
+            return this.AddCountersToDate(startDate, endDate, holidaysCount);
         }
 
         /// <inheritdoc />
@@ -42,9 +61,23 @@ namespace DsuDev.BusinessDays.Services
         }
 
         /// <inheritdoc />
-        public DateTime AddBusinessDays(DateTime startDate, double daysCount)
+        public async Task<DateTime> AddBusinessDaysAsync(DateTime startDate, double daysCount)
         {
-            throw new NotImplementedException();
+            if (daysCount <= 0) return startDate;
+            
+            //read holiday list
+            var holidays = await this.dataProvider.GetAllHolidaysAsync().ConfigureAwait(false);
+
+            //plus weekends
+            int weekendCount = this.GetWeekendsCount(startDate, daysCount);
+            DateTime endDate = startDate.AddDays(daysCount + weekendCount);
+
+            //count the holidays an add them to the date
+            int holidaysCount = this.GetHolidaysCount(startDate, endDate, holidays);
+            if (holidaysCount > 0)
+                endDate = endDate.AddDays(holidaysCount);
+
+            return endDate;
         }
 
         /// <inheritdoc />
