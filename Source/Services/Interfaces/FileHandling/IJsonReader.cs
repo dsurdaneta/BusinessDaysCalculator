@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using DsuDev.BusinessDays.Domain.Entities;
 
-namespace DsuDev.BusinessDays.Services.Interfaces.FileReaders
+namespace DsuDev.BusinessDays.Services.Interfaces.FileHandling
 {
     /// <summary>
     /// Holiday JSON File Reader Interface

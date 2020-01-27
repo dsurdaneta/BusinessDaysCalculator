@@ -1,12 +1,12 @@
 ﻿using DsuDev.BusinessDays.DataAccess;
 using DsuDev.BusinessDays.DataAccess.SQLite;
-using DsuDev.BusinessDays.Services.FileReaders;
 using DsuDev.BusinessDays.Services.Interfaces;
-using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
 using Microsoft.Extensions.Configuration;
 using SimpleInjector;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using DsuDev.BusinessDays.Services.FileHandling;
+using DsuDev.BusinessDays.Services.Interfaces.FileHandling;
 using DbModels = DsuDev.BusinessDays.DataAccess.Models;
 
 namespace DsuDev.BusinessDays.Services.Configuration

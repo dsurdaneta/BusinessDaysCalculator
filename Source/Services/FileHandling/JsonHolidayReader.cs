@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using DsuDev.BusinessDays.Common.Constants;
 using DsuDev.BusinessDays.Domain.Entities;
 using DsuDev.BusinessDays.Services.DTO;
-using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
+using DsuDev.BusinessDays.Services.Interfaces.FileHandling;
 using Newtonsoft.Json;
 
-namespace DsuDev.BusinessDays.Services.FileReaders
+namespace DsuDev.BusinessDays.Services.FileHandling
 {
     /// <summary>
     /// A class to read the holiday information from a Json file

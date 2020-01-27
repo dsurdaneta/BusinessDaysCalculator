@@ -1,5 +1,4 @@
 using DsuDev.BusinessDays.Domain.Entities;
-using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
 using DsuDev.BusinessDays.Services.Tests.TestsDataMembers;
 using FluentAssertions;
 using Moq;
@@ -7,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using DsuDev.BusinessDays.Common.Tools;
 using DsuDev.BusinessDays.Common.Tools.SampleGenerators;
+using DsuDev.BusinessDays.Services.Interfaces.FileHandling;
 using Xunit;
 
 namespace DsuDev.BusinessDays.Services.Tests

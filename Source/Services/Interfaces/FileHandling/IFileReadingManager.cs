@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using DsuDev.BusinessDays.Domain.Entities;
 
-namespace DsuDev.BusinessDays.Services.Interfaces.FileReaders
+namespace DsuDev.BusinessDays.Services.Interfaces.FileHandling
 {
     /// <summary>
     /// Handles the file reading of the Holidays in different formats

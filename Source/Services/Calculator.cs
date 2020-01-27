@@ -37,7 +37,7 @@ namespace DsuDev.BusinessDays.Services
 
             //read holiday list and count them
             var holidays = this.dataProvider.GetHolidays(startDate, endDate);
-            var holidaysCount = this.GetHolidaysCount(startDate, endDate, holidays);
+            var holidaysCount = this.CountHolidays(startDate, endDate, holidays);
             return this.AddCountersToDate(startDate, endDate, holidaysCount);
         }
 
@@ -50,7 +50,7 @@ namespace DsuDev.BusinessDays.Services
             }
 
             //minus holidays
-            int holidaysCount = this.GetHolidaysCount(startDate, endDate, holidays);
+            int holidaysCount = this.CountHolidays(startDate, endDate, holidays);
             return this.AddCountersToDate(startDate, endDate, holidaysCount);
         }
 
@@ -63,11 +63,11 @@ namespace DsuDev.BusinessDays.Services
             var holidays = await this.dataProvider.GetAllHolidaysAsync().ConfigureAwait(false);
 
             //plus weekends
-            int weekendCount = this.GetWeekendsCount(startDate, daysCount);
+            int weekendCount = this.CountWeekends(startDate, daysCount);
             DateTime endDate = startDate.AddDays(daysCount + weekendCount);
 
             //count the holidays an add them to the date
-            int holidaysCount = this.GetHolidaysCount(startDate, endDate, holidays);
+            int holidaysCount = this.CountHolidays(startDate, endDate, holidays);
             if (holidaysCount > 0)
                 endDate = endDate.AddDays(holidaysCount);
 
@@ -80,7 +80,7 @@ namespace DsuDev.BusinessDays.Services
             if (daysCount <= 0) return startDate;
 
             //plus weekends
-            double fullDaysCount = daysCount + this.GetWeekendsCount(startDate, daysCount);
+            double fullDaysCount = daysCount + this.CountWeekends(startDate, daysCount);
             if (notWeekendHolidaysCount > 0)
             {
                 fullDaysCount += notWeekendHolidaysCount;
@@ -120,7 +120,7 @@ namespace DsuDev.BusinessDays.Services
             double result = (endDate.ToUniversalTime() - startDate.ToUniversalTime()).TotalDays;
 
             //minus weekends
-            int weekendCount = this.GetWeekendsCount(startDate, result);
+            int weekendCount = this.CountWeekends(startDate, result);
             result -= (weekendCount + holidaysCount);
 
             return result;
@@ -132,7 +132,7 @@ namespace DsuDev.BusinessDays.Services
         /// <param name="startDate"></param>
         /// <param name="daysCount"></param>
         /// <returns></returns>
-        internal int GetWeekendsCount(DateTime startDate, double daysCount)
+        internal int CountWeekends(DateTime startDate, double daysCount)
         {
             int weekendCount = 0;
             for (int i = 0; i < daysCount; i++)
@@ -151,7 +151,7 @@ namespace DsuDev.BusinessDays.Services
         /// <param name="endDate"></param>
         /// <param name="holidays">Holiday object list</param>
         /// <returns>The amount of Holidays</returns>
-        internal int GetHolidaysCount(DateTime startDate, DateTime endDate, ICollection<Holiday> holidays)
+        internal int CountHolidays(DateTime startDate, DateTime endDate, ICollection<Holiday> holidays)
         {
             int holidayCount = 0;
             if (holidays?.Count > 0)

@@ -2,24 +2,24 @@
 using System.Collections.Generic;
 using AutoMapper;
 using DsuDev.BusinessDays.Common.Constants;
-using DsuDev.BusinessDays.Domain.Entities;
-using DsuDev.BusinessDays.Services.FileReaders;
-using DsuDev.BusinessDays.Services.Interfaces;
-using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
+using DsuDev.BusinessDays.Services.Interfaces.FileHandling;
 
-namespace DsuDev.BusinessDays.Services
+using DbModels = DsuDev.BusinessDays.DataAccess.Models;
+using DomainEntities = DsuDev.BusinessDays.Domain.Entities;
+
+namespace DsuDev.BusinessDays.Services.FileHandling
 {
     public class FileLoader : IFileLoader
     {
         private readonly IMapper mapper;
         private readonly IFileReadingManager fileReading;
         /// <inheritdoc />
-        public FilePathInfo FilePathInfo { get; set; }
+        public DomainEntities.FilePathInfo FilePathInfo { get; set; }
 
         /// <inheritdoc />
-        public List<Holiday> Holidays { get; set; }
+        public List<DomainEntities.Holiday> Holidays { get; set; }
 
-        public FileLoader(IMapper mapper, IFileReadingManager fileReadingManager, FilePathInfo filePathInfo)
+        public FileLoader(IMapper mapper, IFileReadingManager fileReadingManager, DomainEntities.FilePathInfo filePathInfo)
         {
             this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             this.fileReading = fileReadingManager ?? throw new ArgumentNullException(nameof(fileReadingManager));
@@ -33,7 +33,7 @@ namespace DsuDev.BusinessDays.Services
         }
 
         /// <inheritdoc />
-        public bool LoadFile(FilePathInfo filePathInfo = null)
+        public bool LoadFile(DomainEntities.FilePathInfo filePathInfo = null)
         {
             var path = filePathInfo ?? this.FilePathInfo;
             try
@@ -52,13 +52,14 @@ namespace DsuDev.BusinessDays.Services
         /// <inheritdoc />
         public bool SaveHolidays()
         {
+            var dbHolidays = this.mapper.Map<ICollection<DbModels.Holiday>>(Holidays);
             //TODO
             throw new NotImplementedException();
         }
 
-        private static FilePathInfo GetDefaultFilePathInfoValues()
+        private static DomainEntities.FilePathInfo GetDefaultFilePathInfoValues()
         {
-            return new FilePathInfo
+            return new DomainEntities.FilePathInfo
             {
                 Folder = Resources.ContainingFolderName,
                 FileName = Resources.FileName,

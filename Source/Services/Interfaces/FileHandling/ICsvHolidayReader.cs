@@ -1,4 +1,4 @@
-﻿namespace DsuDev.BusinessDays.Services.Interfaces.FileReaders
+﻿namespace DsuDev.BusinessDays.Services.Interfaces.FileHandling
 {
     /// <summary>
     /// Holiday CSV File Reader Interface
