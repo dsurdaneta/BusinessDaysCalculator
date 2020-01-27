@@ -1,14 +1,14 @@
-﻿using DsuDev.BusinessDays.Common.Constants;
-using DsuDev.BusinessDays.Services.Tests.TestsDataMembers;
-using FluentAssertions;
-using Moq;
-using System;
+﻿using System;
+using DsuDev.BusinessDays.Common.Constants;
 using DsuDev.BusinessDays.Common.Tools.SampleGenerators;
 using DsuDev.BusinessDays.Services.FileHandling;
 using DsuDev.BusinessDays.Services.Interfaces.FileHandling;
+using DsuDev.BusinessDays.Services.Tests.TestsDataMembers;
+using FluentAssertions;
+using Moq;
 using Xunit;
 
-namespace DsuDev.BusinessDays.Services.Tests.FileReaders
+namespace DsuDev.BusinessDays.Services.Tests.FileHandling
 {
     public class FileReadingManagerTests
     {

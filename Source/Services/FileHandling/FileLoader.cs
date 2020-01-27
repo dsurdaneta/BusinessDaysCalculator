@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using AutoMapper;
 using DsuDev.BusinessDays.Common.Constants;
 using DsuDev.BusinessDays.Services.Interfaces.FileHandling;
-
 using DbModels = DsuDev.BusinessDays.DataAccess.Models;
 using DomainEntities = DsuDev.BusinessDays.Domain.Entities;
 
