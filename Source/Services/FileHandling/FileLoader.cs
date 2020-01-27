@@ -18,17 +18,19 @@ namespace DsuDev.BusinessDays.Services.FileHandling
         /// <inheritdoc />
         public List<DomainEntities.Holiday> Holidays { get; set; }
 
-        public FileLoader(IMapper mapper, IFileReadingManager fileReadingManager, DomainEntities.FilePathInfo filePathInfo)
+        public FileLoader(IMapper mapper, IFileReadingManager fileReadingManager, DomainEntities.FilePathInfo filePathInfo) : this(mapper)
         {
-            this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             this.fileReading = fileReadingManager ?? throw new ArgumentNullException(nameof(fileReadingManager));
             this.FilePathInfo = filePathInfo ?? GetDefaultFilePathInfoValues();
+            this.Holidays = new List<DomainEntities.Holiday>();
         }
 
-        public FileLoader()
+        public FileLoader(IMapper mapper)
         {
+            this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             this.FilePathInfo = GetDefaultFilePathInfoValues();
             this.fileReading = new FileReadingManager();
+            this.Holidays = new List<DomainEntities.Holiday>();
         }
 
         /// <inheritdoc />
