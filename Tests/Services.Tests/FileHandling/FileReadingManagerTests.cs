@@ -56,7 +56,7 @@ namespace DsuDev.BusinessDays.Services.Tests.FileHandling
             // Act
             Action action = () => new FileReadingManager(jsonReader, xmlReader, csvHolidayReader, customReader);
 
-            //Assert
+            // Assert
             action.Should().Throw<ArgumentNullException>();
         }
 
