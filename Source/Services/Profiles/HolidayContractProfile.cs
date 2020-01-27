@@ -1,9 +1,11 @@
-﻿using AutoMapper;
+﻿using System.Diagnostics.CodeAnalysis;
+using AutoMapper;
 using DbModels = DsuDev.BusinessDays.DataAccess.Models;
 using DomainEntities = DsuDev.BusinessDays.Domain.Entities;
 
 namespace DsuDev.BusinessDays.Services.Profiles
 {
+    [ExcludeFromCodeCoverage]
     public class HolidayContractProfile : Profile
     {
         public HolidayContractProfile()
