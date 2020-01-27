@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using DsuDev.BusinessDays.Common.Extensions;
 using DsuDev.BusinessDays.Domain.Entities;
 using DsuDev.BusinessDays.Services.Interfaces;
@@ -14,7 +13,6 @@ namespace DsuDev.BusinessDays.Services
     /// </summary>
     public class Calculator : ICalculator
     {
-        private readonly IMapper mapper;
         private readonly IDataProvider dataProvider;
         /// <remarks>Holiday only counts if is on a business day</remarks>
         private bool HolidayIsAWeekDay(Holiday holiday) => holiday.HolidayDate.IsAWeekDay();
@@ -22,14 +20,10 @@ namespace DsuDev.BusinessDays.Services
         /// <summary>
         /// Initializes a new instance of the <see cref="Calculator"/> class.
         /// </summary>
-        /// <param name="mapper">The mapper.</param>
         /// <param name="dataProvider">The data provider.</param>
-        /// <exception cref="ArgumentNullException">
-        /// mapper  or  dataProvider
-        /// </exception>
-        public Calculator(IMapper mapper, IDataProvider dataProvider)
+        /// <exception cref="ArgumentNullException">dataProvider</exception>
+        public Calculator(IDataProvider dataProvider)
         {
-            this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             this.dataProvider = dataProvider ?? throw new ArgumentNullException(nameof(dataProvider));
         }
 
