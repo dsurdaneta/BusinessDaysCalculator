@@ -63,6 +63,20 @@ namespace DsuDev.BusinessDays.Services.Tests.FileHandling
         }
 
         [Fact]
+        public void SaveHolidays_IsNotImplemented()
+        {
+            // Arrange
+            var holidays = HolidayGenerator.CreateHolidays(5, DateTime.Today.Year);
+            var basePath = RandomValuesGenerator.RandomString(5);
+            var loader = this.SetupFileLoader(holidays, basePath, false);
+
+            // Act
+            Action action = () => loader.SaveHolidays();
+
+            action.Should().Throw<NotImplementedException>();
+        }
+
+        [Fact]
         public void Constructor_When_FilePathInfoParameterIsNull_Then_DefaultValuesAreAssigned()
         {
             // Act
