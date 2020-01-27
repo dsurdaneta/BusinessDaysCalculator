@@ -38,6 +38,7 @@ namespace DsuDev.BusinessDays.Services
             var path = filePathInfo ?? this.FilePathInfo;
             try
             {
+                DirectoryHelper.ValidateFilePathInfo(path);
                 this.Holidays = this.fileReading.ReadHolidaysFile(path);
                 return this.Holidays.Count > 0;
             }

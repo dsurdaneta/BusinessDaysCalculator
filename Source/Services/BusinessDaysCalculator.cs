@@ -105,8 +105,9 @@ namespace DsuDev.BusinessDays.Services
             DateTime endDate = startDate.AddDays(daysCount + weekendCount);
 
             if (!readHolidaysFile) return endDate;
-            
+
             //holidays calculation
+            DirectoryHelper.ValidateFilePathInfo(this.FilePathInfo);
             List<Holiday> holidays = this.fileReading.ReadHolidaysFile(this.FilePathInfo);
             int holidaysCount = this.GetHolidaysCount(startDate, endDate, holidays);
             
