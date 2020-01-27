@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using DsuDev.BusinessDays.Domain.Entities;
 
-namespace DsuDev.BusinessDays.Services.Interfaces
+namespace DsuDev.BusinessDays.Services.Interfaces.FileHandling
 {
     public interface IFileLoader
     {

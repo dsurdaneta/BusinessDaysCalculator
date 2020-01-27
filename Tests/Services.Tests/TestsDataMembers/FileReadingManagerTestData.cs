@@ -1,7 +1,7 @@
-﻿using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
-using Moq;
+﻿using Moq;
 using System.Collections;
 using System.Collections.Generic;
+using DsuDev.BusinessDays.Services.Interfaces.FileHandling;
 
 namespace DsuDev.BusinessDays.Services.Tests.TestsDataMembers
 {

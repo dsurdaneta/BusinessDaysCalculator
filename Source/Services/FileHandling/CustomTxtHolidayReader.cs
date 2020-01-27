@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using DsuDev.BusinessDays.Domain.Entities;
-using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
+using DsuDev.BusinessDays.Services.Interfaces.FileHandling;
 
-namespace DsuDev.BusinessDays.Services.FileReaders
+namespace DsuDev.BusinessDays.Services.FileHandling
 {
     /// <summary>
     /// A class to read the holiday information from a customized TXT file

@@ -1,11 +1,11 @@
 ﻿using DsuDev.BusinessDays.Common.Constants;
 using DsuDev.BusinessDays.Common.Extensions;
 using DsuDev.BusinessDays.Domain.Entities;
-using DsuDev.BusinessDays.Services.FileReaders;
-using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DsuDev.BusinessDays.Services.FileHandling;
+using DsuDev.BusinessDays.Services.Interfaces.FileHandling;
 
 namespace DsuDev.BusinessDays.Services
 {

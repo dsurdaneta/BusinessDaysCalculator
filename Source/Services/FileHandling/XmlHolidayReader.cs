@@ -1,13 +1,13 @@
-﻿using DsuDev.BusinessDays.Common.Constants;
-using DsuDev.BusinessDays.Domain.Entities;
-using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Xml;
+using DsuDev.BusinessDays.Common.Constants;
 using DsuDev.BusinessDays.Common.Tools.FluentBuilders;
+using DsuDev.BusinessDays.Domain.Entities;
+using DsuDev.BusinessDays.Services.Interfaces.FileHandling;
 
-namespace DsuDev.BusinessDays.Services.FileReaders
+namespace DsuDev.BusinessDays.Services.FileHandling
 {
     /// <summary>
     /// A class to read the holiday information from a XML file

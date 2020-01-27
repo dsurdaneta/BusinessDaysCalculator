@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using DsuDev.BusinessDays.Common.Constants;
 using DsuDev.BusinessDays.Domain.Entities;
-using DsuDev.BusinessDays.Services.Interfaces.FileReaders;
+using DsuDev.BusinessDays.Services.Interfaces.FileHandling;
 
 [assembly: InternalsVisibleTo("DsuDev.BusinessDays.Services.Tests")]
-namespace DsuDev.BusinessDays.Services.FileReaders
+namespace DsuDev.BusinessDays.Services.FileHandling
 {
     /// <summary>
     /// Handles the file reading of the Holidays in different formats
