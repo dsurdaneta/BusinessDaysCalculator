@@ -34,7 +34,7 @@ namespace DsuDev.BusinessDays.Services
         }
 
         /// <inheritdoc />
-        public double GetBusinessDaysCount(DateTime startDate, DateTime endDate)
+        public double CountBusinessDays(DateTime startDate, DateTime endDate)
         {
             if (startDate >= endDate)
             {
@@ -48,7 +48,7 @@ namespace DsuDev.BusinessDays.Services
         }
 
         /// <inheritdoc />
-        public double GetBusinessDaysCount(DateTime startDate, DateTime endDate, ICollection<Holiday> holidays)
+        public double CountBusinessDays(DateTime startDate, DateTime endDate, ICollection<Holiday> holidays)
         {
             if (holidays == null)
             {

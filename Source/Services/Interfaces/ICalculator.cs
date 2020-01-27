@@ -16,7 +16,7 @@ namespace DsuDev.BusinessDays.Services.Interfaces
         /// <param name="startDate">The start date.</param>
         /// <param name="endDate">The end date.</param>
         /// <returns>The amount of business days (double) between the given dates.</returns>
-        double GetBusinessDaysCount(DateTime startDate, DateTime endDate);
+        double CountBusinessDays(DateTime startDate, DateTime endDate);
 
         /// <summary>
         /// Calculates the number of business days between two given dates, considering also the given holiday collection.
@@ -25,7 +25,7 @@ namespace DsuDev.BusinessDays.Services.Interfaces
         /// <param name="endDate">The end date.</param>
         /// <param name="holidays">The holidays.</param>
         /// <returns>The amount of business days (double) between the given dates.</returns>
-        double GetBusinessDaysCount(DateTime startDate, DateTime endDate, ICollection<Holiday> holidays);
+        double CountBusinessDays(DateTime startDate, DateTime endDate, ICollection<Holiday> holidays);
 
         /// <summary>
         /// Adds a specific number of business days. Reads the Holidays from a provider.
