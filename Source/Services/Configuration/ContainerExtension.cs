@@ -59,7 +59,7 @@ namespace DsuDev.BusinessDays.Services.Configuration
         {
             container.Register<IFileLoader, FileLoader>();
             container.Register<IDataProvider, DataProvider>();
-            //container.Register<ICalculator, Calculator>();
+            container.Register<ICalculator, Calculator>();
             return container;
         }
 
