@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using AutoMapper;
 using DsuDev.BusinessDays.Common.Constants;
 using DsuDev.BusinessDays.Domain.Entities;
 using DsuDev.BusinessDays.Services.FileReaders;
@@ -11,6 +11,7 @@ namespace DsuDev.BusinessDays.Services
 {
     public class FileLoader : IFileLoader
     {
+        private readonly IMapper mapper;
         private readonly IFileReadingManager fileReading;
         /// <inheritdoc />
         public FilePathInfo FilePathInfo { get; set; }
@@ -18,10 +19,11 @@ namespace DsuDev.BusinessDays.Services
         /// <inheritdoc />
         public List<Holiday> Holidays { get; set; }
 
-        public FileLoader(IFileReadingManager fileReadingManager, FilePathInfo filePathInfo)
+        public FileLoader(IMapper mapper, IFileReadingManager fileReadingManager, FilePathInfo filePathInfo)
         {
-            this.FilePathInfo = filePathInfo ?? GetDefaultFilePathInfoValues();
+            this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             this.fileReading = fileReadingManager ?? throw new ArgumentNullException(nameof(fileReadingManager));
+            this.FilePathInfo = filePathInfo ?? GetDefaultFilePathInfoValues();
         }
 
         public FileLoader()
@@ -31,7 +33,7 @@ namespace DsuDev.BusinessDays.Services
         }
 
         /// <inheritdoc />
-        public bool LoadFile(FilePathInfo filePathInfo)
+        public bool LoadFile(FilePathInfo filePathInfo = null)
         {
             var path = filePathInfo ?? this.FilePathInfo;
             try
@@ -39,9 +41,9 @@ namespace DsuDev.BusinessDays.Services
                 this.Holidays = this.fileReading.ReadHolidaysFile(path);
                 return this.Holidays.Count > 0;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(ex);
                 throw;
             }
         }
@@ -49,6 +51,7 @@ namespace DsuDev.BusinessDays.Services
         /// <inheritdoc />
         public bool SaveHolidays()
         {
+            //TODO
             throw new NotImplementedException();
         }
 
