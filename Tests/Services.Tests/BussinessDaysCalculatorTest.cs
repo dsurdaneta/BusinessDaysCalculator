@@ -11,19 +11,19 @@ using Xunit;
 
 namespace DsuDev.BusinessDays.Services.Tests
 {
-    public class CalculatorTest
+    public class BussinessDaysCalculatorTest
     {
         private readonly Mock<IFileReadingManager> mockFileReadingManager;
         private readonly FilePathInfo path;
 
-        public CalculatorTest()
+        public BussinessDaysCalculatorTest()
         {
             this.mockFileReadingManager = new Mock<IFileReadingManager>();
             this.path = new FilePathInfo();
         }
 
         [Theory]
-        [ClassData(typeof(CalculatorTestData))]
+        [ClassData(typeof(BussinessDaysCalculatorTestData))]
         public static void Constructor_When_ParameterIsNull_Then_ThrowsException(FilePathInfo filePathInfo, IFileReadingManager fileReadingManager)
         {
             //Assert

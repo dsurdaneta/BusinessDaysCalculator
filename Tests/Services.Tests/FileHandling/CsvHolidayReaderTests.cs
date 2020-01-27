@@ -4,7 +4,7 @@ using DsuDev.BusinessDays.Services.FileHandling;
 using FluentAssertions;
 using Xunit;
 
-namespace DsuDev.BusinessDays.Services.Tests.FileReaders
+namespace DsuDev.BusinessDays.Services.Tests.FileHandling
 {
     public class CsvHolidayReaderTests
     {

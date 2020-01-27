@@ -1,18 +1,18 @@
-﻿using FluentAssertions;
-using System;
+﻿using System;
 using DsuDev.BusinessDays.Common.Tools;
 using DsuDev.BusinessDays.Services.FileHandling;
+using FluentAssertions;
 using Xunit;
 
-namespace DsuDev.BusinessDays.Services.Tests.FileReaders
+namespace DsuDev.BusinessDays.Services.Tests.FileHandling
 {
-    public class JsonReaderTests
+    public class XmlReaderTests
     {
         [Fact]
-        public void JsonHolidayReader_When_new_Then_hasExpectedProperties()
+        public void XmlHolidateReader_When_new_Then_hasExpectedProperties()
         {
             // Act
-            var reader = new JsonHolidayReader();
+            var reader = new XmlHolidayReader();
 
             // Assert
             reader.Holidays.Should().NotBeNull();
@@ -20,10 +20,10 @@ namespace DsuDev.BusinessDays.Services.Tests.FileReaders
         }
 
         [Fact]
-        public void Json_GetHolidaysFromFile_When_EmptyPath_Then_ThrowException()
+        public void Xml_GetHolidaysFromFile_When_EmptyPath_Then_ThrowException()
         {
             // Arrange
-            var reader = new JsonHolidayReader();
+            var reader = new XmlHolidayReader();
             // Act
             Action action = () => reader.GetHolidaysFromFile(string.Empty);
 
@@ -32,10 +32,10 @@ namespace DsuDev.BusinessDays.Services.Tests.FileReaders
         }
         
         [Fact]
-        public void Json_GetHolidaysFromFile_When_WrongFileExtension_Then_ThrowException()
+        public void Xml_GetHolidaysFromFile_When_WrongFileExtension_Then_ThrowException()
         {
             // Arrange
-            var reader = new JsonHolidayReader();
+            var reader = new XmlHolidayReader();
             var path = RandomValuesGenerator.RandomString(6);
 
             // Act

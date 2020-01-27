@@ -6,7 +6,7 @@ using DsuDev.BusinessDays.Services.Interfaces.FileHandling;
 
 namespace DsuDev.BusinessDays.Services.Tests.TestsDataMembers
 {
-    public class CalculatorTestData : IEnumerable<object[]>
+    public class BussinessDaysCalculatorTestData : IEnumerable<object[]>
     {
         public IEnumerator<object[]> GetEnumerator()
         {
