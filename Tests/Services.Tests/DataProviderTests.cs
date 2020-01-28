@@ -69,8 +69,8 @@ namespace DsuDev.BusinessDays.Services.Tests
             const int baseYear = 2002;
             const int initialAmount = 5;
             
-            var domainHolidays = HolidayGenerator.CreateHolidays(initialAmount, baseYear);
-            var dbHolidays = HolidayGeneratorToolExtension.CreateDbHolidays(initialAmount, baseYear);
+            var domainHolidays = HolidayGenerator.CreateRandomHolidays(initialAmount, baseYear);
+            var dbHolidays = HolidayGeneratorToolExtension.CreateRandomDbHolidays(initialAmount, baseYear);
             var otherHoliday = HolidayGeneratorToolExtension.CreateDbHoliday(
                                 RandomValuesGenerator.RandomInt(6, 25),
                                 year: baseYear + 2);
@@ -120,8 +120,8 @@ namespace DsuDev.BusinessDays.Services.Tests
             const int baseYear = 2002;
             const int initialAmount = 5;
             
-            var domainHolidays = HolidayGenerator.CreateHolidays(initialAmount, baseYear);
-            var dbHolidays = HolidayGeneratorToolExtension.CreateDbHolidays(initialAmount, baseYear);
+            var domainHolidays = HolidayGenerator.CreateRandomHolidays(initialAmount, baseYear);
+            var dbHolidays = HolidayGeneratorToolExtension.CreateRandomDbHolidays(initialAmount, baseYear);
             var expectedFirstHoliday = domainHolidays.FirstOrDefault();
             var provider = SetuProvider(domainHolidays, dbHolidays);
 

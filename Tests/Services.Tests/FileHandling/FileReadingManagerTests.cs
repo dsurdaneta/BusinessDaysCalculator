@@ -29,16 +29,16 @@ namespace DsuDev.BusinessDays.Services.Tests.FileHandling
         {
             const int year = 2010;
             jsonMock.Setup(setup => setup.GetHolidaysFromFile(It.IsAny<string>()))
-                .Returns(HolidayGenerator.CreateHolidays(expectedAmount, year));
+                .Returns(HolidayGenerator.CreateRandomHolidays(expectedAmount, year));
 
             xmlMock.Setup(setup => setup.GetHolidaysFromFile(It.IsAny<string>()))
-                .Returns(HolidayGenerator.CreateHolidays(expectedAmount, year));
+                .Returns(HolidayGenerator.CreateRandomHolidays(expectedAmount, year));
 
             csvMock.Setup(setup => setup.GetHolidaysFromFile(It.IsAny<string>()))
-                .Returns(HolidayGenerator.CreateHolidays(expectedAmount, year));
+                .Returns(HolidayGenerator.CreateRandomHolidays(expectedAmount, year));
 
             txtMock.Setup(setup => setup.GetHolidaysFromFile(It.IsAny<string>()))
-                .Returns(HolidayGenerator.CreateHolidays(expectedAmount, year));
+                .Returns(HolidayGenerator.CreateRandomHolidays(expectedAmount, year));
 
 
             var fileReading = new FileReadingManager(jsonMock.Object, xmlMock.Object, csvMock.Object, txtMock.Object);
