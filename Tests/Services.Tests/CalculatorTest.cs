@@ -5,6 +5,7 @@ using FluentAssertions;
 using Moq;
 using System;
 using System.Collections.Generic;
+using DsuDev.BusinessDays.Common.Tools;
 using DsuDev.BusinessDays.Common.Tools.SampleGenerators;
 using Xunit;
 
@@ -157,7 +158,7 @@ namespace DsuDev.BusinessDays.Services.Tests
             var holidays = new List<Holiday>();
             var startDate = new DateTime(year, 4, 27);
             var expectedDate = new DateTime(year, 5, 17);
-            var calculator = GetCalculator();
+            var calculator = GetCalculator(year);
 
             //Act
             holidays.Add(HolidayGenerator.CreateHoliday());
@@ -174,7 +175,7 @@ namespace DsuDev.BusinessDays.Services.Tests
             const int year = 2001;
             var holidays = new List<Holiday>();
             var startDate = new DateTime(year, 4, 27);
-            var calculator = GetCalculator();
+            var calculator = GetCalculator(year);
 
             //Act
             holidays.Add(HolidayGenerator.CreateHoliday());
@@ -192,7 +193,7 @@ namespace DsuDev.BusinessDays.Services.Tests
             var holidays = new List<Holiday>();
             var startDate = new DateTime(year, 4, 25);
             var endDate = new DateTime(year, 5, 9);
-            var calculator = GetCalculator();
+            var calculator = GetCalculator(year);
 
             //Act
             holidays.Add(HolidayGenerator.CreateHoliday(year: year));
@@ -209,7 +210,7 @@ namespace DsuDev.BusinessDays.Services.Tests
             const int year = 2009;
             var startDate = new DateTime(year, 4, 25);
             var endDate = new DateTime(year, 5, 9);
-            var calculator = GetCalculator();
+            var calculator = GetCalculator(year);
 
             //Act
             Action act = () =>
@@ -229,7 +230,7 @@ namespace DsuDev.BusinessDays.Services.Tests
                 this.path.Extension = "test";
                 var holidays = new List<Holiday>
                 {
-                    HolidayGenerator.CreateHoliday(year)
+                    HolidayGenerator.CreateHoliday(year, id: RandomValuesGenerator.RandomInt(1, 25))
                 };
                 this.mockFileReadingManager.Setup(x => x.ReadHolidaysFile(It.IsAny<FilePathInfo>())).Returns(holidays);
             }
