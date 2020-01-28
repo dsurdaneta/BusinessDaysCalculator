@@ -66,7 +66,7 @@ namespace DsuDev.BusinessDays.Services.Tests.FileHandling
         public void SaveHolidays_IsNotImplemented()
         {
             // Arrange
-            var holidays = HolidayGenerator.CreateHolidays(5, DateTime.Today.Year);
+            var holidays = HolidayGenerator.CreateRandomHolidays(5, DateTime.Today.Year);
             var basePath = RandomValuesGenerator.RandomString(5);
             var loader = this.SetupFileLoader(holidays, basePath, false);
 
@@ -116,7 +116,7 @@ namespace DsuDev.BusinessDays.Services.Tests.FileHandling
         public void LoadFile_When_NullParameter_Then_HolidaysAreLoadedFromDB()
         {
             // Arrange
-            var holidays = HolidayGenerator.CreateHolidays(5, DateTime.Today.Year);
+            var holidays = HolidayGenerator.CreateRandomHolidays(5, DateTime.Today.Year);
             var basePath = RandomValuesGenerator.RandomString(5);
             var loader = this.SetupFileLoader(holidays, basePath, false);
             

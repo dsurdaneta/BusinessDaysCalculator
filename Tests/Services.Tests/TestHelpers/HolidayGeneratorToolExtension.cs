@@ -21,7 +21,7 @@ namespace DsuDev.BusinessDays.Services.Tests.TestHelpers
             };
         }
 
-        public static List<DbModels.Holiday> CreateDbHolidays(int amount, int baseYear, int baseId = 0)
+        public static List<DbModels.Holiday> CreateRandomDbHolidays(int amount, int baseYear, int baseId = 0)
         {
             var holidays = new List<DbModels.Holiday>();
 
