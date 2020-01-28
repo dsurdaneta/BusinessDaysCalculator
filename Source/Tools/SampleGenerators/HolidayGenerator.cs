@@ -24,7 +24,7 @@ namespace DsuDev.BusinessDays.Common.Tools.SampleGenerators
                 .Build();
         }
 
-        public static List<Holiday> CreateHolidays(int amount, int baseYear)
+        public static List<Holiday> CreateHolidays(int amount, int baseYear, int baseId = 0)
         {
             var holidays = new List<Holiday>();
             
@@ -36,7 +36,7 @@ namespace DsuDev.BusinessDays.Common.Tools.SampleGenerators
                     RandomValuesGenerator.RandomInt(1, 28),
                     RandomValuesGenerator.RandomString(30),
                     RandomValuesGenerator.RandomString(10),
-                    RandomValuesGenerator.RandomInt(1, amount*3));
+                    baseId + RandomValuesGenerator.RandomInt(1, amount*3));
 
                 holidays.Add(randomHoliday);
             }
