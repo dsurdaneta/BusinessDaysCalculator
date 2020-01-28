@@ -48,6 +48,10 @@ namespace DsuDev.BusinessDays.Services
             {
                 throw new ArgumentNullException(nameof(holidays));
             }
+            if (startDate >= endDate)
+            {
+                return 0;
+            }
 
             //minus holidays
             int holidaysCount = this.CountHolidays(startDate, endDate, holidays);
@@ -95,8 +99,13 @@ namespace DsuDev.BusinessDays.Services
         {
             if (daysCount <= 0) return startDate;
 
+            if (holidays == null)
+            {
+                throw new ArgumentNullException(nameof(holidays));
+            }
+
             int notWeekendHolidaysCount = 0;
-            if (holidays != null && holidays.Any())
+            if (holidays.Any())
             {
                 //The holidays count must consider holidays since evaluation date
                 bool HolidaySince(Holiday h) => h.HolidayDate.ToUniversalTime() >= startDate.ToUniversalTime();
