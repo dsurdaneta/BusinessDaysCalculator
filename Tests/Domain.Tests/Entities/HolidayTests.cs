@@ -15,6 +15,7 @@ namespace DsuDev.BusinessDays.Domain.Tests.Entities
 
             //Assert
             sut.Should().NotBeNull();
+            sut.Id.Should().BeGreaterOrEqualTo(0);
         }
 
         [Fact]

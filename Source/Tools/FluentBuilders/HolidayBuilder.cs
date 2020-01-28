@@ -11,15 +11,23 @@ namespace DsuDev.BusinessDays.Common.Tools.FluentBuilders
     [ExcludeFromCodeCoverage]
     public class HolidayBuilder
     {
+        private int identifier;
         private DateTime date;
         private string name;
         private string desc;
 
         public HolidayBuilder Create()
         {
+            this.identifier = 0;
             this.date = new DateTime();
             this.desc = string.Empty;
             this.name = string.Empty;
+            return this;
+        }
+
+        public HolidayBuilder WithId(int id)
+        {
+            this.identifier = id;
             return this;
         }
 
@@ -51,6 +59,7 @@ namespace DsuDev.BusinessDays.Common.Tools.FluentBuilders
         {
             return new Holiday
             {
+                Id = this.identifier,
                 Name = this.name,
                 HolidayDate = this.date,
                 HolidayStringDate = this.date.ToString(Holiday.DateFormat, CultureInfo.InvariantCulture),

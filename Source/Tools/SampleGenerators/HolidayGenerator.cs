@@ -13,10 +13,11 @@ namespace DsuDev.BusinessDays.Common.Tools.SampleGenerators
     {
         private static readonly HolidayBuilder HolidayBuilder = new HolidayBuilder();
 
-        public static Holiday CreateHoliday(int year = 2001, int month = 5, int day = 1, string description = " ", string name = "Workers Day")
+        public static Holiday CreateHoliday(int year = 2001, int month = 5, int day = 1, string description = " ", string name = "Workers Day", int id = 0)
         {
             return HolidayBuilder
                 .Create()
+                .WithId(id)
                 .WithDate(year, month, day)
                 .WithName(name)
                 .WithDescription(description)
@@ -34,7 +35,8 @@ namespace DsuDev.BusinessDays.Common.Tools.SampleGenerators
                     RandomValuesGenerator.RandomInt(1, 12),
                     RandomValuesGenerator.RandomInt(1, 28),
                     RandomValuesGenerator.RandomString(30),
-                    RandomValuesGenerator.RandomString(10));
+                    RandomValuesGenerator.RandomString(10),
+                    RandomValuesGenerator.RandomInt(1, amount*3));
 
                 holidays.Add(randomHoliday);
             }
