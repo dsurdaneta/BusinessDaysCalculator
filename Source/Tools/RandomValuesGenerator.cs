@@ -43,5 +43,15 @@ namespace DsuDev.BusinessDays.Common.Tools
         /// <param name="max">The maximum value.</param>
         /// <returns></returns>
         public static int RandomInt(int max) => RandomInt(0, max);
+
+        /// <summary>
+        /// Generates the random boolean.
+        /// </summary>
+        /// <returns></returns>
+        public static bool RandomBoolean()
+        {
+            Random random = new Random();
+            return random.Next(ValidChars.Length) % 2 == 0;
+        }
     }
 }
