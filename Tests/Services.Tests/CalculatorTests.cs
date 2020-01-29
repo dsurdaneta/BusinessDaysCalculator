@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using DsuDev.BusinessDays.Common.Tools.SampleGenerators;
 using DsuDev.BusinessDays.Domain.Entities;
 using DsuDev.BusinessDays.Services.Interfaces;
+using DsuDev.BusinessDays.Services.Tests.TestsDataMembers.Calculator;
 using FluentAssertions;
 using Moq;
 using Xunit;
@@ -13,6 +14,24 @@ namespace DsuDev.BusinessDays.Services.Tests
     public class CalculatorTests
     {
         private Mock<IDataProvider> mockDataProvider;
+
+        private Calculator SetupCalculator(ICollection<Holiday> expectedHolidays = null)
+        {
+            this.mockDataProvider = new Mock<IDataProvider>();
+
+            if (expectedHolidays != null)
+            {
+                this.mockDataProvider
+                    .Setup(setup => setup.GetHolidays(It.IsAny<DateTime>(), It.IsAny<DateTime>()))
+                    .Returns(expectedHolidays);
+
+                this.mockDataProvider
+                    .Setup(setup => setup.GetAllHolidaysAsync())
+                    .Returns(Task.FromResult(expectedHolidays));
+            }
+
+            return new Calculator(this.mockDataProvider.Object);
+        }
 
         public CalculatorTests()
         {
@@ -50,8 +69,28 @@ namespace DsuDev.BusinessDays.Services.Tests
             sut.Should().Be(expected);
         }
 
+        [Theory]
+        [ClassData(typeof(CalculatorCountData))]
+        public void CountBusinessDays_When_ValidDates_Then_Success(DateTime startDate, DateTime endDate, ICollection<Holiday> holidays, bool useDataProvider)
+        {
+            // Arrange
+            var diff = (endDate.ToUniversalTime() - startDate.ToUniversalTime()).TotalDays;
+            ICalculator calc = useDataProvider ?
+                                this.SetupCalculator(holidays):
+                                this.SetupCalculator();
+
+            // Act
+            var sut = useDataProvider ? 
+                        calc.CountBusinessDays(startDate, endDate, holidays) :
+                        calc.CountBusinessDays(startDate, endDate);
+
+            // Assert
+            sut.Should().BeGreaterOrEqualTo(1);
+            sut.Should().BeLessThan(diff);
+        }
+        
         [Fact]
-        public void CountBusinessDays_When_ValidDates_Then_Success()
+        public void CountBusinessDays_When_ValidDates_Then_ReturnsExpectedCount()
         {
             // Arrange
             const int year = 2018;
@@ -240,7 +279,7 @@ namespace DsuDev.BusinessDays.Services.Tests
         }
         
         [Fact]
-        public void AddBusinessDays_When_PositiveHolidaysCount_Then_Success()
+        public void AddBusinessDays_When_PositiveHolidaysCount_Then_ReturnsExpectedDate()
         {
             // Arrange
             const int daysCount = 3;
@@ -256,6 +295,28 @@ namespace DsuDev.BusinessDays.Services.Tests
 
             // Assert
             sut.Should().Be(expectedDate);
+        }
+
+        [Theory]
+        [ClassData(typeof(CalculatorAddBusinessDaysData))]
+        public void AddBusinessDays_When_PositiveHolidaysCount_Then_Success(
+            DateTime startDate, 
+            double daysCount, 
+            bool useHolidayCollection,
+            double notWeekendHolidaysCount,
+            ICollection<Holiday> holidays 
+            )
+        {
+            // Arrange
+            ICalculator calc = SetupCalculator();
+
+            // Act
+            var sut = useHolidayCollection ?
+                calc.AddBusinessDays(startDate, daysCount, holidays):
+                calc.AddBusinessDays(startDate, daysCount, notWeekendHolidaysCount);
+                
+            // Arrange
+            sut.Should().BeOnOrAfter(startDate);
         }
         
         [Fact]
@@ -346,24 +407,6 @@ namespace DsuDev.BusinessDays.Services.Tests
 
             // Assert
             sut.Should().Be(expectedDate);
-        } 
-
-        private Calculator SetupCalculator(ICollection<Holiday> expectedHolidays = null)
-        {
-            this.mockDataProvider = new Mock<IDataProvider>();
-
-            if (expectedHolidays != null)
-            {
-                this.mockDataProvider
-                    .Setup(setup => setup.GetHolidays(It.IsAny<DateTime>(), It.IsAny<DateTime>()))
-                    .Returns(expectedHolidays);
-
-                 this.mockDataProvider
-                    .Setup(setup => setup.GetAllHolidaysAsync())
-                    .Returns(Task.FromResult(expectedHolidays));
-            }
-
-            return  new Calculator(this.mockDataProvider.Object);
         }
     }
 }
