@@ -38,7 +38,7 @@ namespace DsuDev.BusinessDays.Services.Tests
             
             double expected = 0;
             var holidays = HolidayGenerator.CreateRandomHolidays(amount, year);
-            var calc = this.SetupCalculator(holidays);
+            ICalculator calc = this.SetupCalculator(holidays);
 
             var startDate = new DateTime(year, 4, 25);
             var endDate = new DateTime(year, 1, 9);
@@ -63,7 +63,7 @@ namespace DsuDev.BusinessDays.Services.Tests
                 HolidayGenerator.CreateHoliday(year, id: 2, month: 4,  day: 29, name: "Weekend Holiday"),
                 HolidayGenerator.CreateHoliday(year, id: 3, month: 7,  day: 3, name: "Some Holiday")
             };
-            var calc = this.SetupCalculator(holidays);
+            ICalculator calc = this.SetupCalculator(holidays);
 
             var startDate = new DateTime(year, 4, 25);
             var endDate = new DateTime(year, 8, 9);
@@ -85,7 +85,7 @@ namespace DsuDev.BusinessDays.Services.Tests
 
             double expectedCount = 10;
             var holidays = new List<Holiday>();
-            var calc = this.SetupCalculator(holidays);
+            ICalculator calc = this.SetupCalculator(holidays);
 
             var startDate = new DateTime(year, 4, 25);
             var endDate = new DateTime(year, 5, 9);
@@ -103,7 +103,7 @@ namespace DsuDev.BusinessDays.Services.Tests
         public void CountBusinessDays_When_NullHolidaysParameter_Then_ThrowsException()
         {
             // Arrange
-            var calc = this.SetupCalculator(new List<Holiday>());
+            ICalculator calc = this.SetupCalculator(new List<Holiday>());
 
             // Act
             Action action = () => calc.CountBusinessDays(new DateTime(), DateTime.Today, null);
@@ -125,7 +125,7 @@ namespace DsuDev.BusinessDays.Services.Tests
                 HolidayGenerator.CreateHoliday(year, id: 2, month: 4,  day: 29, name: "Weekend Holiday"),
                 HolidayGenerator.CreateHoliday(year, id: 3, month: 7,  day: 3, name: "Some Holiday")
             };
-            var calc = this.SetupCalculator();
+            ICalculator calc = this.SetupCalculator();
 
             var startDate = new DateTime(year, 4, 25);
             var endDate = new DateTime(year, 8, 9);
@@ -148,7 +148,7 @@ namespace DsuDev.BusinessDays.Services.Tests
 
             double expected = 0;
             var holidays = HolidayGenerator.CreateRandomHolidays(amount, year);
-            var calc = this.SetupCalculator(new List<Holiday>());
+            ICalculator calc = this.SetupCalculator(new List<Holiday>());
 
             var startDate = new DateTime(year, 4, 25);
             var endDate = new DateTime(year, 1, 9);
@@ -165,7 +165,7 @@ namespace DsuDev.BusinessDays.Services.Tests
         {
             // Arrange
             const int daysCount = -32;
-            var calc = this.SetupCalculator();
+            ICalculator calc = this.SetupCalculator();
             var startDate = new DateTime(2003, 2, 15);
 
             // Act
@@ -184,7 +184,7 @@ namespace DsuDev.BusinessDays.Services.Tests
             var startDate = new DateTime(2003, 7, 3);
             var expectedDate = new DateTime(2003, 7, 19);
 
-            var calc = this.SetupCalculator(new List<Holiday>());
+            ICalculator calc = this.SetupCalculator(new List<Holiday>());
 
             // Act
             var sut = await calc.AddBusinessDaysAsync(startDate, daysCount).ConfigureAwait(false);
@@ -210,7 +210,7 @@ namespace DsuDev.BusinessDays.Services.Tests
                 HolidayGenerator.CreateHoliday(year, id: 3, month: 7,  day: 4, name: "Other Holiday"),
                 HolidayGenerator.CreateHoliday(year, id: 3, month: 7,  day: 5, name: "Wow! another Holiday")
             };
-            var calc = this.SetupCalculator(holidays);
+            ICalculator calc = this.SetupCalculator(holidays);
 
             // Act
             var sut = await calc.AddBusinessDaysAsync(startDate, daysCount).ConfigureAwait(false);
@@ -226,9 +226,11 @@ namespace DsuDev.BusinessDays.Services.Tests
             // Arrange
             const int daysCount = 5;
             const int notWeekendHolidaysCount = -2;
+
             var startDate = new DateTime(1991, 3, 1);
             var expectedDate = new DateTime(1991, 3, 8);
-            var calc = SetupCalculator();
+
+            ICalculator calc = SetupCalculator();
 
             // Act
             var sut = calc.AddBusinessDays(startDate, daysCount, notWeekendHolidaysCount);
@@ -243,9 +245,11 @@ namespace DsuDev.BusinessDays.Services.Tests
             // Arrange
             const int daysCount = 3;
             const int notWeekendHolidaysCount = 2;
+
             var startDate = new DateTime(1941, 3, 1);
             var expectedDate = new DateTime(1941, 3, 8);
-            var calc = SetupCalculator();
+
+            ICalculator calc = SetupCalculator();
 
             // Act
             var sut = calc.AddBusinessDays(startDate, daysCount, notWeekendHolidaysCount);
@@ -260,8 +264,10 @@ namespace DsuDev.BusinessDays.Services.Tests
             // Arrange
             const int daysCount = 0;
             const int notWeekendHolidaysCount = 1;
+
             var startDate = new DateTime(1995, 1, 1);
-            var calc = SetupCalculator();
+
+            ICalculator calc = SetupCalculator();
 
             // Act
             var sut = calc.AddBusinessDays(startDate, daysCount, notWeekendHolidaysCount);
@@ -275,8 +281,10 @@ namespace DsuDev.BusinessDays.Services.Tests
         {
             // Arrange
             const int daysCount = 0;
+
             var startDate = new DateTime(1983, 1, 1);
-            var calc = SetupCalculator();
+
+            ICalculator calc = SetupCalculator();
 
             // Act
             var sut = calc.AddBusinessDays(startDate, daysCount, new List<Holiday>());
@@ -289,7 +297,7 @@ namespace DsuDev.BusinessDays.Services.Tests
         public void AddBusinessDays_When_NullHolidays_Then_ThrowsException()
         {
             // Arrange
-            var calc = SetupCalculator();
+            ICalculator calc = SetupCalculator();
 
             // Act
             Action action = () => calc.AddBusinessDays(new DateTime(),1, null);
@@ -304,7 +312,7 @@ namespace DsuDev.BusinessDays.Services.Tests
             const int daysCount = 7;
             var startDate = new DateTime(2013, 2, 1);
             var expectedDate = new DateTime(2013, 2, 10);
-            var calc = SetupCalculator();
+            ICalculator calc = SetupCalculator();
 
             // Act
             var sut = calc.AddBusinessDays(startDate, daysCount, new List<Holiday>());
@@ -331,7 +339,7 @@ namespace DsuDev.BusinessDays.Services.Tests
                 HolidayGenerator.CreateHoliday(year, id: 3, month: 7,  day: 5, name: "Wow! another Holiday")
             };
 
-            var calc = SetupCalculator();
+            ICalculator calc = SetupCalculator();
 
             // Act
             var sut = calc.AddBusinessDays(startDate, daysCount, holidays);

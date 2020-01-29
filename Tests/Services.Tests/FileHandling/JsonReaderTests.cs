@@ -1,6 +1,7 @@
 ﻿using System;
 using DsuDev.BusinessDays.Common.Tools;
 using DsuDev.BusinessDays.Services.FileHandling;
+using DsuDev.BusinessDays.Services.Interfaces.FileHandling;
 using FluentAssertions;
 using Xunit;
 
@@ -12,7 +13,7 @@ namespace DsuDev.BusinessDays.Services.Tests.FileHandling
         public void JsonHolidayReader_When_new_Then_hasExpectedProperties()
         {
             // Act
-            var reader = new JsonHolidayReader();
+            IJsonReader reader = new JsonHolidayReader();
 
             // Assert
             reader.Holidays.Should().NotBeNull();
@@ -23,7 +24,8 @@ namespace DsuDev.BusinessDays.Services.Tests.FileHandling
         public void Json_GetHolidaysFromFile_When_EmptyPath_Then_ThrowException()
         {
             // Arrange
-            var reader = new JsonHolidayReader();
+            IJsonReader reader = new JsonHolidayReader();
+
             // Act
             Action action = () => reader.GetHolidaysFromFile(string.Empty);
 
@@ -35,7 +37,7 @@ namespace DsuDev.BusinessDays.Services.Tests.FileHandling
         public void Json_GetHolidaysFromFile_When_WrongFileExtension_Then_ThrowException()
         {
             // Arrange
-            var reader = new JsonHolidayReader();
+            IJsonReader reader = new JsonHolidayReader();
             var path = RandomValuesGenerator.RandomString(6);
 
             // Act

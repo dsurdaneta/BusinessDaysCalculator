@@ -1,6 +1,7 @@
 ﻿using System;
 using DsuDev.BusinessDays.Common.Tools;
 using DsuDev.BusinessDays.Services.FileHandling;
+using DsuDev.BusinessDays.Services.Interfaces.FileHandling;
 using FluentAssertions;
 using Xunit;
 
@@ -12,7 +13,7 @@ namespace DsuDev.BusinessDays.Services.Tests.FileHandling
         public void XmlHolidateReader_When_new_Then_hasExpectedProperties()
         {
             // Act
-            var reader = new XmlHolidayReader();
+            IXmlReader reader = new XmlHolidayReader();
 
             // Assert
             reader.Holidays.Should().NotBeNull();
@@ -23,7 +24,7 @@ namespace DsuDev.BusinessDays.Services.Tests.FileHandling
         public void Xml_GetHolidaysFromFile_When_EmptyPath_Then_ThrowException()
         {
             // Arrange
-            var reader = new XmlHolidayReader();
+            IXmlReader reader = new XmlHolidayReader();
             // Act
             Action action = () => reader.GetHolidaysFromFile(string.Empty);
 
@@ -35,7 +36,7 @@ namespace DsuDev.BusinessDays.Services.Tests.FileHandling
         public void Xml_GetHolidaysFromFile_When_WrongFileExtension_Then_ThrowException()
         {
             // Arrange
-            var reader = new XmlHolidayReader();
+            IXmlReader reader = new XmlHolidayReader();
             var path = RandomValuesGenerator.RandomString(6);
 
             // Act

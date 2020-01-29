@@ -1,6 +1,7 @@
 ﻿using System;
 using DsuDev.BusinessDays.Common.Tools;
 using DsuDev.BusinessDays.Services.FileHandling;
+using DsuDev.BusinessDays.Services.Interfaces.FileHandling;
 using FluentAssertions;
 using Xunit;
 
@@ -17,7 +18,7 @@ namespace DsuDev.BusinessDays.Services.Tests.FileHandling
         {
             // Act
             var expectedDelimiter =  string.IsNullOrWhiteSpace(delimiter)  ? ";" : delimiter;
-            var csvReader = new CsvHolidayReader(hasHeader, delimiter);
+            ICsvHolidayReader csvReader = new CsvHolidayReader(hasHeader, delimiter);
 
             // Arrange
             csvReader.Should().NotBeNull();
