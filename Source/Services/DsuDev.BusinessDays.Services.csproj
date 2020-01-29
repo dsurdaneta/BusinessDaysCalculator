@@ -12,11 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Common.Tools\DsuDev.BusinessDays.Common.Tools.csproj" />
     <ProjectReference Include="..\Common\DsuDev.BusinessDays.Common.csproj" />
     <ProjectReference Include="..\DataAccess.SQLite\DsuDev.BusinessDays.DataAccess.SQLite.csproj" />
     <ProjectReference Include="..\DataAccess\DsuDev.BusinessDays.DataAccess.csproj" />
     <ProjectReference Include="..\Domain\DsuDev.BusinessDays.Domain.csproj" />
-    <ProjectReference Include="..\Tools\DsuDev.BusinessDays.Common.Tools.csproj" />
   </ItemGroup>
 
 </Project>
