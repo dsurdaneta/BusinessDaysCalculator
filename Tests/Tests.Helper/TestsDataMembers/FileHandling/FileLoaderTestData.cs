@@ -1,22 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using AutoMapper;
-using DsuDev.BusinessDays.DataAccess;
+using DsuDev.BusinessDays.Services.Interfaces.FileHandling;
 using Moq;
-using DbModels = DsuDev.BusinessDays.DataAccess.Models;
-using DomainEntities = DsuDev.BusinessDays.Domain.Entities;
 
-namespace DsuDev.BusinessDays.Services.Tests.TestsDataMembers
+namespace DsuDev.BusinessDays.Tests.Helper.TestsDataMembers.FileHandling
 {
-    public class DataProviderTestData : IEnumerable<object[]>
+    public class FileLoaderTestData : IEnumerable<object[]>
     {
         /// <inheritdoc />
         public IEnumerator<object[]> GetEnumerator()
         {
             var mockMapper = new Mock<IMapper>();
-            var mockHolidayRepository = new Mock<IRepository<DbModels.Holiday>>();
+            var mockFileReadingManager = new Mock<IFileReadingManager>();
 
-            yield return new object[] { null, mockHolidayRepository.Object };
+            yield return new object[] { null, mockFileReadingManager.Object};
             yield return new object[] { mockMapper.Object, null };
         }
 

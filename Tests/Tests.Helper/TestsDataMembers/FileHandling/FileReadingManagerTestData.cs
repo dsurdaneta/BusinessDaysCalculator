@@ -1,9 +1,9 @@
-﻿using Moq;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using DsuDev.BusinessDays.Services.Interfaces.FileHandling;
+using Moq;
 
-namespace DsuDev.BusinessDays.Services.Tests.TestsDataMembers
+namespace DsuDev.BusinessDays.Tests.Helper.TestsDataMembers.FileHandling
 {
     public class FileReadingManagerTestData : IEnumerable<object[]>
     {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using DsuDev.BusinessDays.Common.Tools;
 using DsuDev.BusinessDays.Common.Tools.SampleGenerators;
 
-namespace DsuDev.BusinessDays.Services.Tests.TestsDataMembers.Calculator
+namespace DsuDev.BusinessDays.Tests.Helper.TestsDataMembers.Calculator
 {
     public class CalculatorAddBusinessDaysData : CalculatorBaseTestData, IEnumerable<object[]>
     {

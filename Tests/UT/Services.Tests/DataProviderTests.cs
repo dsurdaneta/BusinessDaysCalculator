@@ -3,8 +3,8 @@ using DsuDev.BusinessDays.Common.Tools;
 using DsuDev.BusinessDays.Common.Tools.SampleGenerators;
 using DsuDev.BusinessDays.DataAccess;
 using DsuDev.BusinessDays.Services.Interfaces;
-using DsuDev.BusinessDays.Services.Tests.TestHelpers;
-using DsuDev.BusinessDays.Services.Tests.TestsDataMembers;
+using DsuDev.BusinessDays.Tests.Helper.SampleGenerators;
+using DsuDev.BusinessDays.Tests.Helper.TestsDataMembers;
 using FluentAssertions;
 using Moq;
 using System;
@@ -71,8 +71,8 @@ namespace DsuDev.BusinessDays.Services.Tests
             const int initialAmount = 5;
             
             var domainHolidays = HolidayGenerator.CreateRandomHolidays(initialAmount, baseYear);
-            var dbHolidays = HolidayGeneratorToolExtension.CreateRandomDbHolidays(initialAmount, baseYear);
-            var otherHoliday = HolidayGeneratorToolExtension.CreateDbHoliday(
+            var dbHolidays = DbHolidayGenerator.CreateRandomDbHolidays(initialAmount, baseYear);
+            var otherHoliday = DbHolidayGenerator.CreateDbHoliday(
                                 RandomValuesGenerator.RandomInt(6, 25),
                                 year: baseYear + 2);
             dbHolidays.Add(otherHoliday);
@@ -94,7 +94,7 @@ namespace DsuDev.BusinessDays.Services.Tests
             const int baseYear = 2002;
             const int initialAmount = 5;
             
-            var dbHolidays = HolidayGeneratorToolExtension.CreateRandomDbHolidays(initialAmount, baseYear +2);
+            var dbHolidays = DbHolidayGenerator.CreateRandomDbHolidays(initialAmount, baseYear +2);
             IDataProvider provider = SetuProvider(new List<DomainEntities.Holiday>(), dbHolidays);
 
             // Act
@@ -121,7 +121,7 @@ namespace DsuDev.BusinessDays.Services.Tests
                 },
                 new List<DbModels.Holiday>
                 {
-                    HolidayGeneratorToolExtension.CreateDbHoliday(RandomValuesGenerator.RandomInt(6), year)
+                    DbHolidayGenerator.CreateDbHoliday(RandomValuesGenerator.RandomInt(6), year)
                 });
 
             // Act
@@ -145,7 +145,7 @@ namespace DsuDev.BusinessDays.Services.Tests
                 new List<DomainEntities.Holiday>(),
                 new List<DbModels.Holiday>
                 {
-                    HolidayGeneratorToolExtension.CreateDbHoliday(RandomValuesGenerator.RandomInt(6), year)
+                    DbHolidayGenerator.CreateDbHoliday(RandomValuesGenerator.RandomInt(6), year)
                 });
 
             // Act
@@ -164,7 +164,7 @@ namespace DsuDev.BusinessDays.Services.Tests
             const int initialAmount = 5;
             
             var domainHolidays = HolidayGenerator.CreateRandomHolidays(initialAmount, baseYear);
-            var dbHolidays = HolidayGeneratorToolExtension.CreateRandomDbHolidays(initialAmount, baseYear);
+            var dbHolidays = DbHolidayGenerator.CreateRandomDbHolidays(initialAmount, baseYear);
             var expectedFirstHoliday = domainHolidays.FirstOrDefault();
 
             IDataProvider provider = SetuProvider(domainHolidays, dbHolidays);

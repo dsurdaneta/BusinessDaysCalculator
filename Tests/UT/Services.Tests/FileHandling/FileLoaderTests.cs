@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using AutoMapper;
+﻿using AutoMapper;
 using DsuDev.BusinessDays.Common.Constants;
 using DsuDev.BusinessDays.Common.Tools;
 using DsuDev.BusinessDays.Common.Tools.SampleGenerators;
 using DsuDev.BusinessDays.Services.FileHandling;
 using DsuDev.BusinessDays.Services.Interfaces.FileHandling;
-using DsuDev.BusinessDays.Services.Tests.TestsDataMembers;
+using DsuDev.BusinessDays.Tests.Helper.TestsDataMembers.FileHandling;
 using FluentAssertions;
 using Moq;
+using System;
+using System.Collections.Generic;
 using Xunit;
-
 using DomainEntities = DsuDev.BusinessDays.Domain.Entities;
 
 namespace DsuDev.BusinessDays.Services.Tests.FileHandling

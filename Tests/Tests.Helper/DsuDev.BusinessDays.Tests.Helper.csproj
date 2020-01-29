@@ -1,7 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Moq" Version="4.13.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Source\Common.Tools\DsuDev.BusinessDays.Common.Tools.csproj" />
+    <ProjectReference Include="..\..\Source\DataAccess\DsuDev.BusinessDays.DataAccess.csproj" />
+    <ProjectReference Include="..\..\Source\Domain\DsuDev.BusinessDays.Domain.csproj" />
+    <ProjectReference Include="..\..\Source\Services\DsuDev.BusinessDays.Services.csproj" />
+  </ItemGroup>
 
 </Project>

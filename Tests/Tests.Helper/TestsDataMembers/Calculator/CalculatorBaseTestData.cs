@@ -1,7 +1,7 @@
 ﻿using System;
 using DsuDev.BusinessDays.Common.Tools;
 
-namespace DsuDev.BusinessDays.Services.Tests.TestsDataMembers.Calculator
+namespace DsuDev.BusinessDays.Tests.Helper.TestsDataMembers.Calculator
 {
     public class CalculatorBaseTestData
     {
