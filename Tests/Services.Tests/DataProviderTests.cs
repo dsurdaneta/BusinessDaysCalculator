@@ -2,6 +2,7 @@
 using DsuDev.BusinessDays.Common.Tools;
 using DsuDev.BusinessDays.Common.Tools.SampleGenerators;
 using DsuDev.BusinessDays.DataAccess;
+using DsuDev.BusinessDays.Services.Interfaces;
 using DsuDev.BusinessDays.Services.Tests.TestHelpers;
 using DsuDev.BusinessDays.Services.Tests.TestsDataMembers;
 using FluentAssertions;
@@ -76,7 +77,7 @@ namespace DsuDev.BusinessDays.Services.Tests
                                 year: baseYear + 2);
             dbHolidays.Add(otherHoliday);
 
-            var provider = SetuProvider(domainHolidays, dbHolidays);
+            IDataProvider provider = SetuProvider(domainHolidays, dbHolidays);
 
             // Act
             var sut = provider.GetHolidays(baseYear);
@@ -94,7 +95,7 @@ namespace DsuDev.BusinessDays.Services.Tests
             const int initialAmount = 5;
             
             var dbHolidays = HolidayGeneratorToolExtension.CreateRandomDbHolidays(initialAmount, baseYear +2);
-            var provider = SetuProvider(new List<DomainEntities.Holiday>(), dbHolidays);
+            IDataProvider provider = SetuProvider(new List<DomainEntities.Holiday>(), dbHolidays);
 
             // Act
             var sut = provider.GetHolidays(baseYear - 1);
@@ -113,7 +114,7 @@ namespace DsuDev.BusinessDays.Services.Tests
             var startDate = new DateTime(year, 4, 26);
             var endDateTime = new DateTime(year, 5, 11);
 
-            var provider = SetuProvider(
+            IDataProvider provider = SetuProvider(
                 new List<DomainEntities.Holiday>
                 {
                     HolidayGenerator.CreateHoliday(year)
@@ -140,7 +141,7 @@ namespace DsuDev.BusinessDays.Services.Tests
             var startDate = new DateTime(year, 5, 26);
             var endDateTime = new DateTime(year, 6, 11);
 
-            var provider = SetuProvider(
+            IDataProvider provider = SetuProvider(
                 new List<DomainEntities.Holiday>(),
                 new List<DbModels.Holiday>
                 {
@@ -165,7 +166,8 @@ namespace DsuDev.BusinessDays.Services.Tests
             var domainHolidays = HolidayGenerator.CreateRandomHolidays(initialAmount, baseYear);
             var dbHolidays = HolidayGeneratorToolExtension.CreateRandomDbHolidays(initialAmount, baseYear);
             var expectedFirstHoliday = domainHolidays.FirstOrDefault();
-            var provider = SetuProvider(domainHolidays, dbHolidays);
+
+            IDataProvider provider = SetuProvider(domainHolidays, dbHolidays);
 
             // Act
             var sut = await provider.GetAllHolidaysAsync().ConfigureAwait(false);

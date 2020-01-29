@@ -68,7 +68,8 @@ namespace DsuDev.BusinessDays.Services.Tests.FileHandling
             // Arrange
             var holidays = HolidayGenerator.CreateRandomHolidays(5, DateTime.Today.Year);
             var basePath = RandomValuesGenerator.RandomString(5);
-            var loader = this.SetupFileLoader(holidays, basePath, false);
+
+            IFileLoader loader = this.SetupFileLoader(holidays, basePath, false);
 
             // Act
             Action action = () => loader.SaveHolidays();
@@ -80,7 +81,7 @@ namespace DsuDev.BusinessDays.Services.Tests.FileHandling
         public void Constructor_When_FilePathInfoParameterIsNull_Then_DefaultValuesAreAssigned()
         {
             // Act
-            var loader = new FileLoader(this.mockMapper.Object, this. mockFileReadingManager.Object, null);
+            IFileLoader loader = new FileLoader(this.mockMapper.Object, this. mockFileReadingManager.Object, null);
 
             // Assert
             loader.Should().NotBeNull();
@@ -98,7 +99,7 @@ namespace DsuDev.BusinessDays.Services.Tests.FileHandling
         public void Constructor_When_Default_Then_DefaultValuesAreAssigned()
         {
             // Act
-            var loader = new FileLoader(this.mockMapper.Object);
+            IFileLoader loader = new FileLoader(this.mockMapper.Object);
 
             // Assert
             loader.Should().NotBeNull();
@@ -133,7 +134,9 @@ namespace DsuDev.BusinessDays.Services.Tests.FileHandling
             // Arrange
             var holidays = new List<DomainEntities.Holiday>();
             var basePath = RandomValuesGenerator.RandomString(5);
-            var loader = this.SetupFileLoader(holidays, basePath, false);
+
+            IFileLoader loader = this.SetupFileLoader(holidays, basePath, false);
+
             var otherInfo = FilePathGenerator.CreateBasePath(basePath);
 
             // Act
@@ -148,7 +151,8 @@ namespace DsuDev.BusinessDays.Services.Tests.FileHandling
         {
             // Arrange
             var basePath = RandomValuesGenerator.RandomString(5);
-            var loader = this.SetupFileLoader(new List<DomainEntities.Holiday>(), basePath, true);
+
+            IFileLoader loader = this.SetupFileLoader(new List<DomainEntities.Holiday>(), basePath, true);
             
             // Act
             Action action = () =>
@@ -164,7 +168,7 @@ namespace DsuDev.BusinessDays.Services.Tests.FileHandling
         public void LoadFile_When_InvalidPath_Then_ThrowsException()
         {
             // Arrange
-            var loader = this.SetupFileLoader(new List<DomainEntities.Holiday>(), string.Empty, true);
+            IFileLoader loader = this.SetupFileLoader(new List<DomainEntities.Holiday>(), string.Empty, true);
             
             // Act
             Action action = () =>

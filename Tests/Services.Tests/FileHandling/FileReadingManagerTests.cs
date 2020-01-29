@@ -69,7 +69,7 @@ namespace DsuDev.BusinessDays.Services.Tests.FileHandling
         {
             // Arrange
             var expectedAmount = 4;
-            var fileReading = Setup(expectedAmount);
+            IFileReadingManager fileReading = Setup(expectedAmount);
             var pathInfo = FilePathGenerator.CreateBasePath(extension);
 
             // Act
@@ -87,7 +87,7 @@ namespace DsuDev.BusinessDays.Services.Tests.FileHandling
         public void ReadHolidaysFile_When_InvalidFileExtension_ThrowsException()
         {
             // Arrange
-            var fileReading = new FileReadingManager(jsonMock.Object, xmlMock.Object, csvMock.Object, txtMock.Object);
+            IFileReadingManager fileReading = new FileReadingManager(jsonMock.Object, xmlMock.Object, csvMock.Object, txtMock.Object);
             var ext = "unknown";
             var pathInfo = FilePathGenerator.CreateBasePath(ext);
 
