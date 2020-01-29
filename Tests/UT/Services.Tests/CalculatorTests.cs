@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using DsuDev.BusinessDays.Common.Tools.SampleGenerators;
 using DsuDev.BusinessDays.Domain.Entities;
 using DsuDev.BusinessDays.Services.Interfaces;
-using DsuDev.BusinessDays.Services.Tests.TestsDataMembers.Calculator;
+using DsuDev.BusinessDays.Tests.Helper.TestsDataMembers.Calculator;
 using FluentAssertions;
 using Moq;
 using Xunit;

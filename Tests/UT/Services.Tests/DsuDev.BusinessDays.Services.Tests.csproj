@@ -18,9 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\Common.Tools\DsuDev.BusinessDays.Common.Tools.csproj" />
-    <ProjectReference Include="..\..\Source\Domain\DsuDev.BusinessDays.Domain.csproj" />
-    <ProjectReference Include="..\..\Source\Services\DsuDev.BusinessDays.Services.csproj" />
+    <ProjectReference Include="..\..\..\Source\Common.Tools\DsuDev.BusinessDays.Common.Tools.csproj" />
+    <ProjectReference Include="..\..\..\Source\Domain\DsuDev.BusinessDays.Domain.csproj" />
+    <ProjectReference Include="..\..\..\Source\Services\DsuDev.BusinessDays.Services.csproj" />
+    <ProjectReference Include="..\..\Tests.Helper\DsuDev.BusinessDays.Tests.Helper.csproj" />
   </ItemGroup>
 
 </Project>

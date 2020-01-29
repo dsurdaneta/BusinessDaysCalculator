@@ -1,11 +1,11 @@
-﻿using DsuDev.BusinessDays.Common.Tools;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using DsuDev.BusinessDays.Common.Tools;
 using DbModels = DsuDev.BusinessDays.DataAccess.Models;
 
-namespace DsuDev.BusinessDays.Services.Tests.TestHelpers
+namespace DsuDev.BusinessDays.Tests.Helper.SampleGenerators
 {
-    public static class HolidayGeneratorToolExtension
+    public static class DbHolidayGenerator
     {
         public static DbModels.Holiday CreateDbHoliday(int holidayId, int year = 2001, int month = 5, int day = 1, string description = " ", string name = "Workers Day")
         {
