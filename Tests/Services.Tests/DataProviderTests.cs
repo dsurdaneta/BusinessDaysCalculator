@@ -63,7 +63,7 @@ namespace DsuDev.BusinessDays.Services.Tests
         }
 
         [Fact]
-        public void GetHolidaysByYear_GetsCorrectlyTheHolidays()
+        public void GetHolidaysByYear_When_SameYear_GetsCorrectlyTheHolidays()
         {
             // Arrange
             const int baseYear = 2002;
@@ -85,9 +85,27 @@ namespace DsuDev.BusinessDays.Services.Tests
             sut.Should().NotBeNull();
             sut.Count.Should().BeLessOrEqualTo(dbHolidays.Count);
         }
+        
+        [Fact]
+        public void GetHolidaysByYear_When_OtherYear_Then_GetsCorrectlyTheHolidays()
+        {
+            // Arrange
+            const int baseYear = 2002;
+            const int initialAmount = 5;
+            
+            var dbHolidays = HolidayGeneratorToolExtension.CreateRandomDbHolidays(initialAmount, baseYear +2);
+            var provider = SetuProvider(new List<DomainEntities.Holiday>(), dbHolidays);
+
+            // Act
+            var sut = provider.GetHolidays(baseYear - 1);
+
+            // Assert
+            sut.Should().NotBeNull();
+            sut.Count.Should().BeLessOrEqualTo(dbHolidays.Count);
+        }
 
         [Fact]
-        public void GetHolidaysBetweenDates_GetsCorrectlyTheHolidays()
+        public void GetHolidaysBetweenDates_When_ValidDates_Then_GetsCorrectlyTheHolidays()
         {
             // Arrange
             const int year = 1990;
@@ -111,6 +129,30 @@ namespace DsuDev.BusinessDays.Services.Tests
             // Assert
             sut.Should().NotBeNull();
             sut.Count.Should().Be(1);
+        }
+        
+        [Fact]
+        public void GetHolidaysBetweenDates_When_OtherDates_Then_GetsCorrectlyTheHolidays()
+        {
+            // Arrange
+            const int year = 1990;
+            
+            var startDate = new DateTime(year, 5, 26);
+            var endDateTime = new DateTime(year, 6, 11);
+
+            var provider = SetuProvider(
+                new List<DomainEntities.Holiday>(),
+                new List<DbModels.Holiday>
+                {
+                    HolidayGeneratorToolExtension.CreateDbHoliday(RandomValuesGenerator.RandomInt(6), year)
+                });
+
+            // Act
+            var sut = provider.GetHolidays(startDate, endDateTime);
+
+            // Assert
+            sut.Should().NotBeNull();
+            sut.Count.Should().Be(0);
         }
         
         [Fact]
