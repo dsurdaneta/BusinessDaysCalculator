@@ -13,13 +13,13 @@ namespace DsuDev.BusinessDays.DataAccess.SQLite
     /// <seealso cref="DsuDev.BusinessDays.DataAccess.IRepository{DsuDev.BusinessDays.DataAccess.Models.Holiday}" />
     public class SQLiteRepository : IRepository<DbModels.Holiday>
     {
-        private readonly HolidaysSQLiteContext dbContext;
+        private readonly IHolidayContext dbContext;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SQLiteRepository"/> class.
         /// </summary>
         /// <param name="context">The context.</param>
-        public SQLiteRepository(HolidaysSQLiteContext context)
+        public SQLiteRepository(IHolidayContext context)
         {
             this.dbContext = context;
         }

@@ -6,7 +6,7 @@ namespace DsuDev.BusinessDays.DataAccess.SQLite.Tests
 {
     public class SQLiteRepositoryTests
     {
-        private Mock<HolidaysSQLiteContext> contextMock;
+        private Mock<IHolidayContext> contextMock;
 
         [Fact]
         public void Test1()

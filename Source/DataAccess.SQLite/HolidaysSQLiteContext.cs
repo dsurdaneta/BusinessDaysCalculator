@@ -1,4 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Threading;
+using System.Threading.Tasks;
 using DbModels = DsuDev.BusinessDays.DataAccess.Models;
 
 namespace DsuDev.BusinessDays.DataAccess.SQLite
@@ -35,6 +38,16 @@ namespace DsuDev.BusinessDays.DataAccess.SQLite
         {
             base.OnModelCreating(builder);
             _isDbRecentlyCreated = true;
+        }
+
+        EntityEntry<DbModels.Holiday> IHolidayContext.Entry(DbModels.Holiday entity)
+        {
+            return base.Entry(entity);
+        }
+
+        async Task<int> IHolidayContext.SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            return await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
     }
 }
