@@ -7,8 +7,8 @@ namespace DsuDev.BusinessDays.DataAccess.SQLite
     /// The Context for the SQLite database
     /// </summary>
     /// <seealso cref="Microsoft.EntityFrameworkCore.DbContext" />
-    /// <seealso cref="DsuDev.BusinessDays.DataAccess.IContext" />
-    public class HolidaysSQLiteContext : DbContext, IContext
+    /// <seealso cref="DsuDev.BusinessDays.DataAccess.IHolidayContext" />
+    public class HolidaysSQLiteContext : DbContext, IHolidayContext
     {
         private const string DbName = "bussinessdays.sqlite";
         private static readonly string DefaultConnectionString = $"Data Source={DbName};Version=3;";

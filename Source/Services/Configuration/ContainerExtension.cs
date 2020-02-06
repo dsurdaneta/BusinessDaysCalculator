@@ -45,7 +45,7 @@ namespace DsuDev.BusinessDays.Services.Configuration
         /// <returns></returns>
         public static Container RegisterDataAccess(this Container container)
         {
-            container.Register<IContext,HolidaysSQLiteContext>();
+            container.Register<IHolidayContext,HolidaysSQLiteContext>();
             container.Register<IRepository<DbModels.Holiday>, SQLiteRepository>();
             return container;
         }
