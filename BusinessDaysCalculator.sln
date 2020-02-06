@@ -53,6 +53,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Automated", "Automated", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DsuDev.BusinessDays.Tests.Helper", "Tests\Tests.Helper\DsuDev.BusinessDays.Tests.Helper.csproj", "{5E87A541-5FE0-4B5B-80D8-5CAE15D586BB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DsuDev.BusinessDays.Services.API", "Source\Services.API\DsuDev.BusinessDays.Services.API.csproj", "{07C9DFEE-78DE-4EE3-BC41-4BCC13404D65}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{5E87A541-5FE0-4B5B-80D8-5CAE15D586BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E87A541-5FE0-4B5B-80D8-5CAE15D586BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E87A541-5FE0-4B5B-80D8-5CAE15D586BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07C9DFEE-78DE-4EE3-BC41-4BCC13404D65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07C9DFEE-78DE-4EE3-BC41-4BCC13404D65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07C9DFEE-78DE-4EE3-BC41-4BCC13404D65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07C9DFEE-78DE-4EE3-BC41-4BCC13404D65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -126,6 +132,7 @@ Global
 		{DE4096B0-1297-4CD4-A98E-7D30E04505E9} = {71144CB8-64D0-4884-AC0F-8F1686C74A79}
 		{6EA8FA69-F3EB-4712-9EFC-C5C1A8018E84} = {71144CB8-64D0-4884-AC0F-8F1686C74A79}
 		{5E87A541-5FE0-4B5B-80D8-5CAE15D586BB} = {05400C8B-C56A-48EC-A560-A95694ADAFAB}
+		{07C9DFEE-78DE-4EE3-BC41-4BCC13404D65} = {3BC0A9E1-A2F1-4DBF-8E46-B4CAE1FB21D5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D13A0C8E-D264-450F-B7CC-FF8151EAA634}
