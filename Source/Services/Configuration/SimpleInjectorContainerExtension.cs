@@ -14,10 +14,9 @@ namespace DsuDev.BusinessDays.Services.Configuration
     {
         public static Container RegisterAll(this Container container)
         {
-            RegisterDataAccess(container);
-            RegisterFileReaders(container);
-            RegisterServices(container);
-            return container;
+            return container.RegisterDataAccess()
+                            .RegisterFileReaders()
+                            .RegisterServices();
         }
 
         /// <summary>
@@ -45,6 +44,7 @@ namespace DsuDev.BusinessDays.Services.Configuration
         {
             container.Register<IContext,HolidaysSQLiteContext>();
             container.Register<IRepository<DbModels.Holiday>, SQLiteRepository>();
+
             return container;
         }
 
@@ -58,6 +58,7 @@ namespace DsuDev.BusinessDays.Services.Configuration
             container.Register<IFileLoader, FileLoader>();
             container.Register<IDataProvider, DataProvider>();
             container.Register<ICalculator, Calculator>();
+
             return container;
         }
     }
