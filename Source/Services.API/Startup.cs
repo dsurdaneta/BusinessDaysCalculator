@@ -37,6 +37,11 @@ namespace DsuDev.BusinessDays.Services.API
             {
                 app.UseDeveloperExceptionPage();
             }
+            else if(env.IsProduction())
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
+            }
 
             app.UseHttpsRedirection();
 
