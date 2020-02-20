@@ -1,18 +1,16 @@
 ﻿using DsuDev.BusinessDays.DataAccess;
 using DsuDev.BusinessDays.DataAccess.SQLite;
+using DsuDev.BusinessDays.Services.FileHandling;
 using DsuDev.BusinessDays.Services.Interfaces;
-using Microsoft.Extensions.Configuration;
+using DsuDev.BusinessDays.Services.Interfaces.FileHandling;
 using SimpleInjector;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using DsuDev.BusinessDays.Services.FileHandling;
-using DsuDev.BusinessDays.Services.Interfaces.FileHandling;
 using DbModels = DsuDev.BusinessDays.DataAccess.Models;
 
 namespace DsuDev.BusinessDays.Services.Configuration
 {
     [ExcludeFromCodeCoverage]
-    public static class ContainerExtension
+    public static class SimpleInjectorContainerExtension
     {
         public static Container RegisterAll(this Container container)
         {
@@ -61,18 +59,6 @@ namespace DsuDev.BusinessDays.Services.Configuration
             container.Register<IDataProvider, DataProvider>();
             container.Register<ICalculator, Calculator>();
             return container;
-        }
-
-        /// <summary>
-        /// Determines whether this configuration instance is loaded.
-        /// </summary>
-        /// <param name="config">The configuration.</param>
-        /// <returns>
-        ///   <c>true</c> if the specified configuration is loaded; otherwise, <c>false</c>.
-        /// </returns>
-        public static bool IsLoaded(this IConfiguration config)
-        {
-            return config != null && config.AsEnumerable().Any();
         }
     }
 }
