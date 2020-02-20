@@ -86,7 +86,7 @@ namespace DsuDev.BusinessDays.Services.Tests
 
             // Assert
             sut.Should().BeGreaterOrEqualTo(1);
-            sut.Should().BeLessThan(diff);
+            sut.Should().BeLessOrEqualTo(diff);
         }
         
         [Fact]
@@ -96,12 +96,7 @@ namespace DsuDev.BusinessDays.Services.Tests
             const int year = 2018;
 
             double expectedCount = 74;
-            var holidays = new List<Holiday>
-            {
-                HolidayGenerator.CreateHoliday(year, id: 1),
-                HolidayGenerator.CreateHoliday(year, id: 2, month: 4,  day: 29, name: "Weekend Holiday"),
-                HolidayGenerator.CreateHoliday(year, id: 3, month: 7,  day: 3, name: "Some Holiday")
-            };
+            var holidays = GenerateHolidaySet1(year);
             ICalculator calc = this.SetupCalculator(holidays);
 
             var startDate = new DateTime(year, 4, 25);
@@ -158,12 +153,7 @@ namespace DsuDev.BusinessDays.Services.Tests
             const int year = 2018;
 
             double expectedCount = 74;
-            var holidays = new List<Holiday>
-            {
-                HolidayGenerator.CreateHoliday(year, id: 1),
-                HolidayGenerator.CreateHoliday(year, id: 2, month: 4,  day: 29, name: "Weekend Holiday"),
-                HolidayGenerator.CreateHoliday(year, id: 3, month: 7,  day: 3, name: "Some Holiday")
-            };
+            var holidays = GenerateHolidaySet1(year);
             ICalculator calc = this.SetupCalculator();
 
             var startDate = new DateTime(year, 4, 25);
@@ -242,13 +232,7 @@ namespace DsuDev.BusinessDays.Services.Tests
             var startDate = new DateTime(year, 6, 18);
             var expectedDate = new DateTime(year, 7, 17);
 
-            var holidays = new List<Holiday>
-            {
-                HolidayGenerator.CreateHoliday(year, id: 3, month: 6,  day: 24, name: "Some Holiday"),
-                HolidayGenerator.CreateHoliday(year, id: 3, month: 7,  day: 3, name: "Weekend Holiday"),
-                HolidayGenerator.CreateHoliday(year, id: 3, month: 7,  day: 4, name: "Other Holiday"),
-                HolidayGenerator.CreateHoliday(year, id: 3, month: 7,  day: 5, name: "Wow! another Holiday")
-            };
+            var holidays = GenerateHolidaySet2(year);
             ICalculator calc = this.SetupCalculator(holidays);
 
             // Act
@@ -320,7 +304,7 @@ namespace DsuDev.BusinessDays.Services.Tests
         }
         
         [Fact]
-        public void AddBusinessDays_When_PositiveHolidaysCountButNoDayscount_Then_ReturnsStartDate()
+        public void AddBusinessDays_When_PositiveHolidaysCountButNoDaysCount_Then_ReturnsStartDate()
         {
             // Arrange
             const int daysCount = 0;
@@ -392,13 +376,7 @@ namespace DsuDev.BusinessDays.Services.Tests
             var startDate = new DateTime(year, 6, 18);
             var expectedDate = new DateTime(year, 7, 17);
 
-            var holidays = new List<Holiday>
-            {
-                HolidayGenerator.CreateHoliday(year, id: 3, month: 6,  day: 24, name: "Some Holiday"),
-                HolidayGenerator.CreateHoliday(year, id: 3, month: 7,  day: 3, name: "Weekend Holiday"),
-                HolidayGenerator.CreateHoliday(year, id: 3, month: 7,  day: 4, name: "Other Holiday"),
-                HolidayGenerator.CreateHoliday(year, id: 3, month: 7,  day: 5, name: "Wow! another Holiday")
-            };
+            var holidays = GenerateHolidaySet2(year);
 
             ICalculator calc = SetupCalculator();
 
@@ -407,6 +385,28 @@ namespace DsuDev.BusinessDays.Services.Tests
 
             // Assert
             sut.Should().Be(expectedDate);
+        }
+
+
+        private static List<Holiday> GenerateHolidaySet1(int year)
+        {
+            return new List<Holiday>
+            {
+                HolidayGenerator.CreateHoliday(year, id: 1),
+                HolidayGenerator.CreateHoliday(year, id: 2, month: 4,  day: 29, name: "Weekend Holiday"),
+                HolidayGenerator.CreateHoliday(year, id: 3, month: 7,  day: 3, name: "Some Holiday")
+            };
+        }
+        
+        private static List<Holiday> GenerateHolidaySet2(int year)
+        {
+            return new List<Holiday>
+            {
+                HolidayGenerator.CreateHoliday(year, id: 1, month: 6,  day: 24, name: "Some Holiday"),
+                HolidayGenerator.CreateHoliday(year, id: 2, month: 7,  day: 3, name: "Weekend Holiday"),
+                HolidayGenerator.CreateHoliday(year, id: 3, month: 7,  day: 4, name: "Other Holiday"),
+                HolidayGenerator.CreateHoliday(year, id: 4, month: 7,  day: 5, name: "Wow! another Holiday")
+            };
         }
     }
 }
