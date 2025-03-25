@@ -108,6 +108,7 @@ public class Holiday : IEquatable<Holiday>
 
         return Name.Equals(other.Name, StringComparison.InvariantCultureIgnoreCase)
                      && myHolidayUtc.Month == otherHolidayUtc.Month
-                     && myHolidayUtc.Day == otherHolidayUtc.Day;}
+                     && myHolidayUtc.Day == otherHolidayUtc.Day;
+    }
 }
 	
